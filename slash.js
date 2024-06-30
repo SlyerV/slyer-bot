@@ -1,8 +1,9 @@
 const { REST } = require('discord.js');
 const { Routes } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
+const {  token  } = require('./config.json')
 const botID = "1244853392942170143";
-const botToken = process.env.token
+const botToken = token
 const restv = new REST({ version: '10' }).setToken(botToken);
 const slashRegister = async () => {
   try {
