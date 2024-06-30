@@ -1,3 +1,6 @@
+# Config
+configure.json
+
 # Logs
 logs
 *.log
@@ -78,9 +81,6 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
-
-# config
-configure.json
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
