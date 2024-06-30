@@ -1,5 +1,6 @@
 const express = require("express");
 const insults = require('./insults.json');
+const {  token  } = require("./config.json")
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
@@ -232,4 +233,4 @@ client.on("messageCreate", async msg => {
         msg.reply("why tf would u ping me boi")
     }
 })
-client.login(process.env.token)
+client.login(token)
