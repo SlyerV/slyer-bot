@@ -1,8 +1,9 @@
 const { REST } = require('discord.js');
 const { Routes } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
+const {  token  } = require('./config.json')
 const botID = "1244853392942170143";
-const botToken = process.env.token
+const botToken = token
 const restv = new REST({ version: '10' }).setToken(botToken);
 const slashRegister = async () => {
   try {
@@ -124,7 +125,10 @@ const slashRegister = async () => {
           .setDescription("Sets the nickname of everyone in this server to their username!"),
           new SlashCommandBuilder()
           .setName("renick")
-          .setDescription("Re-nicknames everyone after using the /unnick command.")
+          .setDescription("Re-nicknames everyone after using the /unnick command."),
+          new SlashCommandBuilder()
+          .setName("owner")
+          .setDescription("Displays the owner of the server")
         ]
       }
     );
