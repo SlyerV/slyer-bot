@@ -13,6 +13,7 @@ let channelid = 0
 let oldid = 0
 let nicks = {}
 let nicked = false
+let nerdmode = false
 let warns = {
   key: "test",
   value: 0
@@ -211,6 +212,14 @@ client.on("interactionCreate", async int => {
         } else {
             int.reply({ content: "You didn't use /unnick", ephemeral: true });
         }
+     } else if (int.commandName === "nerdmode") {
+        if (nerdmode == false) {
+          nerdmode = true
+          int.reply("Nerd reactions toggled on!")
+        } else {
+          nerdmode = false
+          int.reply("Nerd reactions toggled off!")
+        }
      }
   }
 });
@@ -237,8 +246,9 @@ client.on("messageCreate", async msg => {
             }
         }
     }
-    if (msg.content.includes("<@1244853392942170143>")) {
-        msg.reply("why tf would u ping me boi")
+    if ((nerdmode == true) && (randomnum(10) == 1)) {
+      msg.react("🤓")
+      msg.react("👆")
     }
 })
 client.login(token)
