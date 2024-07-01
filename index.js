@@ -151,7 +151,8 @@ client.on("interactionCreate", async int => {
         counting = true
         channelid = int.channel.id
         oldid = 0
-        int.reply("Counting game started in this channel!")
+        ncount = 0
+        int.reply("Counting channel set to <#channelid>! Count has also reset to 0.")
     } else if (int.commandName === "collatz") {
         let collatz = int.options.getNumber("number")
         let colcount = 0
@@ -225,7 +226,6 @@ client.on("messageCreate", async msg => {
             msg.react("😡")
             msg.react("❌")
             msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Counting game turned off.")
-            counting = false
             ncount = 0
         }
         oldid = msg.author.id
