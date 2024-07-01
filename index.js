@@ -1,5 +1,6 @@
 const express = require("express");
 const insults = require('./insults.json');
+const {  token  } = require("./config.json")
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
@@ -11,6 +12,7 @@ let ncount = 0
 let channelid = 0
 let oldid = 0
 let nicks = {}
+let nicked = false
 let warns = {
   key: "test",
   value: 0
@@ -149,7 +151,8 @@ client.on("interactionCreate", async int => {
         counting = true
         channelid = int.channel.id
         oldid = 0
-        int.reply("Counting game started in this channel!")
+        ncount = 0
+        int.reply("Counting channel set to <#channelid>! Count has also reset to 0.")
     } else if (int.commandName === "collatz") {
         let collatz = int.options.getNumber("number")
         let colcount = 0
@@ -169,28 +172,33 @@ client.on("interactionCreate", async int => {
         const colmax = colnums.reduce((a,b) => Math.max(a,b), -Infinity)
         int.reply(int.options.getNumber("number")+" works and became 1 after "+colcount+" iterations.\n"+"Peak value: "+colmax+"\nList: "+colnums)
      } else if (int.commandName === "unnick") {
-        let server = int.guild
-        let members = await server.members.fetch()
-        let nick = null
-        members.forEach(member => {
-            if (member.nickname == null) {
-                nick = member.displayName
-            } else {
-                nick = member.nickname
-            }
-            nicks[member.user.id] = nick
-            console.log(nick)
-        })
-        console.log(nicks)
-        members.forEach(memb => {
-            if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
-                memb.setNickname(memb.user.tag)
-        })
-        int.reply("Unnicked all non-admins >:)")
+        if (nicked == false) {
+          const server = int.guild
+          const members = await server.members.fetch()
+          let nick = null
+          members.forEach(member => {
+              if (member.nickname == null) {
+                  nick = member.displayName
+              } else {
+                  nick = member.nickname
+              }
+              nicks[member.user.id] = nick
+              console.log(nick)
+          })
+          console.log(nicks)
+          members.forEach(memb => {
+              if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
+                  memb.setNickname(memb.user.tag)
+          })
+          int.reply("Unnicked all non-admins >:)")
+          nicked = true
+        } else {
+          int.reply({ content: "You already used /unnick, use /renick to use it again", ephemeral: true });
+        }
      } else if (int.commandName === "renick") {
         let server = int.guild
         let members = await server.members.fetch()
-        if (nicks != {}) {
+        if (nicked == true) {
             console.log(nicks)
             members.forEach(member => {
                 console.log(nicks[member.user.id])
@@ -198,8 +206,10 @@ client.on("interactionCreate", async int => {
                     member.setNickname(nicks[member.user.id])
             })
             int.reply("Re-nicked all non-admins :)")
+            nicked = false
+            nicks = {}
         } else {
-            int.reply("You didn't use /unnick in this server")
+            int.reply({ content: "You didn't use /unnick", ephemeral: true });
         }
      }
   }
@@ -216,7 +226,6 @@ client.on("messageCreate", async msg => {
             msg.react("😡")
             msg.react("❌")
             msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Counting game turned off.")
-            counting = false
             ncount = 0
         }
         oldid = msg.author.id
@@ -232,4 +241,4 @@ client.on("messageCreate", async msg => {
         msg.reply("why tf would u ping me boi")
     }
 })
-client.login(process.env.token)
+client.login(token)
