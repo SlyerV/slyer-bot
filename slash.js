@@ -125,7 +125,10 @@ const slashRegister = async () => {
           .setDescription("Sets the nickname of everyone in this server to their username!"),
           new SlashCommandBuilder()
           .setName("renick")
-          .setDescription("Re-nicknames everyone after using the /unnick command.")
+          .setDescription("Re-nicknames everyone after using the /unnick command."),
+          new SlashCommandBuilder()
+          .setName("owner")
+          .setDescription("Displays the owner of the server")
         ]
       }
     );
