@@ -226,7 +226,7 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
      } else if (int.commandName === "info") {
-        int.reply("Creation date: "+client.user.createdAt+"\nCreator: slyer1\nGender: Male\nHeight: undefined\nWeight: 32 MB\nSexuality: Straight\nStatus: Single 😏")
+        int.reply("Creation date: May 28th 2024"+"\nCreator: slyer1\nGender: Male\nHeight: undefined\nWeight: 32 MB\nSexuality: Straight\nStatus: Single 😏")
      }
   }
 });
