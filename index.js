@@ -254,7 +254,7 @@ client.on("messageCreate", async msg => {
       msg.react("👆")
     }
     if (msg.channel.id != "1253010049199243398")
-      if (((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3"))))
+      if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("~")) || (msg.content.includes("princess")) || (msg.content.includes("bodyguard")))
         msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
 })
 client.login(token)
