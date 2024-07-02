@@ -29,10 +29,8 @@ function randomnum(max) {
 }
 const con = mysql.createConnection({
   host: "mysql.db.bot-hosting.net",
-  port: 3306,
-  database: "s83224_slyerbot",
   user: "u83224_f02owgaM5N",
-  password: ""
+  password: "7I.5A0!^TFBKHb9rH3SYmr1K"
 });
 con.connect(function(err) {
   if (err) throw err;
