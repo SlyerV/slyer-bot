@@ -27,20 +27,23 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
-const con = mysql.createConnection({
-  host: "127.0.0.1",
-  port: "3306",
-  user: "u83224_f02owgaM5N",
-  password: "7I.5A0!^TFBKHb9rH3SYmr1K"
-});
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to MySQL!");
-  con.query("CREATE DATABASE mydb", function (err, result) {
-    if (err) throw err;
-    console.log("Database created");
-  });
-});
+String url = "jdbc:mysql://localhost/test";
+Class.forName ("com.mysql.jdbc.Driver").newInstance ();
+Connection conn = DriverManager.getConnection (url, "u83224_f02owgaM5N", "7I.5A0!^TFBKHb9rH3SYmr1K");
+// const con = mysql.createConnection({
+//   host: "127.0.0.1",
+//   port: "3306",
+//   user: "u83224_f02owgaM5N",
+//   password: "7I.5A0!^TFBKHb9rH3SYmr1K"
+// });
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected to MySQL!");
+//   con.query("CREATE DATABASE mydb", function (err, result) {
+//     if (err) throw err;
+//     console.log("Database created");
+//   });
+// });
 app.listen(3000, () => {
   console.log("Project is running.")
 })
