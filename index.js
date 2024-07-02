@@ -1,4 +1,5 @@
 const express = require("express");
+const mysql = require('mysql');
 const insults = require('./insults.json');
 const {  token  } = require("./config.json")
 const { PermissionsBitField } = require('discord.js');
@@ -26,6 +27,15 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
+const con = mysql.createConnection({
+  host: "localhost",
+  user: "u83224_QEJwJl99lQ",
+  password: "0hX+Kj=i^VdWWl+lB!frcZl="
+});
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected to MySQL!");
+});
 app.listen(3000, () => {
   console.log("Project is running.")
 })
