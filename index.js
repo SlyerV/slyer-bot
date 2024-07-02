@@ -30,8 +30,8 @@ function randomnum(max) {
 const con = mysql.createConnection({
   host: "127.0.0.1",
   port: "3306",
-  user: "u83224_QEJwJl99lQ",
-  password: "0hX+Kj=i^VdWWl+lB!frcZl="
+  user: "u83224_f02owgaM5N",
+  password: "7I.5A0!^TFBKHb9rH3SYmr1K"
 });
 con.connect(function(err) {
   if (err) throw err;
