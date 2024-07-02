@@ -36,7 +36,7 @@ this.pool = mysql.createPool({
   port: '3306'
 });
 const con = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "mysql.db.bot-hosting.net:3306",
   user: "u83224_QEJwJl99lQ",
   password: "0hX+Kj=i^VdWWl+lB!frcZl="
 });
