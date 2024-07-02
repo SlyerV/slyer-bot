@@ -222,7 +222,7 @@ client.on("interactionCreate", async int => {
         }
      } else if (int.commandName === "owner") {
         const owner = await int.guild.fetchOwner()
-        int.reply("The owner of the server is <@"+owner+">", {"allowed_mentions": {"parse": []}}, ephemeral: true)
+        int.reply({ content:"The owner of the server is <@"+owner+">", ephemeral: true })
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
      }
