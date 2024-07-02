@@ -33,7 +33,7 @@ this.pool = mysql.createPool({
   user: 'root',
   password: 'root',
   database: 'todo',
-  port: '8889'
+  port: '3336'
 });
 const con = mysql.createConnection({
   host: "127.0.0.1",
