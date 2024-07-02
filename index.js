@@ -35,6 +35,10 @@ const con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected to MySQL!");
+  con.query("CREATE DATABASE mydb", function (err, result) {
+    if (err) throw err;
+    console.log("Database created");
+  });
 });
 app.listen(3000, () => {
   console.log("Project is running.")
