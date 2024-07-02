@@ -27,7 +27,7 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
-String url = "jdbc:mysql://localhost/test";
+const url = "jdbc:mysql://localhost/test";
 Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 Connection conn = DriverManager.getConnection (url, "u83224_f02owgaM5N", "7I.5A0!^TFBKHb9rH3SYmr1K");
 // const con = mysql.createConnection({
