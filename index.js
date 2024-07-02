@@ -225,6 +225,8 @@ client.on("interactionCreate", async int => {
         int.reply({ content:"The owner of the server is <@"+owner+">", ephemeral: true })
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
+     } else if (int.commandName === "info") {
+        int.reply("Creation date: "+client.user.createdAt+"\nCreator: slyer1\nGender: Male\nHeight: undefined\nWeight: 32 MB\nSexuality: Straight\nStatus: Single 😏")
      }
   }
 });
@@ -256,7 +258,7 @@ client.on("messageCreate", async msg => {
       msg.react("👆")
     }
     if (msg.channel.id != "1253010049199243398")
-      if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("~")) || (msg.content.includes("princess")) || (msg.content.includes("bodyguard")) || (msg.content.includes("<@947534567781331024>")) || (msg.content.includes("NESTEROVICH")))
+      if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("bodyguard")) || (msg.content.includes("NESTEROVICH")))
         msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
 })
 client.login(token)
