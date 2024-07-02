@@ -27,16 +27,9 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
-this.pool = mysql.createPool({
-  connectionLimit: 10,
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'todo',
-  port: '3306'
-});
 const con = mysql.createConnection({
-  host: "mysql.db.bot-hosting.net:3306",
+  host: "127.0.0.1",
+  port: "3306",
   user: "u83224_QEJwJl99lQ",
   password: "0hX+Kj=i^VdWWl+lB!frcZl="
 });
