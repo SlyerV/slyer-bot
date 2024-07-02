@@ -35,10 +35,10 @@ const con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected to MySQL!");
-  con.query("CREATE DATABASE mydb", function (err, result) {
-    if (err) throw err;
-    console.log("Database created");
-  });
+  // con.query("CREATE DATABASE mydb", function (err, result) {
+  //   if (err) throw err;
+  //   console.log("Database created");
+  // });
 });
 app.listen(3000, () => {
   console.log("Project is running.")
@@ -268,11 +268,16 @@ client.on("messageCreate", async msg => {
         }
     }
     if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008")) {
-      msg.react("🤓")
-      msg.react("👆")
+      try {
+        msg.react("🤓")
+        msg.react("👆")
+      } catch(err) {
+        console.log(err)
+      }
     }
     if (msg.channel.id != "1253010049199243398")
-      if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("bodyguard")) || (msg.content.includes("NESTEROVICH")))
-        msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
+      if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718"))
+        if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷"))
+          msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
 })
 client.login(token)
