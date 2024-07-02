@@ -220,6 +220,9 @@ client.on("interactionCreate", async int => {
           nerdmode = false
           int.reply("Nerd reactions toggled off!")
         }
+     } else if (int.commandName === "owner") {
+        const owner = await int.guild.fetchOwner()
+        int.reply("The owner of the server is <@"+owner+">", {"allowed_mentions": {"parse": []}})
      }
   }
 });
