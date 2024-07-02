@@ -28,7 +28,7 @@ function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
 const con = mysql.createConnection({
-  host: "mysql.db.bot-hosting.net:3306",
+  host: "mysql.db.bot-hosting.net",
   port: 3306,
   database: "s83224_slyerbot",
   user: "u83224_f02owgaM5N",
