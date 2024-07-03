@@ -24,9 +24,31 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
-function write(data) {
+function writewarns(warns) {
   fs.writeFile(
     "warns.json",
+    JSON.stringify(data),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote data");
+  }); 
+}
+function writenicks(nicks) {
+  fs.writeFile(
+    "nicks.json",
+    JSON.stringify(data),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote data");
+  }); 
+}
+function writedata(data) {
+  fs.writeFile(
+    "data.json",
     JSON.stringify(data),
     err => {
     // Checking for errors 
@@ -98,7 +120,7 @@ client.on("interactionCreate", async int => {
       }
       // int.reply({ content: "Warn sent!", ephemeral: true });
       int.reply("<@"+user+"> \nWarning " + warns[userS] + "/3 \n" + int.options.getString('reason'))
-      write(warns)
+      writewarns(warns)
     } else if (int.commandName === "warnlist") {
       let user = int.options.getUser('user')
       let userS = String(user)
@@ -115,7 +137,7 @@ client.on("interactionCreate", async int => {
       }
       warns[userS] = int.options.getNumber('number')
       int.reply(userS+"'s warn count is now "+num)
-      write(warns)
+      writewarns(warns)
     } else if (int.commandName === "8ball") {
         int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
     } else if (int.commandName === "randping") {
@@ -201,7 +223,7 @@ client.on("interactionCreate", async int => {
               }
               nicks[member.user.id] = nick
           })
-          write(nicks)
+          writenicks(nicks)
           members.forEach(memb => {
               if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
                   memb.setNickname(memb.user.tag)
@@ -224,7 +246,7 @@ client.on("interactionCreate", async int => {
             int.reply("Re-nicked all non-admins :)")
             nicked = false
             nicks = {}
-            write(nicks)
+            writenicks(nicks)
         } else {
             int.reply({ content: "You didn't use /unnick", ephemeral: true });
         }
@@ -233,12 +255,12 @@ client.on("interactionCreate", async int => {
           nerdmode = true
           int.reply("Nerd reactions toggled on!")
           data["nerdmode"] = true
-          write(data)
+          writedata(data)
         } else {
           nerdmode = false
           int.reply("Nerd reactions toggled off!")
           data["nerdmode"] = false
-          write(data)
+          writedata(data)
         }
      } else if (int.commandName === "owner") {
         const owner = await int.guild.fetchOwner()
@@ -254,7 +276,7 @@ client.on("messageCreate", async msg => {
     if ((counting == true) && (msg.channel.id == channelid) && (msg.author.id != "1244853392942170143")) {
         ncount = ncount+1
         data["count"] = ncount
-        write(data)
+        writedata(data)
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
             msg.react("✅")
