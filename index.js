@@ -284,7 +284,7 @@ client.on("interactionCreate", async int => {
   }
 });
 client.on("messageCreate", async msg => {
-    if ((counting == true) && (msg.channel.id == channelid) && (msg.author.id != "1244853392942170143")) {
+    if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
