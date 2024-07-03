@@ -300,6 +300,8 @@ client.on("messageCreate", async msg => {
             msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Count reset to 0.")
             ncount = 0
             oldid = 0
+        } else {
+            ncount = ncount-1
         }
         data["count"] = ncount
         data["countid"] = oldid 
