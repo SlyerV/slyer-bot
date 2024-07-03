@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require('mysql');
 const fs = require("fs");
 const warns = require('./warns.json')
+const { token } = require('./config.json')
 const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
 const app = express()
