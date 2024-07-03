@@ -149,9 +149,8 @@ client.on("interactionCreate", async int => {
         if (int.options.getUser('user') == "816099107545940008") {
             int.reply("You really thought you could insult my creator??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
         } else if (int.options.getUser('user').id === "1244853392942170143") {
-            int.reply("bro really thought he could insult ME the SUPREME RULER")
-          int.channel.send("As revenge, <@"+int.user.id+"> "+random(insults))
-    } else {
+            int.reply("bro really thought he could insult ME the SUPREME RULER\nAs revenge, <@"+int.user.id+"> "+random(insults)")
+        } else {
           console.log(int.options.getUser('user'))
           int.reply("<@"+int.options.getUser('user')+"> "+random(insults))
         }
@@ -272,6 +271,13 @@ client.on("interactionCreate", async int => {
         int.reply("Pong!\n🏓")
      } else if (int.commandName === "info") {
         int.reply("Creation date: May 28th 2024"+"\nCreator: slyer1\nGender: Male\nHeight: undefined\nWeight: 32 MB\nSexuality: Straight\nStatus: Single 😏")
+     } else if (int.commandName === "kill") {
+        if (int.user.id == "816099107545940008") {
+            int.reply("Bot successfully terminated 💀🫡")
+            process.exit()
+        } else {
+            int.reply({ content: "You're not my creator...", ephemeral: true })
+        }
      }
   }
 });
