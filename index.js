@@ -1,5 +1,7 @@
 const express = require("express");
 const mysql = require('mysql');
+const fs = require("fs");
+const data = require('./data.json')
 const insults = require('./insults.json');
 const { token } = require('./config.json');
 const { PermissionsBitField } = require('discord.js');
@@ -15,10 +17,7 @@ let oldid = 0
 let nicks = {}
 let nicked = false
 let nerdmode = false
-let warns = {
-  key: "test",
-  value: 0
-}
+let warns = data
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes"]
 function random(list) {
@@ -26,6 +25,18 @@ function random(list) {
 }
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
+}
+function write(data) {
+  data.push(data)
+  fs.writeFile(
+    "data.json",
+    JSON.stringify(data),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote data");
+  }); 
 }
 const con = mysql.createConnection({
   host: "mysql.db.bot-hosting.net",
@@ -90,6 +101,7 @@ client.on("interactionCreate", async int => {
       }
       // int.reply({ content: "Warn sent!", ephemeral: true });
       int.reply("<@"+user+"> \nWarning " + warns[userS] + "/3 \n" + int.options.getString('reason'))
+      write(warns)
     } else if (int.commandName === "warnlist") {
       let user = int.options.getUser('user')
       let userS = String(user)
@@ -106,6 +118,7 @@ client.on("interactionCreate", async int => {
       }
       warns[userS] = int.options.getNumber('number')
       int.reply(userS+"'s warn count is now "+num)
+      write(warns)
     } else if (int.commandName === "8ball") {
         int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
     } else if (int.commandName === "randping") {
