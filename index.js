@@ -274,7 +274,9 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "kill") {
         if (int.user.id == "816099107545940008") {
             int.reply("Bot successfully terminated 💀🫡")
-            process.exit()
+            .then(() => {
+                process.exit()  
+            })
         } else {
             int.reply({ content: "You're not my creator...", ephemeral: true })
         }
