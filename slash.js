@@ -1,7 +1,7 @@
 const { REST } = require('discord.js');
 const { Routes } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
-const {  token  } = require('./config.json')
+const token = process.env.token
 const botID = "1244853392942170143";
 const botToken = token
 const restv = new REST({ version: '10' }).setToken(botToken);
@@ -79,7 +79,7 @@ const slashRegister = async () => {
           .setDescription("Ping a random person!"),
           new SlashCommandBuilder()
           .setName("insult")
-          .setDescription("Insult a specified user! (credit: @Twentysix26 on GitHub")
+          .setDescription("Insult a specified user! (credit: @Twentysix26 on GitHub)")
           .addUserOption(option => {
             return option
             .setName("user")
@@ -128,7 +128,16 @@ const slashRegister = async () => {
           .setDescription("Re-nicknames everyone after using the /unnick command."),
           new SlashCommandBuilder()
           .setName("owner")
-          .setDescription("Displays the owner of the server")
+          .setDescription("Displays the owner of the server"),
+          new SlashCommandBuilder()
+          .setName("nerdmode")
+          .setDescription("Toggles nerd reactions off/on."),
+          new SlashCommandBuilder()
+          .setName("info")
+          .setDescription("Displays bot info"),
+          new SlashCommandBuilder()
+          .setName("ping")
+          .setDescription("Pong!")
         ]
       }
     );
