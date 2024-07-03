@@ -2,6 +2,8 @@ const express = require("express");
 const mysql = require('mysql');
 const fs = require("fs");
 const warns = require('./warns.json')
+const nicks = require('./nicks.json')
+let data = require("./data.json")
 const { token } = require('./config.json')
 const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
@@ -9,12 +11,11 @@ const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
 let i = 0
 let counting = false
-let ncount = 0
+let ncount = data.count
 let channelid = 0
 let oldid = 0
-let nicks = {}
 let nicked = false
-let nerdmode = false
+let nerdmode = data.nerdmode
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 function random(list) {
@@ -31,7 +32,7 @@ function write(data) {
     // Checking for errors 
     if (err) throw err;
     // Success 
-    console.log("Wrote warns");
+    console.log("Wrote data");
   }); 
 }
 const con = mysql.createConnection({
@@ -199,9 +200,8 @@ client.on("interactionCreate", async int => {
                   nick = member.nickname
               }
               nicks[member.user.id] = nick
-              console.log(nick)
           })
-          console.log(nicks)
+          write(nicks)
           members.forEach(memb => {
               if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
                   memb.setNickname(memb.user.tag)
@@ -224,6 +224,7 @@ client.on("interactionCreate", async int => {
             int.reply("Re-nicked all non-admins :)")
             nicked = false
             nicks = {}
+            write(nicks)
         } else {
             int.reply({ content: "You didn't use /unnick", ephemeral: true });
         }
@@ -231,9 +232,13 @@ client.on("interactionCreate", async int => {
         if (nerdmode == false) {
           nerdmode = true
           int.reply("Nerd reactions toggled on!")
+          data["nerdmode"] = true
+          write(data)
         } else {
           nerdmode = false
           int.reply("Nerd reactions toggled off!")
+          data["nerdmode"] = false
+          write(data)
         }
      } else if (int.commandName === "owner") {
         const owner = await int.guild.fetchOwner()
@@ -248,6 +253,8 @@ client.on("interactionCreate", async int => {
 client.on("messageCreate", async msg => {
     if ((counting == true) && (msg.channel.id == channelid) && (msg.author.id != "1244853392942170143")) {
         ncount = ncount+1
+        data["count"] = ncount
+        write(data)
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
             msg.react("✅")
