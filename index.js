@@ -281,6 +281,7 @@ client.on("messageCreate", async msg => {
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
             msg.react("✅")
+            oldid = msg.author.id
         } else {
             console.log(ncount)
             console.log("count fail")
@@ -288,8 +289,8 @@ client.on("messageCreate", async msg => {
             msg.react("❌")
             msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Counting game turned off.")
             ncount = 0
+            oldid = 0
         }
-        oldid = msg.author.id
         data["count"] = ncount
         data["countid"] = oldid 
         writedata(data)
