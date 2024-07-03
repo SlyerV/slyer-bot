@@ -73,9 +73,9 @@ client.on("interactionCreate", async int => {
     } else if (int.commandName === "praise") {
       int.reply("slyer1 is so "+random(compliments)+"!")
     } else if (int.commandName === "echo") {
-      let msg = int.options.getString("message");
-      msg = msg.replace("@","")
-      msg = msg.replace("<","<@")
+      let emsg = int.options.getString("message");
+      emsg = emsg.replace("@","")
+      emsg = emsg.replace("<","<@")
       d = new Date()
       console.log(d+"\nEcho used by "+int.user.tag)
       int.reply({ content: "Message sent!", ephemeral: true });
