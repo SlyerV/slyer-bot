@@ -1,4 +1,7 @@
 {
   "count": 0,
-  "nerdmode": false
+  "counting": false,
+  "nerdmode": false,
+  "channel": 0,
+  "countingid": 0
 }
