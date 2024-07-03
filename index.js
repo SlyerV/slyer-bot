@@ -1,7 +1,7 @@
 const express = require("express");
 const mysql = require('mysql');
 const insults = require('./insults.json');
-const {  token  } = require("./config.json")
+const { token } = require('./config.json');
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
@@ -79,7 +79,7 @@ client.on("interactionCreate", async int => {
       d = new Date()
       console.log(d+"\nEcho used by "+int.user.tag)
       int.reply({ content: "Message sent!", ephemeral: true });
-      int.channel.send(msg);
+      int.channel.send(emsg);
     } else if (int.commandName === "warn") {
       let user = int.options.getUser('user')
       let userS = String(user)
