@@ -7,9 +7,7 @@ const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
-const curses = ["fuck","bitch","hell","sex","porn"," ass ","shit","wtf","wth","stfu","idgaf","lmao","lmfao","sthu","tf","nigga","nigger"]
 let i = 0
-let filter = false
 let counting = false
 let ncount = 0
 let channelid = 0
@@ -18,7 +16,7 @@ let nicks = {}
 let nicked = false
 let nerdmode = false
 const smembers= []
-const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes"]
+const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
 }
@@ -165,14 +163,6 @@ client.on("interactionCreate", async int => {
           }
             int.reply(rolltxt)
         }
-    } else if (int.commandName === "filter") {
-        if (filter == false) {
-            filter = true
-            int.reply("Filter toggled on!")
-        } else {
-            filter = false
-            int.reply("Filter toggled off!")
-        }
     } else if (int.commandName === "counting") {
         counting = true
         channelid = int.channel.id
@@ -270,13 +260,6 @@ client.on("messageCreate", async msg => {
             ncount = 0
         }
         oldid = msg.author.id
-    }
-    if (filter == true) {
-        for (x of curses) {
-            if (msg.content.includes(x)) {
-                msg.reply("that's a no-no word! 😡👎")
-            }
-        }
     }
     if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008") && (msg.author.id != "1244853392942170143")) {
       try {
