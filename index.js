@@ -290,20 +290,16 @@ client.on("messageCreate", async msg => {
             console.log("count success")
             msg.react("✅")
             oldid = msg.author.id
-        } else {
-            try {
-                x = Number(msg.content)
-                console.log(x)
-                console.log(ncount)
-                console.log("count fail")
-                msg.react("😡")
-                msg.react("❌")
-                msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Count reset to 0.")
-                ncount = 0
-                oldid = 0
-            } catch {
-                console.log("count neutral")
-            }
+        } else if (! isNaN(msg.content)) {
+            x = Number(msg.content)
+            console.log(x)
+            console.log(ncount)
+            console.log("count fail")
+            msg.react("😡")
+            msg.react("❌")
+            msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Count reset to 0.")
+            ncount = 0
+            oldid = 0
         }
         data["count"] = ncount
         data["countid"] = oldid 
