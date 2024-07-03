@@ -291,13 +291,16 @@ client.on("messageCreate", async msg => {
             msg.react("✅")
             oldid = msg.author.id
         } else {
-            console.log(ncount)
-            console.log("count fail")
-            msg.react("😡")
-            msg.react("❌")
-            msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Counting game turned off.")
-            ncount = 0
-            oldid = 0
+            try {
+                x = Number(msg.content)
+                console.log(ncount)
+                console.log("count fail")
+                msg.react("😡")
+                msg.react("❌")
+                msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Count reset to 0.")
+                ncount = 0
+                oldid = 0
+            }
         }
         data["count"] = ncount
         data["countid"] = oldid 
