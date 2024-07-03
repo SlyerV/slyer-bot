@@ -149,7 +149,7 @@ client.on("interactionCreate", async int => {
         if (int.options.getUser('user') == "816099107545940008") {
             int.reply("You really thought you could insult my creator??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
         } else if (int.options.getUser('user').id === "1244853392942170143") {
-            int.reply("bro really thought he could insult ME the SUPREME RULER\nAs revenge, <@"+int.user.id+"> "+random(insults)")
+            int.reply("bro really thought he could insult ME the SUPREME RULER\nAs revenge, <@"+int.user.id+"> "+random(insults))
         } else {
           console.log(int.options.getUser('user'))
           int.reply("<@"+int.options.getUser('user')+"> "+random(insults))
