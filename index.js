@@ -3,7 +3,6 @@ const mysql = require('mysql');
 const fs = require("fs");
 const warns = require('./warns.json')
 const insults = require('./insults.json');
-const { warns } = require('./warns.json')
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
