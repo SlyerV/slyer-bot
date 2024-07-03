@@ -293,6 +293,7 @@ client.on("messageCreate", async msg => {
         } else {
             try {
                 x = Number(msg.content)
+                console.log(x)
                 console.log(ncount)
                 console.log("count fail")
                 msg.react("😡")
