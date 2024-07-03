@@ -10,10 +10,10 @@ const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
 let i = 0
-let counting = false
+let counting = data.counting
 let ncount = data.count
-let channelid = 0
-let oldid = 0
+let channelid = data.channel
+let oldid = data.countid
 let nicked = false
 let nerdmode = data.nerdmode
 const smembers= []
@@ -191,7 +191,10 @@ client.on("interactionCreate", async int => {
         channelid = int.channel.id
         oldid = 0
         ncount = 0
-        int.reply("Counting channel set to <#channelid>! Count has also reset to 0.")
+        int.reply("Counting channel set to <#"+channelid+">! Count has also reset to 0.")
+        data["counting"] = true
+        data["channel"] = channelid
+        writedata(data)
     } else if (int.commandName === "collatz") {
         let collatz = int.options.getNumber("number")
         let colcount = 0
@@ -275,8 +278,6 @@ client.on("interactionCreate", async int => {
 client.on("messageCreate", async msg => {
     if ((counting == true) && (msg.channel.id == channelid) && (msg.author.id != "1244853392942170143")) {
         ncount = ncount+1
-        data["count"] = ncount
-        writedata(data)
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
             msg.react("✅")
@@ -289,6 +290,9 @@ client.on("messageCreate", async msg => {
             ncount = 0
         }
         oldid = msg.author.id
+        data["count"] = ncount
+        data["countid"] = oldid 
+        writedata(data)
     }
     if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008") && (msg.author.id != "1244853392942170143")) {
       try {
