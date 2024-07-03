@@ -1,9 +1,9 @@
 const express = require("express");
 const mysql = require('mysql');
 const fs = require("fs");
-const data = require('./data.json')
+const warns = require('./warns.json')
 const insults = require('./insults.json');
-const { token } = require('./config.json');
+const { warns } = require('./warns.json')
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
@@ -17,7 +17,6 @@ let oldid = 0
 let nicks = {}
 let nicked = false
 let nerdmode = false
-let warns = data
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes"]
 function random(list) {
@@ -27,15 +26,14 @@ function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
 function write(data) {
-  data.push(data)
   fs.writeFile(
-    "data.json",
+    "warns.json",
     JSON.stringify(data),
     err => {
     // Checking for errors 
     if (err) throw err;
     // Success 
-    console.log("Wrote data");
+    console.log("Wrote warns");
   }); 
 }
 const con = mysql.createConnection({
