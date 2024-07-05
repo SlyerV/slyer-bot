@@ -352,7 +352,7 @@ client.on("messageDelete", async dmsg => {
             dmsg.channel.send(dmsg.content+" at "+(d.getHours()+7)+":"+d.getMinutes())
         }
     } else {
-        client.channels.get("1258915068595146753").send("'"+dmsg.content+"' - "+dmsg.author.tag)
+        client.channels.cache.get("1258915068595146753").send("'"+dmsg.content+"' - "+dmsg.author.tag)
     }
 })
 client.login(token)
