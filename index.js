@@ -99,7 +99,7 @@ client.on("interactionCreate", async int => {
       }
       const T = new Date(startT.getTime()+7*(currentT.getTime()-oldT.getTime()-h*60*60*1000)+a*24*60*60*1000);
       const d = T.toLocaleDateString();
-      int.reply({ content: ("The Rathnorian date is "+d), ephemeral: true });
+      int.reply({ content: ("The Rathnorian date is **"+d+"**"), ephemeral: true });
     } else if (int.commandName === "praise") {
       int.reply("slyer1 is so "+random(compliments)+"!")
     } else if (int.commandName === "echo") {
@@ -119,7 +119,7 @@ client.on("interactionCreate", async int => {
         warns[userS] = 1
       }
       // int.reply({ content: "Warn sent!", ephemeral: true });
-      int.reply("<@"+user+"> \nWarning " + warns[userS] + "/3 \n" + int.options.getString('reason'))
+      int.reply("<@"+user+"> \nWarning **" + warns[userS] + "**/3 \n" + int.options.getString('reason'))
       writewarns()
     } else if (int.commandName === "warnlist") {
       let user = int.options.getUser('user')
@@ -127,7 +127,7 @@ client.on("interactionCreate", async int => {
       if (! (userS in warns)) {
         warns[userS] = 0
       }
-      int.reply(userS+" has "+warns[userS]+" warns.")
+      int.reply(userS+" has **"+warns[userS]+"** warns.")
     } else if (int.commandName === "warnset") {
       let user = int.options.getUser('user')
       let userS = String(user)
@@ -136,7 +136,7 @@ client.on("interactionCreate", async int => {
         num = 0
       }
       warns[userS] = int.options.getNumber('number')
-      int.reply(userS+"'s warn count is now "+num)
+      int.reply(userS+"'s warn count is now **"+num+"**")
       writewarns()
     } else if (int.commandName === "8ball") {
         int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
@@ -147,18 +147,18 @@ client.on("interactionCreate", async int => {
         int.reply("<@"+random(smembers)+"> you got randomly pinged lol have a nice day")
     } else if (int.commandName === "insult") {
         if (int.options.getUser('user') == "816099107545940008") {
-            int.reply("You really thought you could insult my creator??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
+            int.reply("You really thought you could insult my **creator**??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
         } else if (int.options.getUser('user').id === "1244853392942170143") {
-            int.reply("bro really thought he could insult ME the SUPREME RULER\nAs revenge, <@"+int.user.id+"> "+random(insults))
+            int.reply("bro really thought he could insult **ME** the **SUPREME RULER**\nAs revenge, <@"+int.user.id+"> "+random(insults))
         } else {
           console.log(int.options.getUser('user'))
           int.reply("<@"+int.options.getUser('user')+"> "+random(insults))
         }
     } else if (int.commandName === "flipcoin") {
         if (randomnum(2) == 1) {
-            int.reply("🗣️ It's heads 🗣️")
+            int.reply("🗣️ It's **heads** 🗣️")
         } else {
-            int.reply("🪙 It's tails 🪙")
+            int.reply("🪙 It's **tails** 🪙")
         }
     } else if (int.commandName === "rolldice") {
         let rolltxt = ""
@@ -170,30 +170,37 @@ client.on("interactionCreate", async int => {
         if ((int.options.getNumber("count") == undefined) || (int.options.getNumber("count") < 0)) {
             let count = 1
             if ((int.options.getNumber("size") == undefined) || (int.options.getNumber("size") < 3)) {
-        int.reply("(Size: d6)\n🎲 You rolled a "+randomnum(6)+" 🎲")
+        int.reply("(Size: d6)\n🎲 You rolled a **"+randomnum(6)+"** 🎲")
             } else {
-                int.reply("(Size: d"+int.options.getNumber("size")+")\n🎲 You rolled a "+randomnum(int.options.getNumber("size"))+" 🎲")
+                int.reply("(Size: d"+int.options.getNumber("size")+")\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲")
                 }
         } else {
             let count = int.options.getNumber("count")
             for (let x = 0; x < int.options.getNumber("count"); x++) {
                 if ((int.options.getNumber("size") == undefined) || (int.options.getNumber("size") < 3)) {
-                    rolltxt = rolltxt + "\n🎲 You rolled a "+randomnum(6)+" 🎲"
+                    rolltxt = rolltxt + "\n🎲 You rolled a **"+randomnum(6)+"** 🎲"
                 } else {
-                    rolltxt = rolltxt + "\n🎲 You rolled a "+randomnum(int.options.getNumber("size"))+" 🎲"
+                    rolltxt = rolltxt + "\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲"
               }
           }
             int.reply(rolltxt)
         }
     } else if (int.commandName === "counting") {
-        counting = true
-        channelid = int.channel.id
-        oldid = 0
-        ncount = 0
-        int.reply("Counting channel set to <#"+channelid+">! Count has also reset to 0.")
-        data["counting"] = true
-        data["channel"] = channelid
-        writedata()
+        if (int.options.getString("off") === true) {
+            counting = false
+            data["counting"] = false
+            int.reply("Counting game turned **off**.")
+            writedata()
+        } else {
+            counting = true
+            channelid = int.channel.id
+            oldid = 0
+            ncount = 0
+            int.reply("Counting game channel set to <#"+channelid+">! **Count has also reset to 0.**")
+            data["counting"] = true
+            data["channel"] = channelid
+            writedata()
+        }
     } else if (int.commandName === "collatz") {
         let collatz = int.options.getNumber("number")
         let colcount = 0
@@ -211,7 +218,7 @@ client.on("interactionCreate", async int => {
             }
         }
         const colmax = colnums.reduce((a,b) => Math.max(a,b), -Infinity)
-        int.reply(int.options.getNumber("number")+" works and became 1 after "+colcount+" iterations.\n"+"Peak value: "+colmax+"\nList: "+colnums)
+        int.reply(int.options.getNumber("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+colnums)
      } else if (int.commandName === "unnick") {
         if (nicked == false) {
           const server = int.guild
@@ -235,7 +242,7 @@ client.on("interactionCreate", async int => {
           data["nicked"] = true
           writedata()
         } else {
-          int.reply({ content: "You already used /unnick, use /renick to use it again", ephemeral: true });
+          int.reply({ content: "You already used /unnick, use **/renick** to use it again", ephemeral: true });
         }
      } else if (int.commandName === "renick") {
         let server = int.guild
@@ -254,17 +261,17 @@ client.on("interactionCreate", async int => {
             writedata()
             writenicks()
         } else {
-            int.reply({ content: "You didn't use /unnick", ephemeral: true });
+            int.reply({ content: "You didn't use **/unnick**", ephemeral: true });
         }
      } else if (int.commandName === "nerdmode") {
         if (nerdmode == false) {
           nerdmode = true
-          int.reply("Nerd reactions toggled on!")
+          int.reply("Nerd reactions toggled **on**!")
           data["nerdmode"] = true
           writedata()
         } else {
           nerdmode = false
-          int.reply("Nerd reactions toggled off!")
+          int.reply("Nerd reactions toggled **off**!")
           data["nerdmode"] = false
           writedata()
         }
@@ -274,7 +281,7 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
      } else if (int.commandName === "info") {
-        int.reply("Creation date: May 28th 2024"+"\nCreator: slyer1\nGender: Male\nHeight: undefined\nWeight: 32 MB\nSexuality: Straight\nStatus: Single 😏")
+        int.reply("Creation date: **May 28th 2024**"+"\nCreator: **slyer1**\nGender: **Male**\nHeight: **undefined**\nWeight: **32 MB**\nSexuality: **Straight**\nStatus: **Single 😏**")
      } else if (int.commandName === "kill") {
         if (int.user.id == "816099107545940008") {
             int.reply("Bot successfully terminated 💀🫡")
