@@ -219,7 +219,7 @@ client.on("interactionCreate", async int => {
         }
         const colmax = colnums.reduce((a,b) => Math.max(a,b), -Infinity)
         let collist = ""
-        for (let x = 0; x<colnums.length; x++) {
+        colnums.forEach(x => {
             if (x == 1) {
                 collist+=String(x)
             } else if (x == colmax) {
@@ -227,7 +227,7 @@ client.on("interactionCreate", async int => {
             } else {
                 collist+=String(x)+", "
             }
-        }
+        })
         int.reply(int.options.getNumber("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
      } else if (int.commandName === "unnick") {
         if (nicked == false) {
