@@ -343,4 +343,7 @@ client.on("messageCreate", async msg => {
       }
     }
 })
+client.on("messageDelete", async dmsg => {
+    dmsg.channel.send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
+})
 client.login(token)
