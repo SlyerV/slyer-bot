@@ -186,7 +186,7 @@ client.on("interactionCreate", async int => {
             int.reply(rolltxt)
         }
     } else if (int.commandName === "counting") {
-        if (int.options.getString("off") === true) {
+        if (int.options.getString("off") === "true") {
             counting = false
             data["counting"] = false
             int.reply("Counting game turned **off**.")
