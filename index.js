@@ -344,16 +344,13 @@ client.on("messageCreate", async msg => {
     }
 })
 client.on("messageDelete", async dmsg => {
-    if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718")) {
+    if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718") || (dmsg.author.id == "1054172100459495424")) {
         if (dmsg.author.id != "1244853392942170143") {
             dmsg.channel.send("'"+dmsg.content+"' - "+dmsg.author.tag)
         } else {
             const d = new Date()
-            dmsg.channel.send(dmsg.content+" at "+(d.getHours()+7)+":"+d.getMinutes())
+            dmsg.channel.send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
         }
-    } else {
-        const d = new Date()
-        client.channels.cache.get("1258915068595146753").send("'"+dmsg.content+"' - "+dmsg.author.tag+" at "+(d.getHours()+7)+":"+d.getMinutes())
     }
 })
 client.login(token)
