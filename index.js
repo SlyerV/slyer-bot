@@ -9,7 +9,6 @@ const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
-let strikes = 0
 let counting = data.counting
 let ncount = data.count
 let channelid = data.channel
@@ -339,17 +338,7 @@ client.on("messageCreate", async msg => {
     if (msg.channel.id != "1253010049199243398") {
       if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718")) {
         if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷")) {
-          strikes++
-          if (strikes < 1) {
-              msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
-          } else {
-              msg.reply("That's it, u keep ignoring me so ur lovelocked now have fun >:)")
-              .then(() => { // Wait until the first message is sent
-              setTimeout(() => {
-                   msg.author.roles.add(1206115715401252915)
-              }, 3000) // Wait 2000 milliseconds (2 seconds) before sending again.
-              })
-          }
+          msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
         }
       }
     }
