@@ -14,7 +14,7 @@ let counting = data.counting
 let ncount = data.count
 let channelid = data.channel
 let oldid = data.countid
-let nicked = false
+let nicked = data.nicked
 let nerdmode = data.nerdmode
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
@@ -24,29 +24,29 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
-function writewarns(warns) {
+function writewarns() {
   fs.writeFile(
     "warns.json",
-    JSON.stringify(data),
+    JSON.stringify(warns),
     err => {
     // Checking for errors 
     if (err) throw err;
     // Success 
-    console.log("Wrote data");
+    console.log("Wrote warns");
   }); 
 }
-function writenicks(nicks) {
+function writenicks() {
   fs.writeFile(
     "nicks.json",
-    JSON.stringify(data),
+    JSON.stringify(nicks),
     err => {
     // Checking for errors 
     if (err) throw err;
     // Success 
-    console.log("Wrote data");
+    console.log("Wrote nicks");
   }); 
 }
-function writedata(data) {
+function writedata() {
   fs.writeFile(
     "data.json",
     JSON.stringify(data),
@@ -120,7 +120,7 @@ client.on("interactionCreate", async int => {
       }
       // int.reply({ content: "Warn sent!", ephemeral: true });
       int.reply("<@"+user+"> \nWarning " + warns[userS] + "/3 \n" + int.options.getString('reason'))
-      writewarns(warns)
+      writewarns()
     } else if (int.commandName === "warnlist") {
       let user = int.options.getUser('user')
       let userS = String(user)
@@ -137,7 +137,7 @@ client.on("interactionCreate", async int => {
       }
       warns[userS] = int.options.getNumber('number')
       int.reply(userS+"'s warn count is now "+num)
-      writewarns(warns)
+      writewarns()
     } else if (int.commandName === "8ball") {
         int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
     } else if (int.commandName === "randping") {
@@ -193,7 +193,7 @@ client.on("interactionCreate", async int => {
         int.reply("Counting channel set to <#"+channelid+">! Count has also reset to 0.")
         data["counting"] = true
         data["channel"] = channelid
-        writedata(data)
+        writedata()
     } else if (int.commandName === "collatz") {
         let collatz = int.options.getNumber("number")
         let colcount = 0
@@ -225,13 +225,15 @@ client.on("interactionCreate", async int => {
               }
               nicks[member.user.id] = nick
           })
-          writenicks(nicks)
+          writenicks()
           members.forEach(memb => {
               if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
                   memb.setNickname(memb.user.tag)
           })
           int.reply("Unnicked all non-admins >:)")
           nicked = true
+          data["nicked"] = true
+          writedata()
         } else {
           int.reply({ content: "You already used /unnick, use /renick to use it again", ephemeral: true });
         }
@@ -247,8 +249,10 @@ client.on("interactionCreate", async int => {
             })
             int.reply("Re-nicked all non-admins :)")
             nicked = false
+            data["nicked"] = false
             nicks = {}
-            writenicks(nicks)
+            writedata()
+            writenicks()
         } else {
             int.reply({ content: "You didn't use /unnick", ephemeral: true });
         }
@@ -257,12 +261,12 @@ client.on("interactionCreate", async int => {
           nerdmode = true
           int.reply("Nerd reactions toggled on!")
           data["nerdmode"] = true
-          writedata(data)
+          writedata()
         } else {
           nerdmode = false
           int.reply("Nerd reactions toggled off!")
           data["nerdmode"] = false
-          writedata(data)
+          writedata()
         }
      } else if (int.commandName === "owner") {
         const owner = await int.guild.fetchOwner()
@@ -305,7 +309,7 @@ client.on("messageCreate", async msg => {
         }
         data["count"] = ncount
         data["countid"] = oldid 
-        writedata(data)
+        writedata()
     }
     if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008") && (msg.author.id != "1244853392942170143")) {
       try {
