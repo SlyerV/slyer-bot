@@ -314,7 +314,7 @@ client.on("messageCreate", async msg => {
     if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008") && (msg.author.id != "1244853392942170143")) {
       try {
         msg.react("🤓")
-        msg.react("👆")
+        msg.react("☝️")
       } catch(err) {
         console.log(err)
       }
