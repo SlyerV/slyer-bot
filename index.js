@@ -311,7 +311,7 @@ client.on("messageCreate", async msg => {
         data["countid"] = oldid 
         writedata()
     }
-    if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008") && (msg.author.id != "1244853392942170143")) {
+    if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "1244853392942170143")) {
       try {
         msg.react("🤓")
         msg.react("☝️")
