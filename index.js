@@ -343,7 +343,16 @@ client.on("messageCreate", async msg => {
       }
     }
 })
-// client.on("messageDelete", async dmsg => {
-    //dmsg.channel.send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
-//})
+client.on("messageDelete", async dmsg => {
+    if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718")) {
+        if (dmsg.author.id != "1244853392942170143") {
+            dmsg.channel.send("'"+dmsg.content+"' - "+dmsg.author.tag)
+        } else {
+            const d = new Date()
+            dmsg.channel.send(dmsg.content+" at "+(d.getHours()+7)+":"+d.getMinutes())
+        }
+    } else {
+        client.channels.get("1258915068595146753").send("'"+dmsg.content+"' - "+dmsg.author.tag)
+    }
+})
 client.login(token)
