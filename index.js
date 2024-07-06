@@ -52,8 +52,6 @@ function writedata() {
   }); 
 }
 // Stored data
-data["quoting"] = false
-writedata()
 let counting = data.counting
 let ncount = data.count
 let channelid = data.channel
