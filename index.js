@@ -304,7 +304,7 @@ client.on("interactionCreate", async int => {
   }
 });
 client.on("messageCreate", async msg => {
-    const t = new Date()
+    var t = new Date()
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
@@ -346,7 +346,7 @@ client.on("messageCreate", async msg => {
 })
 client.on("messageDelete", async dmsg => {
     const l = new Date()
-    if ((d.getSeconds()-l.getSeconds()) == 0) {
+    if ((d.getSeconds()-l.getSeconds()) < 2) {
         dmsg.channel.send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
     } else if ((dmsg.author.id == "1244853392942170143") && dmsg.content.contains(" - <@")) {
         dmsg.channel.send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
