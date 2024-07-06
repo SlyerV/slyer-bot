@@ -360,9 +360,7 @@ client.on("messageCreate", async msg => {
 })
 client.on("messageDelete", async dmsg => {
     if (quoting == true) {
-        if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718")) {
-            client.channels.cache.get("1179602392367517766").send('"'+dmsg.content+'" - <@'+dmsg.author.id+'>')
-        }
+        client.channels.cache.get("1179602392367517766").send('"'+dmsg.content+'" - <@'+dmsg.author.id+'>')
     }
 })
 client.login(token)
