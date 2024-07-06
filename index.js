@@ -343,13 +343,11 @@ client.on("messageCreate", async msg => {
       }
     }
 })
-// client.on("messageDelete", async dmsg => {
-//     const d = dmsg.createdTimestamp()
-//     const l = Date.now()
-//     if ((l-d) < 1500) {
-//         dmsg.channel.send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
-//     } else if ((dmsg.author.id == "1244853392942170143") && dmsg.content.contains(" - <@")) {
-//         dmsg.channel.send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
-//     }
-// })
+client.on("messageDelete", async dmsg => {
+    if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718") || (msg.author.id == "1054172100459495424")) {
+        client.channels.cache.get("1179602392367517766").send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
+    } else if ((dmsg.author.id == "1244853392942170143") && dmsg.content.contains(" - <@")) {
+        client.channels.cache.get("1179602392367517766").send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
+    }
+})
 client.login(token)
