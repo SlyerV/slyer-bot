@@ -9,14 +9,9 @@ const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
-let counting = data.counting
-let ncount = data.count
-let channelid = data.channel
-let oldid = data.countid
-let nicked = data.nicked
-let nerdmode = data.nerdmode
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
+// Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
 }
@@ -56,6 +51,16 @@ function writedata() {
     console.log("Wrote data");
   }); 
 }
+// Stored data
+data["quoting"] = false
+writedata()
+let counting = data.counting
+let ncount = data.count
+let channelid = data.channel
+let oldid = data.countid
+let nicked = data.nicked
+let nerdmode = data.nerdmode
+let quoting = data.quoting
 const con = mysql.createConnection({
   host: "mysql.db.bot-hosting.net",
   user: "u83224_f02owgaM5N",
@@ -300,6 +305,18 @@ client.on("interactionCreate", async int => {
         } else {
             int.reply({ content: "You're not my creator...", ephemeral: true })
         }
+     } else if (int.commandName === "quoting") {
+        if (quoting == false) {
+          quoting = true
+          int.reply("Quoting toggled **on**!")
+          data["quoting"] = true
+          writedata()
+        } else {
+          quoting = false
+          int.reply("Quoting toggled **off**!")
+          data["quoting"] = false
+          writedata()
+        }
      }
   }
 });
@@ -344,8 +361,10 @@ client.on("messageCreate", async msg => {
     }
 })
 client.on("messageDelete", async dmsg => {
-    if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718") || (dmsg.author.id == "1054172100459495424")) {
-        client.channels.cache.get("1179602392367517766").send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
+    if (quoting == true) {
+        if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718") || (dmsg.author.id == "1054172100459495424")) {
+            client.channels.cache.get("1179602392367517766").send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
+        }
     }
 })
 client.login(token)
