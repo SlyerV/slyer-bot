@@ -290,7 +290,7 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
      } else if (int.commandName === "info") {
-        int.reply("Creation date: **May 28th 2024**"+"\nCreator: **slyer1**\nGender: **Male**\nHeight: **undefined**\nWeight: **32 MB**\nSexuality: **Straight**\nStatus: **Single 😏**")
+        int.reply("Creation date: **May 28th 2024**"+"\nCreator: **slyer1**\nGender: **Male**\nHeight: **undefined**\nWeight: **472.45 MB**\nSexuality: **Straight**\nStatus: **Single 😏**")
      } else if (int.commandName === "kill") {
         if (int.user.id == "816099107545940008") {
             int.reply("Bot successfully terminated 💀🫡")
@@ -304,7 +304,6 @@ client.on("interactionCreate", async int => {
   }
 });
 client.on("messageCreate", async msg => {
-    var t = new Date()
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
@@ -345,8 +344,9 @@ client.on("messageCreate", async msg => {
     }
 })
 client.on("messageDelete", async dmsg => {
-    const l = new Date()
-    if ((d.getSeconds()-l.getSeconds()) < 2) {
+    const d = dmsg.createdTimestamp()
+    const l = Date.now()
+    if ((l-d) < 1500) {
         dmsg.channel.send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
     } else if ((dmsg.author.id == "1244853392942170143") && dmsg.content.contains(" - <@")) {
         dmsg.channel.send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
