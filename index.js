@@ -304,6 +304,7 @@ client.on("interactionCreate", async int => {
   }
 });
 client.on("messageCreate", async msg => {
+    const t = new Date()
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
@@ -344,13 +345,11 @@ client.on("messageCreate", async msg => {
     }
 })
 client.on("messageDelete", async dmsg => {
-    if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718") || (dmsg.author.id == "1054172100459495424")) {
-        if (dmsg.author.id != "1244853392942170143") {
-            dmsg.channel.send("'"+dmsg.content+"' - "+dmsg.author.tag)
-        } else {
-            const d = new Date()
-            dmsg.channel.send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
-        }
+    const l = new Date()
+    if ((d.getSeconds()-l.getSeconds()) == 0) {
+        dmsg.channel.send("'"+dmsg.content+"' - <@"+dmsg.author.id+">")
+    } else if ((dmsg.author.id == "1244853392942170143") && dmsg.content.contains(" - <@")) {
+        dmsg.channel.send(dmsg.content+" at "+(d.getHours()-19)+":"+d.getMinutes())
     }
 })
 client.login(token)
