@@ -476,11 +476,9 @@ client.on("messageCreate", async msg => {
       if (s == 6) {
         msg.reply(gtxt+"You lost!")
         hangman = false
-        break
       } else if (l == word.length) {
         msg.reply(gtxt+"You won!")
         hangman = false
-        break
       }
     }
 })
