@@ -396,7 +396,7 @@ client.on("interactionCreate", async int => {
         hangman = true
         word = list[Math.floor(Math.random() * list.length)]
         for (let x=0;x<word.length;x++) {
-          r+="_ "
+          r+="x"
         }
         console.log(r)
         console.log(word)
