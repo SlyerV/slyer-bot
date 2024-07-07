@@ -78,25 +78,7 @@ s7 =
 |
 |
 |`
-function writetxt() {
-  r = ""
-  l = 0
-  for (y of word) {
-    let added = false
-    for (x of c) {
-      if (x == y) {
-        r+=(x+" ")
-        added = true
-        l+=1
-      }
-    }
-    if (! added) {
-      r+="_ "  
-    }
-  }
-}
 let stages = [s1,s2,s3,s4,s5,s6,s7]
-const gtxt = r+"\n"+stages[s]+"\n"
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -416,6 +398,25 @@ client.on("interactionCreate", async int => {
         let s = 0
         let l = 0
         let g = ""
+        let gtxt = stages[s]+"\n"+r+"\n"
+        function writetxt() {
+          r = ""
+          l = 0
+          for (y of word) {
+            let added = false
+            for (x of c) {
+              if (x == y) {
+                r+=(x+" ")
+                added = true
+                l+=1
+              }
+            }
+            if (! added) {
+              r+="_ "  
+            }
+          }
+          gtxt = stages[s]+"\n"+r+"\n"
+        }
         int.reply(gtxt+"Hangman game on!Type !guess to guess a letter.")
      }
   }
