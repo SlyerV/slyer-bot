@@ -472,7 +472,7 @@ client.on("messageCreate", async msg => {
       }
       g = msg.content.replace("!guess ","")
       if (c.includes(g)) {
-        msg.reply("Already said that letter")
+        msg.reply("Already said that letter.")
       } else if (word.includes(g)) {
         c.push(g)
         writetxt()
@@ -484,10 +484,10 @@ client.on("messageCreate", async msg => {
         msg.reply(gtxt+"Incorrect letter.")
       }
       if (s == 6) {
-        msg.reply(gtxt+"You lost!")
+        msg.reply("You lost! :(")
         hangman = false
       } else if (l == word.length) {
-        msg.reply(gtxt+"You won!")
+        msg.reply("You won! :)")
         hangman = false
       }
     }
