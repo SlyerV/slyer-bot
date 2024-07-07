@@ -407,7 +407,7 @@ client.on("interactionCreate", async int => {
         l = 0
         g = ""
         gtxt = stages[s]+"\n"+r+"\n"
-        int.reply(gtxt+"Hangman game on!Type !guess to guess a letter.")
+        int.reply(stages[s]+"\n"+r+"\n"+"Hangman game on!Type !guess to guess a letter.")
      }
   }
 });
