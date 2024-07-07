@@ -34,55 +34,56 @@ s1 =
 |`
 s2 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
-|             O
+|                         O
 |
 |
 |
 |
 |
 |`
+
 s3 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
-|             O
-|             |
-|             |
+|                         O
+|                          |
+|                          |
 |
 |
 |
 |`
 s4 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
-|             O
-|            \\|
-|             |
+|                         O
+|                        \\|
+|                          |
 |
 |
 |
 |`
 s5 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
-|             O
-|            \\|/
-|             |
+|                         O
+|                        \\|/
+|                          |
 |
 |
 |
 |`
 s6 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
-|             O
-|            \\|/
-|             |
-|            /
+|                         O
+|                        \\|/
+|                          |
+|                        /
 |
 |
 |`
 s7 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
-|             O
-|            \\|/
-|             |
-|            / \\
+|                         O
+|                        \\|/
+|                          |
+|                        / \
 |
 |
 |`
@@ -396,7 +397,7 @@ client.on("interactionCreate", async int => {
         hangman = true
         word = list[Math.floor(Math.random() * list.length)]
         for (let x=0;x<word.length;x++) {
-          r+="x"
+          r+="\_ "
         }
         console.log(r)
         console.log(word)
@@ -407,7 +408,7 @@ client.on("interactionCreate", async int => {
         g = ""
         gtxt = stages[s]+"\n"+r+"\n"
         console.log(r)
-        int.reply(r)
+        int.reply(gtxt+"Hangman game started! Type !guess follwed by a letter to guess.")
      }
   }
 });
@@ -464,7 +465,7 @@ client.on("messageCreate", async msg => {
               }
             }
             if (! added) {
-              r+="_ "  
+              r+="\_ "  
             }
           }
           gtxt = stages[s]+"\n"+r+"\n"
