@@ -54,7 +54,7 @@ s3 =
 s4 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                        \\|
+|                      \\\\|
 |                          |
 |
 |
@@ -63,7 +63,7 @@ s4 =
 s5 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                        \\|/
+|                      \\\\|/
 |                          |
 |
 |
@@ -397,7 +397,7 @@ client.on("interactionCreate", async int => {
         hangman = true
         word = list[Math.floor(Math.random() * list.length)]
         for (let x=0;x<word.length;x++) {
-          r+="\_ "
+          r+="\\_ "
         }
         console.log(r)
         console.log(word)
@@ -465,7 +465,7 @@ client.on("messageCreate", async msg => {
               }
             }
             if (! added) {
-              r+="\_ "  
+              r+="\\_ "  
             }
           }
           gtxt = stages[s]+"\n"+r+"\n"
