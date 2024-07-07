@@ -26,7 +26,6 @@ let i =  []
 let s = 0
 let r = ""
 let l = 0
-const gtxt = r+"\n"+stages[s]+"\n"
 const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 s1 = 
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
@@ -110,6 +109,7 @@ function writetxt() {
 }
 let stages = [s1,s2,s3,s4,s5,s6,s7]
 let g = ""
+const gtxt = r+"\n"+stages[s]+"\n"
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
