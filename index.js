@@ -12,6 +12,7 @@ const compliments = ["cool","awesome","intelligent","handsome","amazing","wonder
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 // Hangman
+const gtxt = r+"\n"+stages[s]+"\n"
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
 const word = list[Math.floor(Math.random() * list.length)]
@@ -416,7 +417,7 @@ client.on("interactionCreate", async int => {
         }
      } else if (int.commandName === "hangman") {
         hangman = true
-        int.reply("Hangman game on!Type !guess to guess a letter.")
+        int.reply(gtxt+"Hangman game on!Type !guess to guess a letter.")
      }
   }
 });
@@ -459,9 +460,8 @@ client.on("messageCreate", async msg => {
         }
       }
     }
-    if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.replace("!guess ", "")))) {
+    if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.content.replace("!guess ", "")))) {
       g = msg.content
-      let gtxt = r+"\n"+stages[s]+"\n"
       if (c.includes(g)) {
         msg.reply("Already said that letter")
       } else if (word.includes(g)) {
