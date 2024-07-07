@@ -22,7 +22,7 @@ let s = 0
 let l = 0
 let g = ""
 let gtxt = ""
-const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D, "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 s1 = 
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |             
@@ -475,7 +475,7 @@ client.on("messageCreate", async msg => {
           }
           gtxt = stages[s]+"\n"+r+"\n"
       }
-      g = msg.content
+      g = msg.content.toLowerCase()
       if (c.includes(g)) {
         msg.reply("Already said that letter.")
       } else if (word.includes(g)) {
