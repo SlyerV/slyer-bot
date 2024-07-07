@@ -455,7 +455,7 @@ client.on("messageCreate", async msg => {
         }
       }
     }
-    if ((hangman == true) && (alphabet.includes(msg.content)) {
+    if ((hangman == true) && (alphabet.includes(msg.content))) {
       function writetxt() {
           r = ""
           l = 0
