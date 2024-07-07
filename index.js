@@ -12,7 +12,6 @@ const compliments = ["cool","awesome","intelligent","handsome","amazing","wonder
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 // Hangman
-const gtxt = r+"\n"+stages[s]+"\n"
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
 const word = list[Math.floor(Math.random() * list.length)]
@@ -27,6 +26,7 @@ let i =  []
 let s = 0
 let r = ""
 let l = 0
+const gtxt = r+"\n"+stages[s]+"\n"
 const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 s1 = 
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
