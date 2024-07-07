@@ -395,7 +395,6 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "hangman") {
         hangman = true
         word = list[Math.floor(Math.random() * list.length)]
-        r = ""
         for (let x=0;x<word.length;x++) {
           r+="_ "
         }
@@ -407,7 +406,7 @@ client.on("interactionCreate", async int => {
         l = 0
         g = ""
         gtxt = stages[s]+"\n"+r+"\n"
-        int.reply(stages[s]+"\n"+r+"\n"+"Hangman game on!Type !guess to guess a letter.")
+        int.reply(r+"Hangman game on!Type !guess to guess a letter.")
      }
   }
 });
