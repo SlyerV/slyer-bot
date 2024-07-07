@@ -54,7 +54,7 @@ s3 =
 s4 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                      \\\\|
+|                       \\\\|
 |                          |
 |
 |
@@ -63,7 +63,7 @@ s4 =
 s5 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                      \\\\|/
+|                       \\\\|/
 |                          |
 |
 |
@@ -72,7 +72,7 @@ s5 =
 s6 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                        \\|/
+|                       \\\\|/
 |                          |
 |                        /
 |
@@ -81,9 +81,9 @@ s6 =
 s7 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                        \\|/
+|                       \\\\|/
 |                          |
-|                        / \
+|                        / \\
 |
 |
 |`
@@ -394,21 +394,25 @@ client.on("interactionCreate", async int => {
           writedata()
         }
      } else if (int.commandName === "hangman") {
-        hangman = true
-        word = list[Math.floor(Math.random() * list.length)]
-        for (let x=0;x<word.length;x++) {
-          r+="\\_ "
+        if (hangman == false) {
+            hangman = true
+            word = list[Math.floor(Math.random() * list.length)]
+            for (let x=0;x<word.length;x++) {
+              r+="\\_ "
+            }
+            console.log(r)
+            console.log(word)
+            c = []
+            i =  []
+            s = 0
+            l = 0
+            g = ""
+            gtxt = stages[s]+"\n"+r+"\n"
+            console.log(r)
+            int.reply(gtxt+"Hangman game started! Type any letter to guess.")
+        } else {
+            int.reply({ content: "A game has already started!", ephemeral: true })
         }
-        console.log(r)
-        console.log(word)
-        c = []
-        i =  []
-        s = 0
-        l = 0
-        g = ""
-        gtxt = stages[s]+"\n"+r+"\n"
-        console.log(r)
-        int.reply(gtxt+"Hangman game started! Type !guess follwed by a letter to guess.")
      }
   }
 });
@@ -451,7 +455,7 @@ client.on("messageCreate", async msg => {
         }
       }
     }
-    if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.content.replace("!guess ", "")))) {
+    if ((hangman == true) && (alphabet.includes(msg.content)) {
       function writetxt() {
           r = ""
           l = 0
@@ -470,7 +474,7 @@ client.on("messageCreate", async msg => {
           }
           gtxt = stages[s]+"\n"+r+"\n"
       }
-      g = msg.content.replace("!guess ","")
+      g = msg.content
       if (c.includes(g)) {
         msg.reply("Already said that letter.")
       } else if (word.includes(g)) {
