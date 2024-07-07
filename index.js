@@ -14,17 +14,6 @@ const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1
 // Hangman
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
-const word = list[Math.floor(Math.random() * list.length)]
-let r = ""
-for (let x=0;x<word.length;x++) {
-  r+="_ "
-}
-console.log(r)
-console.log(word)
-let c = []
-let i =  []
-let s = 0
-let l = 0
 const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 s1 = 
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
@@ -107,7 +96,6 @@ function writetxt() {
   }
 }
 let stages = [s1,s2,s3,s4,s5,s6,s7]
-let g = ""
 const gtxt = r+"\n"+stages[s]+"\n"
 // Funcs
 function random(list) {
@@ -416,6 +404,18 @@ client.on("interactionCreate", async int => {
         }
      } else if (int.commandName === "hangman") {
         hangman = true
+        const word = list[Math.floor(Math.random() * list.length)]
+        let r = ""
+        for (let x=0;x<word.length;x++) {
+          r+="_ "
+        }
+        console.log(r)
+        console.log(word)
+        let c = []
+        let i =  []
+        let s = 0
+        let l = 0
+        let g = ""
         int.reply(gtxt+"Hangman game on!Type !guess to guess a letter.")
      }
   }
