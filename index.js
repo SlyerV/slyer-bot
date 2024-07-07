@@ -54,7 +54,7 @@ s3 =
 s4 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                       \\\\|
+|                        \\\\|
 |                          |
 |
 |
@@ -63,7 +63,7 @@ s4 =
 s5 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                       \\\\|/
+|                        \\\\|/
 |                          |
 |
 |
@@ -72,7 +72,7 @@ s5 =
 s6 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                       \\\\|/
+|                        \\\\|/
 |                          |
 |                        /
 |
@@ -81,7 +81,7 @@ s6 =
 s7 =
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
 |                         O
-|                       \\\\|/
+|                        \\\\|/
 |                          |
 |                        / \\
 |
@@ -397,6 +397,7 @@ client.on("interactionCreate", async int => {
         if (hangman == false) {
             hangman = true
             word = list[Math.floor(Math.random() * list.length)]
+            r = ""
             for (let x=0;x<word.length;x++) {
               r+="\\_ "
             }
