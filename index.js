@@ -14,6 +14,14 @@ const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1
 // Hangman
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
+let word = ""
+let r = ""
+let c = []
+let i =  []
+let s = 0
+let l = 0
+let g = ""
+let gtxt = ""
 const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 s1 = 
 `|‾‾‾‾‾‾‾‾‾‾‾‾‾|
@@ -386,37 +394,19 @@ client.on("interactionCreate", async int => {
         }
      } else if (int.commandName === "hangman") {
         hangman = true
-        const word = list[Math.floor(Math.random() * list.length)]
-        let r = ""
+        word = list[Math.floor(Math.random() * list.length)]
+        r = ""
         for (let x=0;x<word.length;x++) {
           r+="_ "
         }
         console.log(r)
         console.log(word)
-        let c = []
-        let i =  []
-        let s = 0
-        let l = 0
-        let g = ""
-        let gtxt = stages[s]+"\n"+r+"\n"
-        function writetxt() {
-          r = ""
-          l = 0
-          for (y of word) {
-            let added = false
-            for (x of c) {
-              if (x == y) {
-                r+=(x+" ")
-                added = true
-                l+=1
-              }
-            }
-            if (! added) {
-              r+="_ "  
-            }
-          }
-          gtxt = stages[s]+"\n"+r+"\n"
-        }
+        c = []
+        i =  []
+        s = 0
+        l = 0
+        g = ""
+        gtxt = stages[s]+"\n"+r+"\n"
         int.reply(gtxt+"Hangman game on!Type !guess to guess a letter.")
      }
   }
@@ -461,6 +451,24 @@ client.on("messageCreate", async msg => {
       }
     }
     if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.content.replace("!guess ", "")))) {
+      function writetxt() {
+          r = ""
+          l = 0
+          for (y of word) {
+            let added = false
+            for (x of c) {
+              if (x == y) {
+                r+=(x+" ")
+                added = true
+                l+=1
+              }
+            }
+            if (! added) {
+              r+="_ "  
+            }
+          }
+          gtxt = stages[s]+"\n"+r+"\n"
+      }
       g = msg.content.replace("!guess ","")
       if (c.includes(g)) {
         msg.reply("Already said that letter")
