@@ -489,7 +489,7 @@ client.on("messageCreate", async msg => {
         msg.reply(gtxt+"Incorrect letter.")
       }
       if (s == 6) {
-        msg.reply("You lost! :(")
+        msg.reply("You lost! :(\n\nThe word was "+word)
         hangman = false
       } else if (l == word.length) {
         msg.reply("You won! :)")
