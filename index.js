@@ -11,6 +11,104 @@ const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
 const smembers= []
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
+// Hangman
+const words = fs.readFileSync("./words.txt").toString('utf-8');
+const list = words.split("\n")
+const word = list[Math.floor(Math.random() * list.length)]
+let txt = ""
+for (let x=0;x<word.length;x++) {
+  txt+="_ "
+}
+console.log(txt)
+console.log(word)
+let c = []
+let i =  []
+let s = 0
+let r = ""
+let l = 0
+const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+s1 = 
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             
+|
+|
+|
+|
+|
+|`
+s2 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|
+|
+|
+|
+|
+|`
+s3 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|             |
+|             |
+|
+|
+|
+|`
+s4 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|
+|             |
+|
+|
+|
+|`
+s5 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|/
+|             |
+|
+|
+|
+|`
+s6 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|/
+|             |
+|            /
+|
+|
+|`
+s7 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|/
+|             |
+|            / \\
+|
+|
+|`
+function writetxt() {
+  r = ""
+  l = 0
+  for (y of word) {
+    let added = false
+    for (x of c) {
+      if (x == y) {
+        r+=(x+" ")
+        added = true
+        l+=1
+      }
+    }
+    if (! added) {
+      r+="_ "  
+    }
+  }
+}
+let stages = [s1,s2,s3,s4,s5,s6,s7]
+let g = ""
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -59,6 +157,7 @@ let oldid = data.countid
 let nicked = data.nicked
 let nerdmode = data.nerdmode
 let quoting = data.quoting
+let hangman = false
 const con = mysql.createConnection({
   host: "mysql.db.bot-hosting.net",
   user: "u83224_f02owgaM5N",
@@ -315,6 +414,9 @@ client.on("interactionCreate", async int => {
           data["quoting"] = false
           writedata()
         }
+     } else if (int.commandName === "hangman") {
+        hangman = true
+        int.reply("Hangman game on!Type !guess to guess a letter.")
      }
   }
 });
@@ -355,6 +457,30 @@ client.on("messageCreate", async msg => {
         if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷")) {
           msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
         }
+      }
+    }
+    if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.replace("!guess ", "")))) {
+      g = msg.content
+      let gtxt = r+"\n"+stages[s]+"\n"
+      if (c.includes(g)) {
+        msg.reply("Already said that letter")
+      } else if (word.includes(g)) {
+        c.push(g)
+        writetxt()
+        msg.reply(gtxt+"Correct letter!")
+      } else {
+        s+=1
+        i.push(g)
+        msg.reply(gtxt+"Incorrect letter.")
+      }
+      if (s == 6) {
+        msg.reply(gtxt+"You lost!")
+        hangman = false
+        break
+      } else if (l == word.length) {
+        msg.reply(gtxt+"You won!")
+        hangman = false
+        break
       }
     }
 })
