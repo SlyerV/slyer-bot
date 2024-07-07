@@ -15,16 +15,15 @@ const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
 const word = list[Math.floor(Math.random() * list.length)]
-let txt = ""
+let r = ""
 for (let x=0;x<word.length;x++) {
-  txt+="_ "
+  r+="_ "
 }
-console.log(txt)
+console.log(r)
 console.log(word)
 let c = []
 let i =  []
 let s = 0
-let r = ""
 let l = 0
 const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 s1 = 
@@ -461,7 +460,7 @@ client.on("messageCreate", async msg => {
       }
     }
     if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.content.replace("!guess ", "")))) {
-      g = msg.content
+      g = msg.content.replace("!guess ","")
       if (c.includes(g)) {
         msg.reply("Already said that letter")
       } else if (word.includes(g)) {
@@ -471,6 +470,7 @@ client.on("messageCreate", async msg => {
       } else {
         s+=1
         i.push(g)
+        writetxt()
         msg.reply(gtxt+"Incorrect letter.")
       }
       if (s == 6) {
