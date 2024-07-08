@@ -414,6 +414,14 @@ client.on("interactionCreate", async int => {
         } else {
             int.reply({ content: "A game has already started!", ephemeral: true })
         }
+     } else if (int.commandName === "reply") {
+        const id = int.options.getString("receiver")
+        try {
+            const msg = int.channels.messages.fetch(id)
+        } catch {
+            int.reply({ content:"Receiving message ID/link is invalid or in a different channel", ephemeral: true })
+        }
+        int.channels.messages.fetch(id).reply(int.options.getString("message"))
      }
   }
 });
