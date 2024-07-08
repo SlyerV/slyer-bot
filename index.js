@@ -510,11 +510,15 @@ client.on("messageCreate", async msg => {
       }
     }
     if ((msg.author.id == "1025868793068658718") && (randomnum(5) == 1)) {
-        msg.react("🇸")
-        msg.react("🇹")
-        msg.react("🇫")
-        msg.react("🇺")
-        msg.react("🐒")
+        try {
+            msg.react("🇸")
+            msg.react("🇹")
+            msg.react("🇫")
+            msg.react("🇺")
+            msg.react("🐒")
+        } catch(err) {
+            console.log(err)
+        }
     }
 })
 client.on("messageDelete", async dmsg => {
