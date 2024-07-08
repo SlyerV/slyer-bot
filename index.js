@@ -417,11 +417,11 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "reply") {
         const id = int.options.getString("receiver")
         try {
-            const msg = int.channels.messages.fetch(id)
+            const rmsg = int.channel.messages.cache.get(id)
         } catch {
             int.reply({ content:"Receiving message ID/link is invalid or in a different channel", ephemeral: true })
         }
-        int.channels.messages.fetch(id).reply(int.options.getString("message"))
+        rmsg.reply(int.options.getString("message"))
      }
   }
 });
