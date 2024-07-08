@@ -421,6 +421,7 @@ client.on("interactionCreate", async int => {
         } catch {
             int.reply({ content:"Receiving message ID/link is invalid or in a different channel", ephemeral: true })
         }
+        const rmsg = int.channel.messages.cache.get(id)
         rmsg.reply(int.options.getString("message"))
      }
   }
