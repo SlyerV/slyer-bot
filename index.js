@@ -509,7 +509,7 @@ client.on("messageCreate", async msg => {
         hangman = false
       }
     }
-    if ((msg.author.id == "1025868793068658718") && (randomnum(5) == 1)) {
+    if ((msg.author.id == "947534567781331024") && (randomnum(5) == 1)) {
         try {
             msg.react("🇸")
             msg.react("🇹")
