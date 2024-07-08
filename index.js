@@ -418,13 +418,11 @@ client.on("interactionCreate", async int => {
         const id = int.options.getString("receiver")
         try {
             const rmsg = int.channel.messages.cache.get(id)
+            int.reply({ content:"Message replied to!", ephemeral: true })
             rmsg.reply(int.options.getString("message"))
         } catch {
             int.reply({ content:"Receiving message ID/link is invalid or in a different channel", ephemeral: true })
         }
-        const rmsg = int.channel.messages.cache.get(id)
-        int.reply({ content:"Message replied to!", ephemeral: true })
-        rmsg.reply(int.options.getString("message"))
      }
   }
 });
