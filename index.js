@@ -416,7 +416,7 @@ client.on("interactionCreate", async int => {
         }
      } else if (int.commandName === "reply") {
         const id = int.options.getString("receiver")
-        const caught = false
+        let caught = false
         try {
             const rmsg = int.channel.messages.cache.get(id)
             rmsg.reply("test")
