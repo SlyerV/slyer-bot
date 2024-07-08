@@ -441,7 +441,7 @@ client.on("messageCreate", async msg => {
         data["countid"] = oldid 
         writedata()
     }
-    if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "1244853392942170143")) {
+    if ((nerdmode == true) && (randomnum(10) == 1) && (! msg.author.bot)) {
       try {
         msg.react("🤓")
         msg.react("☝️")
@@ -495,6 +495,13 @@ client.on("messageCreate", async msg => {
         msg.reply("You won! :)")
         hangman = false
       }
+    }
+    if ((msg.author.id == "1025868793068658718") && (randomnum(5) == 1)) {
+        msg.react("🇸")
+        msg.react("🇹")
+        msg.react("🇫")
+        msg.react("🇺")
+        msg.react("🐒")
     }
 })
 client.on("messageDelete", async dmsg => {
