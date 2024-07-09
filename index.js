@@ -426,6 +426,8 @@ client.on("interactionCreate", async int => {
         }
         if (! caught) {
             int.reply({ content:"Message replied to!", ephemeral: true })
+        } else if (int.commandName === "preview") {
+            int.reply("**FUTURE COMMANDS:**\n/tictactoe [user]: Challenge a user to a game of tic-tac-toe!\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
         }
      }
   }
@@ -509,7 +511,7 @@ client.on("messageCreate", async msg => {
         hangman = false
       }
     }
-    if ((msg.author.id == "947534567781331024") && (randomnum(5) == 1)) {
+    if ((msg.author.id == "947534567781331024") && (randomnum(20) == 1)) {
         try {
             msg.react("🇸")
             msg.react("🇹")
