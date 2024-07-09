@@ -426,11 +426,10 @@ client.on("interactionCreate", async int => {
         }
         if (! caught) {
             int.reply({ content:"Message replied to!", ephemeral: true })
-        } else if (int.commandName === "preview") {
-            int.reply("**FUTURE COMMANDS:**\n/tictactoe [user]: Challenge a user to a game of tic-tac-toe!\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
         }
+     } else if (int.commandName === "preview") {
+        int.reply("**FUTURE COMMANDS:**\n/tictactoe [user]: Challenge a user to a game of tic-tac-toe!\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
      }
-  }
 });
 client.on("messageCreate", async msg => {
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
