@@ -432,7 +432,7 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "rps") {
         const c1 = int.options.getString("choice")
         if (int.options.getUser("user")) {
-            int.reply('Can't play against a user yet :/')
+            int.reply("Can't play against a user yet :/")
         } else {
             int.reply("WIP")
         }
