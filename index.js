@@ -436,6 +436,38 @@ client.on("interactionCreate", async int => {
         } else {
             int.reply("WIP")
         }
+     } else if (int.commandName === "average") {
+        if (int.options.getNumber("5")) {
+            if ((! (int.options.getNumber(4))) || (! (int.options.getNumber(3)))) {
+                int.reply({ content: "Invalid input(s)", ephemeral: true })
+            } else {
+                const n1 = int.options.getNumber("1")
+                const n2 = int.options.getNumber("2")
+                const n3 = int.options.getNumber("3")
+                const n4 = int.options.getNumber("4")
+                const n5 = int.options.getNumber("5")
+                int.reply((n1+n2+n3+n4+n5)/5)
+            }
+        } else if (int.options.getNumber("4")) {
+            if (! (int.options.getNumber(3))) {
+                int.reply({ content: "Invalid input(s)", ephemeral: true })
+            } else {
+                const n1 = int.options.getNumber("1")
+                const n2 = int.options.getNumber("2")
+                const n3 = int.options.getNumber("3")
+                const n4 = int.options.getNumber("4")
+                int.reply((n1+n2+n3+n4)/4)
+            }
+        } else if (int.options.getNumber("3")) {
+            const n1 = int.options.getNumber("1")
+            const n2 = int.options.getNumber("2")
+            const n3 = int.options.getNumber("3")
+            int.reply((n1+n2+n3)/3)
+        } else {
+            const n1 = int.options.getNumber("1")
+            const n2 = int.options.getNumber("2")
+            int.reply((n1+n2)/2)
+        }
      }
    }
 });
