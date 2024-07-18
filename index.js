@@ -353,15 +353,15 @@ client.on("interactionCreate", async int => {
         } else {
             int.reply({ content: "You didn't use **/unnick**", ephemeral: true });
         }
-     } else if (int.commandName === "nerdmode") {
+     } else if (int.commandName === "reactions") {
         if (nerdmode == false) {
           nerdmode = true
-          int.reply("Nerd reactions toggled **on**!")
+          int.reply("Reactions toggled **on**!")
           data["nerdmode"] = true
           writedata()
         } else {
           nerdmode = false
-          int.reply("Nerd reactions toggled **off**!")
+          int.reply("Reactions toggled **off**!")
           data["nerdmode"] = false
           writedata()
         }
