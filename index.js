@@ -458,8 +458,9 @@ client.on("interactionCreate", async int => {
 			.addComponents(rock, paper, scissors, cancel);
             		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
 			const collectorFilter = i => i.user.id === int.options.getUser("user")
+			console.log(collectorFilter)
 			try {
-				confirmation = await resp.awaitMessageComponent({ time: 20_000 })
+				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
 				if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
 					  c2 = confirmation.customId
 					  if ((c1 == 'r') && (c2 == 'r')) {
@@ -499,11 +500,11 @@ client.on("interactionCreate", async int => {
 	    } else if ((c1 == 'r') && (c2 == 'p')) {
 		      int.reply({ content: "🤜  🫲\nYou lose :(", components: []})
 	    } else if ((c1 == 'r') && (c2 == 's')) {
-		      int.reply({ content: "🤜  ✌️\You win!", components: []})
+		      int.reply({ content: "🤜  ✌️\nYou win!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'r')) {
 		      int.reply({ content: "🫱  🤛\nYou win!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 's')) {
-		      int.reply({ content: "🫱  ✌️\nYou lose :(!", components: []})
+		      int.reply({ content: "🫱  ✌️\nYou lose :(", components: []})
 	    } else if ((c1 == 's') && (c2 == 'r')) {
 		      int.reply({ content: "✌️  🤛\nYou lose :(", components: []})
 	    } else if ((c1 == 's') && (c2 == 'p')) {
