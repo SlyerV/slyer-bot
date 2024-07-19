@@ -452,9 +452,39 @@ client.on("interactionCreate", async int => {
 			.setCustomId("c")
 			.setLabel('Cancel')
 			.setStyle(ButtonStyle.Danger);
-    		const row = new ActionRowBuilder()
+    	    const row = new ActionRowBuilder()
 			.addComponents(rock, paper, scissors, cancel);
-            int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
+            const resp = int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
+	    const collectorFilter = i => i.user.id === int.options.getUser("user")
+	    try {
+		const confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
+		if ((confirmation.customId === "r") || (confirmation.customId === "p") (confirmation.customId === "s")) {
+			  c2 = confirmation.customId
+			  if (c1 == c2 == 'r') {
+		              int.reply("🤜  🤛\nTie!")
+		          } else if (c1 == c2 == 'p') {
+		              int.reply("🫱  🫲\nTie!")
+		          } else if (c1 == c2 == 's') {
+		              int.reply("✌️  ✌️\nTie!")
+		          } else if ((c1 == 'r') && (c2 == 'p')) {
+		              int.reply("🤜  🫲\nPlayer 2 Wins!")
+		          } else if ((c1 == 'r') && (c2 == 's')) {
+		              int.reply("🤜  ✌️\nPlayer 1 Wins!")
+		          } else if ((c1 == 'p') && (c2 == 'r')) {
+		              int.reply("🫱  🤛\nPlayer 1 Wins!")
+		          } else if ((c1 == 'p') && (c2 == 's')) {
+		              int.reply("🫱  ✌️\nPlayer 2 Wins!")
+		          } else if ((c1 == 's') && (c2 == 'r')) {
+		              int.reply("✌️  🤛\nPlayer 2 Wins!")
+		          } else if ((c1 == 's') && (c2 == 'p')) {
+		              int.reply("✌️  🫲\nPlayer 1 Wins!")
+		          }
+		} else if (confirmation.customId === "c") {
+			await confirmation.update({ content: 'Action cancelled', components: [] })
+		}
+	    } catch (e) {
+		        await interaction.editReply({ content: 'Confirmation not received within 15 seconds, cancelling', components: [] })
+	    }
         } else {
             int.reply("WIP")
         }
