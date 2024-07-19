@@ -461,28 +461,28 @@ client.on("interactionCreate", async int => {
 				if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
 					  c2 = confirmation.customId
 					  if ((c1 == 'r') && (c2 == 'r')) {
-					      confirmation.update("🤜  🤛\nTie!")
+					      int.editReply({ content: "🤜  🤛\nTie!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'p')) {
-					      confirmation.update("🫱  🫲\nTie!")
+					      int.editReply({ content: "🫱  🫲\nTie!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'p')) {
-					      confirmation.update("✌️  ✌️\nTie!")
+					      int.editReply({ content: "✌️  ✌️\nTie!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 'p')) {
-					      confirmation.update("🤜  🫲\nPlayer 2 Wins!")
+					      int.editReply({ content: "🤜  🫲\nPlayer 2 Wins!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 's')) {
-					      confirmation.update("🤜  ✌️\nPlayer 1 Wins!")
+					      int.editReply({ content: "🤜  ✌️\nPlayer 1 Wins!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'r')) {
-					      confirmation.update("🫱  🤛\nPlayer 1 Wins!")
+					      int.editReply({ content: "🫱  🤛\nPlayer 1 Wins!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 's')) {
-					      confirmation.update("🫱  ✌️\nPlayer 2 Wins!")
+					      int.editReply({ content: "🫱  ✌️\nPlayer 2 Wins!", components: []})
 					  } else if ((c1 == 's') && (c2 == 'r')) {
-					      confirmation.update("✌️  🤛\nPlayer 2 Wins!")
+					      int.editReply({ content: "✌️  🤛\nPlayer 2 Wins!", components: []})
 					  } else if ((c1 == 's') && (c2 == 'p')) {
-					      confirmation.update("✌️  🫲\nPlayer 1 Wins!")
+					      int.editReply({ content: "✌️  🫲\nPlayer 1 Wins!", components: []})
 					  }
 				} else if (confirmation.customId === "c") {
-					await confirmation.update({ content: 'Action cancelled', components: [] })
+					int.editReply("Action cancelled")
 				} else {
-					await confirmation.update("Error: Invalid ID")
+					confirmation.update("Error: Invalid ID")
 				}
 			} catch (e) {
 				int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
