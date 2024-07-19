@@ -450,43 +450,43 @@ client.on("interactionCreate", async int => {
 			.setStyle(ButtonStyle.Primary);
             const cancel = new ButtonBuilder()
 			.setCustomId("c")
-			.setLabel('Cancel')
+			.setLabel('❌ Cancel')
 			.setStyle(ButtonStyle.Danger);
     	    const row = new ActionRowBuilder()
 			.addComponents(rock, paper, scissors, cancel);
-            const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
-	    const collectorFilter = i => i.user.id === int.options.getUser("user")
-	    try {
-		const confirmation = await resp.awaitMessageComponent({ time: 20_000 })
-		if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
-			  c2 = confirmation.customId
-			  if (c1 == c2 == 'r') {
-		              confirmation.update("🤜  🤛\nTie!")
-		          } else if (c1 == c2 == 'p') {
-		              confirmation.update("🫱  🫲\nTie!")
-		          } else if (c1 == c2 == 's') {
-		              confirmation.update("✌️  ✌️\nTie!")
-		          } else if ((c1 == 'r') && (c2 == 'p')) {
-		              confirmation.update("🤜  🫲\nPlayer 2 Wins!")
-		          } else if ((c1 == 'r') && (c2 == 's')) {
-		              confirmation.update("🤜  ✌️\nPlayer 1 Wins!")
-		          } else if ((c1 == 'p') && (c2 == 'r')) {
-		              confirmation.update("🫱  🤛\nPlayer 1 Wins!")
-		          } else if ((c1 == 'p') && (c2 == 's')) {
-		              confirmation.update("🫱  ✌️\nPlayer 2 Wins!")
-		          } else if ((c1 == 's') && (c2 == 'r')) {
-		              confirmation.update("✌️  🤛\nPlayer 2 Wins!")
-		          } else if ((c1 == 's') && (c2 == 'p')) {
-		              confirmation.update("✌️  🫲\nPlayer 1 Wins!")
-		          }
-		} else if (confirmation.customId === "c") {
-			await confirmation.update({ content: 'Action cancelled', components: [] })
-		} else {
-			confirmation.update("Error: Invalid ID")
-		}
-	    } catch (e) {
-		        int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
-	    }
+         //    const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
+	 //    const collectorFilter = i => i.user.id === int.options.getUser("user")
+	 //    try {
+		// const confirmation = await resp.awaitMessageComponent({ time: 20_000 })
+		// if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
+		// 	  c2 = confirmation.customId
+		// 	  if (c1 == c2 == 'r') {
+		//               confirmation.update("🤜  🤛\nTie!")
+		//           } else if (c1 == c2 == 'p') {
+		//               confirmation.update("🫱  🫲\nTie!")
+		//           } else if (c1 == c2 == 's') {
+		//               confirmation.update("✌️  ✌️\nTie!")
+		//           } else if ((c1 == 'r') && (c2 == 'p')) {
+		//               confirmation.update("🤜  🫲\nPlayer 2 Wins!")
+		//           } else if ((c1 == 'r') && (c2 == 's')) {
+		//               confirmation.update("🤜  ✌️\nPlayer 1 Wins!")
+		//           } else if ((c1 == 'p') && (c2 == 'r')) {
+		//               confirmation.update("🫱  🤛\nPlayer 1 Wins!")
+		//           } else if ((c1 == 'p') && (c2 == 's')) {
+		//               confirmation.update("🫱  ✌️\nPlayer 2 Wins!")
+		//           } else if ((c1 == 's') && (c2 == 'r')) {
+		//               confirmation.update("✌️  🤛\nPlayer 2 Wins!")
+		//           } else if ((c1 == 's') && (c2 == 'p')) {
+		//               confirmation.update("✌️  🫲\nPlayer 1 Wins!")
+		//           }
+		// } else if (confirmation.customId === "c") {
+		// 	await confirmation.update({ content: 'Action cancelled', components: [] })
+		// } else {
+		// 	confirmation.update("Error: Invalid ID")
+		// }
+	 //    } catch (e) {
+		//         int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
+	 //    }
         } else {
             int.reply("WIP")
         }
