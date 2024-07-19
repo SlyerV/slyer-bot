@@ -454,7 +454,7 @@ client.on("interactionCreate", async int => {
 			.setStyle(ButtonStyle.Danger);
     	    const row = new ActionRowBuilder()
 			.addComponents(rock, paper, scissors, cancel);
-         //    const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
+            int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
 	 //    const collectorFilter = i => i.user.id === int.options.getUser("user")
 	 //    try {
 		// const confirmation = await resp.awaitMessageComponent({ time: 20_000 })
