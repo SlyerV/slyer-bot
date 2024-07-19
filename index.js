@@ -435,6 +435,8 @@ client.on("interactionCreate", async int => {
         int.reply("**FUTURE COMMANDS:**\n/tictactoe [user]: Challenge a user to a game of tic-tac-toe!\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
      } else if (int.commandName === "rps") {
         c1 = int.options.getString("choice")
+	const p1 = "<@"+int.user.id+">"
+	const p2 = "<@"+int.options.getUser("user")+">"
         if (int.options.getUser("user")) {
             const rock = new ButtonBuilder()
 			.setCustomId("r")
@@ -467,28 +469,46 @@ client.on("interactionCreate", async int => {
 					  } else if ((c1 == 'p') && (c2 == 'p')) {
 					      int.editReply({ content: "✌️  ✌️\nTie!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 'p')) {
-					      int.editReply({ content: "🤜  🫲\nPlayer 2 Wins!", components: []})
+					      int.editReply({ content: "🤜  🫲\n"+p2+" wins!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 's')) {
-					      int.editReply({ content: "🤜  ✌️\nPlayer 1 Wins!", components: []})
+					      int.editReply({ content: "🤜  ✌️\n"+p1+" wins!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'r')) {
-					      int.editReply({ content: "🫱  🤛\nPlayer 1 Wins!", components: []})
+					      int.editReply({ content: "🫱  🤛\n"+p1+" wins!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 's')) {
-					      int.editReply({ content: "🫱  ✌️\nPlayer 2 Wins!", components: []})
+					      int.editReply({ content: "🫱  ✌️\n"+p2+" wins!", components: []})
 					  } else if ((c1 == 's') && (c2 == 'r')) {
-					      int.editReply({ content: "✌️  🤛\nPlayer 2 Wins!", components: []})
+					      int.editReply({ content: "✌️  🤛\n"+p2+" wins!", components: []})
 					  } else if ((c1 == 's') && (c2 == 'p')) {
-					      int.editReply({ content: "✌️  🫲\nPlayer 1 Wins!", components: []})
+					      int.editReply({ content: "✌️  🫲\n"+p1+" wins!", components: []})
 					  }
 				} else if (confirmation.customId === "c") {
 					int.editReply("Action cancelled")
-				} else {
-					confirmation.update("Error: Invalid ID")
 				}
 			} catch (e) {
 				int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
 			}
         } else {
-            int.reply("WIP")
+            const l = ["r","p","s"]
+	    c2 = random(l)
+	    if ((c1 == 'r') && (c2 == 'r')) {
+		      int.reply({ content: "🤜  🤛\nTie!", components: []})
+	    } else if ((c1 == 'p') && (c2 == 'p')) {
+		      int.reply({ content: "🫱  🫲\nTie!", components: []})
+	    } else if ((c1 == 'p') && (c2 == 'p')) {
+		      int.reply({ content: "✌️  ✌️\nTie!", components: []})
+	    } else if ((c1 == 'r') && (c2 == 'p')) {
+		      int.reply({ content: "🤜  🫲\nYou lose :(", components: []})
+	    } else if ((c1 == 'r') && (c2 == 's')) {
+		      int.reply({ content: "🤜  ✌️\You win!", components: []})
+	    } else if ((c1 == 'p') && (c2 == 'r')) {
+		      int.reply({ content: "🫱  🤛\nYou win!", components: []})
+	    } else if ((c1 == 'p') && (c2 == 's')) {
+		      int.reply({ content: "🫱  ✌️\nYou lose :(!", components: []})
+	    } else if ((c1 == 's') && (c2 == 'r')) {
+		      int.reply({ content: "✌️  🤛\nYou lose :(", components: []})
+	    } else if ((c1 == 's') && (c2 == 'p')) {
+		      int.reply({ content: "✌️  🫲\nYou win!", components: []})
+	    }
         }
      } else if (int.commandName === "average") {
         if (int.options.getNumber("5")) {
@@ -523,33 +543,6 @@ client.on("interactionCreate", async int => {
             int.reply(String((n1+n2)/2))
         }
      }
-   } else if (int.isButton()) {
-   //    if ((int.customId == "r") || (int.customId == "p") || (int.customId == "s")) {
-   //        c2 = int.customId
-   //        if ((c1 == 'r') && (c2 == 'r')) {
-   //            int.reply("🤜  🤛\nTie!")
-   //        } else if ((c1 == 'p') && (c2 == 'p')) {
-   //            int.reply("🫱  🫲\nTie!")
-   //        } else if ((c1 == 's') && (c2 == 's')) {
-   //            int.reply("✌️  ✌️\nTie!")
-   //        } else if ((c1 == 'r') && (c2 == 'p')) {
-   //            int.reply("🤜  🫲\nPlayer 2 Wins!")
-   //        } else if ((c1 == 'r') && (c2 == 's')) {
-   //            int.reply("🤜  ✌️\nPlayer 1 Wins!")
-   //        } else if ((c1 == 'p') && (c2 == 'r')) {
-   //            int.reply("🫱  🤛\nPlayer 1 Wins!")
-   //        } else if ((c1 == 'p') && (c2 == 's')) {
-   //            int.reply("🫱  ✌️\nPlayer 2 Wins!")
-   //        } else if ((c1 == 's') && (c2 == 'r')) {
-   //            int.reply("✌️  🤛\nPlayer 2 Wins!")
-   //        } else if ((c1 == 's') && (c2 == 'p')) {
-   //            int.reply("✌️  🫲\nPlayer 1 Wins!")
-   //        } else {
-	  //     int.reply("Error: "+c1,c2)
-	  // }
-   //    } else {
-	  //     int.reply("Error: Button ID Invalid ("+int.customId+")")
-   //    }
    }
 });
 // MESSAGES
