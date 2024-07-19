@@ -449,7 +449,7 @@ client.on("interactionCreate", async int => {
 			.setLabel('✂️ Scissors')
 			.setStyle(ButtonStyle.Primary);
             const cancel = new ButtonBuilder()
-			.setCustomId(null)
+			.setCustomId("c")
 			.setLabel('Cancel')
 			.setStyle(ButtonStyle.Danger);
     		const row = new ActionRowBuilder()
