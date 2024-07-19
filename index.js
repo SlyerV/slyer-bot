@@ -458,7 +458,7 @@ client.on("interactionCreate", async int => {
 	    const collectorFilter = i => i.user.id === int.options.getUser("user")
 	    try {
 		const confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
-		if ((confirmation.customId === "r") || (confirmation.customId === "p") (confirmation.customId === "s")) {
+		if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
 			  c2 = confirmation.customId
 			  if (c1 == c2 == 'r') {
 		              confirmation.update("🤜  🤛\nTie!")
