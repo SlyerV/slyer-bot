@@ -464,23 +464,23 @@ client.on("interactionCreate", async int => {
 				if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
 					  c2 = confirmation.customId
 					  if ((c1 == 'r') && (c2 == 'r')) {
-					      int.editReply({ content: "🤜  🤛\nTie!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'p')) {
-					      int.editReply({ content: "🫱  🫲\nTie!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'p')) {
-					      int.editReply({ content: "✌️  ✌️\nTie!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 'p')) {
-					      int.editReply({ content: "🤜  🫲\n"+p2+" wins!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 's')) {
-					      int.editReply({ content: "🤜  ✌️\n"+p1+" wins!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'r')) {
-					      int.editReply({ content: "🫱  🤛\n"+p1+" wins!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 's')) {
-					      int.editReply({ content: "🫱  ✌️\n"+p2+" wins!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
 					  } else if ((c1 == 's') && (c2 == 'r')) {
-					      int.editReply({ content: "✌️  🤛\n"+p2+" wins!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
 					  } else if ((c1 == 's') && (c2 == 'p')) {
-					      int.editReply({ content: "✌️  🫲\n"+p1+" wins!", components: []})
+					      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 					  }
 				} else if (confirmation.customId === "c") {
 					int.editReply({ content: "Action cancelled", components: []})
@@ -491,24 +491,25 @@ client.on("interactionCreate", async int => {
         } else {
             const l = ["r","p","s"]
 	    c2 = random(l)
+	    p2 = "<@1244853392942170143>"
 	    if ((c1 == 'r') && (c2 == 'r')) {
-		      int.reply({ content: "🤜  🤛\nTie!", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'p')) {
-		      int.reply({ content: "🫱  🫲\nTie!", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'p')) {
-		      int.reply({ content: "✌️  ✌️\nTie!", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
 	    } else if ((c1 == 'r') && (c2 == 'p')) {
-		      int.reply({ content: "🤜  🫲\nYou lose :(", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
 	    } else if ((c1 == 'r') && (c2 == 's')) {
-		      int.reply({ content: "🤜  ✌️\nYou win!", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'r')) {
-		      int.reply({ content: "🫱  🤛\nYou win!", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 's')) {
-		      int.reply({ content: "🫱  ✌️\nYou lose :(", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
 	    } else if ((c1 == 's') && (c2 == 'r')) {
-		      int.reply({ content: "✌️  🤛\nYou lose :(", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
 	    } else if ((c1 == 's') && (c2 == 'p')) {
-		      int.reply({ content: "✌️  🫲\nYou win!", components: []})
+	      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 	    }
         }
      } else if (int.commandName === "average") {
