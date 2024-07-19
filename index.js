@@ -493,23 +493,23 @@ client.on("interactionCreate", async int => {
 	    c2 = random(l)
 	    const p2 = "<@1244853392942170143>"
 	    if ((c1 == 'r') && (c2 == 'r')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'p')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'p')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
 	    } else if ((c1 == 'r') && (c2 == 'p')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
 	    } else if ((c1 == 'r') && (c2 == 's')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'r')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 's')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
 	    } else if ((c1 == 's') && (c2 == 'r')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
 	    } else if ((c1 == 's') && (c2 == 'p')) {
-	      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
+	      int.reply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 	    }
         }
      } else if (int.commandName === "average") {
