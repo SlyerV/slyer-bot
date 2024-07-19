@@ -512,6 +512,7 @@ client.on("interactionCreate", async int => {
           } else if ((c1 == 's') && (c2 == 'p')) {
               int.reply("✌️  🫲\nPlayer 1 Wins!")
           }
+      }
    }
 });
 // MESSAGES
