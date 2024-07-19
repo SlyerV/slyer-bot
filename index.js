@@ -492,7 +492,7 @@ client.on("interactionCreate", async int => {
         }
      }
    } else if (int.isButton()) {
-      if ((int.customId == 'r') || (int.customId == 'p') || (int.customId == 's')) {
+      if ((int.customId == "r") || (int.customId == "p") || (int.customId == "s")) {
           c2 = int.customId
           if (c1 == c2 == 'r') {
               int.reply("🤜  🤛\nTie!")
@@ -513,6 +513,8 @@ client.on("interactionCreate", async int => {
           } else if ((c1 == 's') && (c2 == 'p')) {
               int.reply("✌️  🫲\nPlayer 1 Wins!")
           }
+      } else {
+	      int.reply("Error: Button ID Invalid ("+int.customId+")")
       }
    }
 });
