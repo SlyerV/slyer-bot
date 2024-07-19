@@ -457,8 +457,8 @@ client.on("interactionCreate", async int => {
     	    const row = new ActionRowBuilder()
 			.addComponents(rock, paper, scissors, cancel);
             		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
-			const collectorFilter = int.options.getUser("user")
-			console.log(collectorFilter)
+			const collectorFilter = i => i.user.id => int.options.getUser("user")
+			console.log(i)
 			try {
 				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
 				if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
