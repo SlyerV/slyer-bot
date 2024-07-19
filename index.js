@@ -88,6 +88,9 @@ s7 =
 |
 |`
 let stages = [s1,s2,s3,s4,s5,s6,s7]
+// RPS
+let c1 = ""
+let c2 = ""
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -430,9 +433,27 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "preview") {
         int.reply("**FUTURE COMMANDS:**\n/tictactoe [user]: Challenge a user to a game of tic-tac-toe!\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
      } else if (int.commandName === "rps") {
-        const c1 = int.options.getString("choice")
+        c1 = Number(int.options.getString("choice"))
         if (int.options.getUser("user")) {
-            int.reply("Can't play against a user yet :/")
+            const rock = new ButtonBuilder()
+			.setCustomId("r")
+			.setLabel('🪨 Rock')
+			.setStyle(ButtonStyle.Primary);
+            const paper = new ButtonBuilder()
+			.setCustomId("p")
+			.setLabel('📃 Paper')
+			.setStyle(ButtonStyle.Primary);
+            const scissors = new ButtonBuilder()
+			.setCustomId("s")
+			.setLabel('✂️ Scissors')
+			.setStyle(ButtonStyle.Primary);
+            const cancel = new ButtonBuilder()
+			.setCustomId(null)
+			.setLabel('Cancel')
+			.setStyle(ButtonStyle.Danger);
+    		const row = new ActionRowBuilder()
+			.addComponents(rock, paper, scissors, cancel);
+            int.reply("<@"+int.options.getUser("user")+"> choose your move!")
         } else {
             int.reply("WIP")
         }
@@ -469,8 +490,31 @@ client.on("interactionCreate", async int => {
             int.reply(String((n1+n2)/2))
         }
      }
+   } else if (int.isButton()) {
+      if ((int.customId == 'r') || (int.customId == 'p') || (int.customId == 's')) {
+          c2 = int.customId
+          if (c1 == c2 == 'r') {
+              int.reply("🤜  🤛\nTie!")
+          } else if (c1 == c2 == 'p') {
+              int.reply("🫱  🫲\nTie!")
+          } else if (c1 == c2 == 's') {
+              int.reply("✌️  ✌️\nTie!")
+          } else if ((c1 == 'r') && (c2 == 'p')) {
+              int.reply("🤜  🫲\nPlayer 2 Wins!")
+          } else if ((c1 == 'r') && (c2 == 's')) {
+              int.reply("🤜  ✌️\nPlayer 1 Wins!")
+          } else if ((c1 == 'p') && (c2 == 'r')) {
+              int.reply("🫱  🤛\nPlayer 1 Wins!")
+          } else if ((c1 == 'p') && (c2 == 's')) {
+              int.reply("🫱  ✌️\nPlayer 2 Wins!")
+          } else if ((c1 == 's') && (c2 == 'r')) {
+              int.reply("✌️  🤛\nPlayer 2 Wins!")
+          } else if ((c1 == 's') && (c2 == 'p')) {
+              int.reply("✌️  🫲\nPlayer 1 Wins!")
+          }
    }
 });
+// MESSAGES
 client.on("messageCreate", async msg => {
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
