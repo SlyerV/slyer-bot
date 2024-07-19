@@ -454,7 +454,7 @@ client.on("interactionCreate", async int => {
 			.setStyle(ButtonStyle.Danger);
     		const row = new ActionRowBuilder()
 			.addComponents(rock, paper, scissors, cancel);
-            int.reply("<@"+int.options.getUser("user")+"> choose your move!")
+            int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
         } else {
             int.reply("WIP")
         }
