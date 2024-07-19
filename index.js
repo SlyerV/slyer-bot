@@ -483,7 +483,7 @@ client.on("interactionCreate", async int => {
 			await confirmation.update({ content: 'Action cancelled', components: [] })
 		}
 	    } catch (e) {
-		        await interaction.editReply({ content: 'Confirmation not received within 15 seconds, cancelling', components: [] })
+		        await int.editReply({ content: 'Confirmation not received within 15 seconds, cancelling', components: [] })
 	    }
         } else {
             int.reply("WIP")
