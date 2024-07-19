@@ -454,39 +454,39 @@ client.on("interactionCreate", async int => {
 			.setStyle(ButtonStyle.Danger);
     	    const row = new ActionRowBuilder()
 			.addComponents(rock, paper, scissors, cancel);
-            		int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
-	 //    const collectorFilter = i => i.user.id === int.options.getUser("user")
-	 //    try {
-		// const confirmation = await resp.awaitMessageComponent({ time: 20_000 })
-		// if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
-		// 	  c2 = confirmation.customId
-		// 	  if ((c1 == 'r') && (c2 == 'r')) {
-		//               confirmation.update("🤜  🤛\nTie!")
-		//           } else if ((c1 == 'p') && (c2 == 'p')) {
-		//               confirmation.update("🫱  🫲\nTie!")
-		//           } else if ((c1 == 'p') && (c2 == 'p')) {
-		//               confirmation.update("✌️  ✌️\nTie!")
-		//           } else if ((c1 == 'r') && (c2 == 'p')) {
-		//               confirmation.update("🤜  🫲\nPlayer 2 Wins!")
-		//           } else if ((c1 == 'r') && (c2 == 's')) {
-		//               confirmation.update("🤜  ✌️\nPlayer 1 Wins!")
-		//           } else if ((c1 == 'p') && (c2 == 'r')) {
-		//               confirmation.update("🫱  🤛\nPlayer 1 Wins!")
-		//           } else if ((c1 == 'p') && (c2 == 's')) {
-		//               confirmation.update("🫱  ✌️\nPlayer 2 Wins!")
-		//           } else if ((c1 == 's') && (c2 == 'r')) {
-		//               confirmation.update("✌️  🤛\nPlayer 2 Wins!")
-		//           } else if ((c1 == 's') && (c2 == 'p')) {
-		//               confirmation.update("✌️  🫲\nPlayer 1 Wins!")
-		//           }
-		// } else if (confirmation.customId === "c") {
-		// 	await confirmation.update({ content: 'Action cancelled', components: [] })
-		// } else {
-		// 	confirmation.update("Error: Invalid ID")
-		// }
-	 //    } catch (e) {
-		//         int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
-	 //    }
+            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
+			const collectorFilter = i => i.user.id === int.options.getUser("user")
+			try {
+				confirmation = await resp.awaitMessageComponent({ time: 20_000 })
+				if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
+					  c2 = confirmation.customId
+					  if ((c1 == 'r') && (c2 == 'r')) {
+					      confirmation.update("🤜  🤛\nTie!")
+					  } else if ((c1 == 'p') && (c2 == 'p')) {
+					      confirmation.update("🫱  🫲\nTie!")
+					  } else if ((c1 == 'p') && (c2 == 'p')) {
+					      confirmation.update("✌️  ✌️\nTie!")
+					  } else if ((c1 == 'r') && (c2 == 'p')) {
+					      confirmation.update("🤜  🫲\nPlayer 2 Wins!")
+					  } else if ((c1 == 'r') && (c2 == 's')) {
+					      confirmation.update("🤜  ✌️\nPlayer 1 Wins!")
+					  } else if ((c1 == 'p') && (c2 == 'r')) {
+					      confirmation.update("🫱  🤛\nPlayer 1 Wins!")
+					  } else if ((c1 == 'p') && (c2 == 's')) {
+					      confirmation.update("🫱  ✌️\nPlayer 2 Wins!")
+					  } else if ((c1 == 's') && (c2 == 'r')) {
+					      confirmation.update("✌️  🤛\nPlayer 2 Wins!")
+					  } else if ((c1 == 's') && (c2 == 'p')) {
+					      confirmation.update("✌️  🫲\nPlayer 1 Wins!")
+					  }
+				} else if (confirmation.customId === "c") {
+					await confirmation.update({ content: 'Action cancelled', components: [] })
+				} else {
+					await confirmation.update("Error: Invalid ID")
+				}
+			} catch (e) {
+				int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
+			}
         } else {
             int.reply("WIP")
         }
@@ -524,32 +524,32 @@ client.on("interactionCreate", async int => {
         }
      }
    } else if (int.isButton()) {
-      if ((int.customId == "r") || (int.customId == "p") || (int.customId == "s")) {
-          c2 = int.customId
-          if ((c1 == 'r') && (c2 == 'r')) {
-              int.editReply("🤜  🤛\nTie!")
-          } else if ((c1 == 'p') && (c2 == 'p')) {
-              int.reply("🫱  🫲\nTie!")
-          } else if ((c1 == 's') && (c2 == 's')) {
-              int.reply("✌️  ✌️\nTie!")
-          } else if ((c1 == 'r') && (c2 == 'p')) {
-              int.reply("🤜  🫲\nPlayer 2 Wins!")
-          } else if ((c1 == 'r') && (c2 == 's')) {
-              int.reply("🤜  ✌️\nPlayer 1 Wins!")
-          } else if ((c1 == 'p') && (c2 == 'r')) {
-              int.reply("🫱  🤛\nPlayer 1 Wins!")
-          } else if ((c1 == 'p') && (c2 == 's')) {
-              int.reply("🫱  ✌️\nPlayer 2 Wins!")
-          } else if ((c1 == 's') && (c2 == 'r')) {
-              int.reply("✌️  🤛\nPlayer 2 Wins!")
-          } else if ((c1 == 's') && (c2 == 'p')) {
-              int.reply("✌️  🫲\nPlayer 1 Wins!")
-          } else {
-	      int.reply("Error: "+c1,c2)
-	  }
-      } else {
-	      int.reply("Error: Button ID Invalid ("+int.customId+")")
-      }
+   //    if ((int.customId == "r") || (int.customId == "p") || (int.customId == "s")) {
+   //        c2 = int.customId
+   //        if ((c1 == 'r') && (c2 == 'r')) {
+   //            int.reply("🤜  🤛\nTie!")
+   //        } else if ((c1 == 'p') && (c2 == 'p')) {
+   //            int.reply("🫱  🫲\nTie!")
+   //        } else if ((c1 == 's') && (c2 == 's')) {
+   //            int.reply("✌️  ✌️\nTie!")
+   //        } else if ((c1 == 'r') && (c2 == 'p')) {
+   //            int.reply("🤜  🫲\nPlayer 2 Wins!")
+   //        } else if ((c1 == 'r') && (c2 == 's')) {
+   //            int.reply("🤜  ✌️\nPlayer 1 Wins!")
+   //        } else if ((c1 == 'p') && (c2 == 'r')) {
+   //            int.reply("🫱  🤛\nPlayer 1 Wins!")
+   //        } else if ((c1 == 'p') && (c2 == 's')) {
+   //            int.reply("🫱  ✌️\nPlayer 2 Wins!")
+   //        } else if ((c1 == 's') && (c2 == 'r')) {
+   //            int.reply("✌️  🤛\nPlayer 2 Wins!")
+   //        } else if ((c1 == 's') && (c2 == 'p')) {
+   //            int.reply("✌️  🫲\nPlayer 1 Wins!")
+   //        } else {
+	  //     int.reply("Error: "+c1,c2)
+	  // }
+   //    } else {
+	  //     int.reply("Error: Button ID Invalid ("+int.customId+")")
+   //    }
    }
 });
 // MESSAGES
