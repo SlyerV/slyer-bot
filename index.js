@@ -467,7 +467,7 @@ client.on("interactionCreate", async int => {
 					      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 					  } else if ((c1 == 'p') && (c2 == 'p')) {
 					      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
-					  } else if ((c1 == 'p') && (c2 == 'p')) {
+					  } else if ((c1 == 's') && (c2 == 's')) {
 					      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
 					  } else if ((c1 == 'r') && (c2 == 'p')) {
 					      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
@@ -496,7 +496,7 @@ client.on("interactionCreate", async int => {
 	      int.reply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'p')) {
 	      int.reply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
-	    } else if ((c1 == 'p') && (c2 == 'p')) {
+	    } else if ((c1 == 's') && (c2 == 's')) {
 	      int.reply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
 	    } else if ((c1 == 'r') && (c2 == 'p')) {
 	      int.reply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
