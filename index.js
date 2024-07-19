@@ -436,8 +436,8 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "rps") {
         c1 = int.options.getString("choice")
 	const p1 = "<@"+int.user.id+">"
-	const p2 = "<@"+int.options.getUser("user")+">"
         if (int.options.getUser("user")) {
+	    const p2 = "<@"+int.options.getUser("user")+">"
             const rock = new ButtonBuilder()
 			.setCustomId("r")
 			.setLabel('🪨 Rock')
@@ -491,7 +491,7 @@ client.on("interactionCreate", async int => {
         } else {
             const l = ["r","p","s"]
 	    c2 = random(l)
-	    p2 = "<@1244853392942170143>"
+	    const p2 = "<@1244853392942170143>"
 	    if ((c1 == 'r') && (c2 == 'r')) {
 	      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 	    } else if ((c1 == 'p') && (c2 == 'p')) {
