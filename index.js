@@ -545,7 +545,7 @@ client.on("interactionCreate", async int => {
           } else if ((c1 == 's') && (c2 == 'p')) {
               int.reply("✌️  🫲\nPlayer 1 Wins!")
           } else {
-	      int.reply("Error: E")
+	      int.reply("Error: "+c1,c2)
 	  }
       } else {
 	      int.reply("Error: Button ID Invalid ("+int.customId+")")
