@@ -482,7 +482,7 @@ client.on("interactionCreate", async int => {
 					      int.editReply({ content: "✌️  🫲\n"+p1+" wins!", components: []})
 					  }
 				} else if (confirmation.customId === "c") {
-					int.editReply("Action cancelled")
+					int.editReply({ content: "Action cancelled", components: []})
 				}
 			} catch (e) {
 				int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
