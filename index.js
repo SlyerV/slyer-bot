@@ -1,32 +1,141 @@
+
 const express = require("express");
 const mysql = require('mysql');
+const fs = require("fs");
+const warns = require('./warns.json')
+const nicks = require('./nicks.json')
+let data = require("./data.json")
 const insults = require('./insults.json');
-const { token } = require('./config.json');
 const { PermissionsBitField } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
-const curses = ["fuck","bitch","hell","sex","porn"," ass ","shit","wtf","wth","stfu","idgaf","lmao","lmfao","sthu","tf","nigga","nigger"]
-let i = 0
-let filter = false
-let counting = false
-let ncount = 0
-let channelid = 0
-let oldid = 0
-let nicks = {}
-let nicked = false
-let nerdmode = false
-let warns = {
-  key: "test",
-  value: 0
-}
 const smembers= []
-const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes"]
+const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
+// Hangman
+const words = fs.readFileSync("./words.txt").toString('utf-8');
+const list = words.split("\n")
+let word = ""
+let r = ""
+let c = []
+let i =  []
+let s = 0
+let l = 0
+let g = ""
+let gtxt = ""
+const alphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+s1 = 
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             
+|
+|
+|
+|
+|
+|`
+s2 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|
+|
+|
+|
+|
+|`
+s3 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|             |
+|             |
+|
+|
+|
+|`
+s4 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|
+|             |
+|
+|
+|
+|`
+s5 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|/
+|             |
+|
+|
+|
+|`
+s6 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|/
+|             |
+|            /
+|
+|
+|`
+s7 =
+`|‾‾‾‾‾‾‾‾‾‾‾‾‾|
+|             O
+|            \\|/
+|             |
+|            / \\
+|
+|
+|`
+let stages = [s1,s2,s3,s4,s5,s6,s7]
+// Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
 }
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
+function writewarns() {
+  fs.writeFile(
+    "warns.json",
+    JSON.stringify(warns),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote warns");
+  }); 
+}
+function writenicks() {
+  fs.writeFile(
+    "nicks.json",
+    JSON.stringify(nicks),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote nicks");
+  }); 
+}
+function writedata() {
+  fs.writeFile(
+    "data.json",
+    JSON.stringify(data),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote data");
+  }); 
+}
+// Stored data
+let counting = data.counting
+let ncount = data.count
+let channelid = data.channel
+let oldid = data.countid
+let nicked = data.nicked
+let nerdmode = data.nerdmode
+let quoting = data.quoting
+let hangman = false
 const con = mysql.createConnection({
   host: "mysql.db.bot-hosting.net",
   user: "u83224_f02owgaM5N",
@@ -69,7 +178,7 @@ client.on("interactionCreate", async int => {
       }
       const T = new Date(startT.getTime()+7*(currentT.getTime()-oldT.getTime()-h*60*60*1000)+a*24*60*60*1000);
       const d = T.toLocaleDateString();
-      int.reply({ content: ("The Rathnorian date is "+d), ephemeral: true });
+      int.reply({ content: ("The Rathnorian date is **"+d+"**"), ephemeral: true });
     } else if (int.commandName === "praise") {
       int.reply("slyer1 is so "+random(compliments)+"!")
     } else if (int.commandName === "echo") {
@@ -89,14 +198,15 @@ client.on("interactionCreate", async int => {
         warns[userS] = 1
       }
       // int.reply({ content: "Warn sent!", ephemeral: true });
-      int.reply("<@"+user+"> \nWarning " + warns[userS] + "/3 \n" + int.options.getString('reason'))
+      int.reply("<@"+user+"> \nWarning **" + warns[userS] + "**/3 \n" + int.options.getString('reason'))
+      writewarns()
     } else if (int.commandName === "warnlist") {
       let user = int.options.getUser('user')
       let userS = String(user)
       if (! (userS in warns)) {
         warns[userS] = 0
       }
-      int.reply(userS+" has "+warns[userS]+" warns.")
+      int.reply(userS+" has **"+warns[userS]+"** warns.")
     } else if (int.commandName === "warnset") {
       let user = int.options.getUser('user')
       let userS = String(user)
@@ -105,7 +215,8 @@ client.on("interactionCreate", async int => {
         num = 0
       }
       warns[userS] = int.options.getNumber('number')
-      int.reply(userS+"'s warn count is now "+num)
+      int.reply(userS+"'s warn count is now **"+num+"**")
+      writewarns()
     } else if (int.commandName === "8ball") {
         int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
     } else if (int.commandName === "randping") {
@@ -115,19 +226,18 @@ client.on("interactionCreate", async int => {
         int.reply("<@"+random(smembers)+"> you got randomly pinged lol have a nice day")
     } else if (int.commandName === "insult") {
         if (int.options.getUser('user') == "816099107545940008") {
-            int.reply("You really thought you could insult my creator??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
+            int.reply("You really thought you could insult my **creator**??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
         } else if (int.options.getUser('user').id === "1244853392942170143") {
-            int.reply("bro really thought he could insult ME the SUPREME RULER")
-          int.channel.send("As revenge, <@"+int.user.id+"> "+random(insults))
-    } else {
+            int.reply("bro really thought he could insult **ME** the **SUPREME RULER**\nAs revenge, <@"+int.user.id+"> "+random(insults))
+        } else {
           console.log(int.options.getUser('user'))
           int.reply("<@"+int.options.getUser('user')+"> "+random(insults))
         }
     } else if (int.commandName === "flipcoin") {
         if (randomnum(2) == 1) {
-            int.reply("🗣️ It's heads 🗣️")
+            int.reply("🗣️ It's **heads** 🗣️")
         } else {
-            int.reply("🪙 It's tails 🪙")
+            int.reply("🪙 It's **tails** 🪙")
         }
     } else if (int.commandName === "rolldice") {
         let rolltxt = ""
@@ -139,35 +249,37 @@ client.on("interactionCreate", async int => {
         if ((int.options.getNumber("count") == undefined) || (int.options.getNumber("count") < 0)) {
             let count = 1
             if ((int.options.getNumber("size") == undefined) || (int.options.getNumber("size") < 3)) {
-        int.reply("(Size: d6)\n🎲 You rolled a "+randomnum(6)+" 🎲")
+        int.reply("(Size: d6)\n🎲 You rolled a **"+randomnum(6)+"** 🎲")
             } else {
-                int.reply("(Size: d"+int.options.getNumber("size")+")\n🎲 You rolled a "+randomnum(int.options.getNumber("size"))+" 🎲")
+                int.reply("(Size: d"+int.options.getNumber("size")+")\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲")
                 }
         } else {
             let count = int.options.getNumber("count")
             for (let x = 0; x < int.options.getNumber("count"); x++) {
                 if ((int.options.getNumber("size") == undefined) || (int.options.getNumber("size") < 3)) {
-                    rolltxt = rolltxt + "\n🎲 You rolled a "+randomnum(6)+" 🎲"
+                    rolltxt = rolltxt + "\n🎲 You rolled a **"+randomnum(6)+"** 🎲"
                 } else {
-                    rolltxt = rolltxt + "\n🎲 You rolled a "+randomnum(int.options.getNumber("size"))+" 🎲"
+                    rolltxt = rolltxt + "\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲"
               }
           }
             int.reply(rolltxt)
         }
-    } else if (int.commandName === "filter") {
-        if (filter == false) {
-            filter = true
-            int.reply("Filter toggled on!")
-        } else {
-            filter = false
-            int.reply("Filter toggled off!")
-        }
     } else if (int.commandName === "counting") {
-        counting = true
-        channelid = int.channel.id
-        oldid = 0
-        ncount = 0
-        int.reply("Counting channel set to <#channelid>! Count has also reset to 0.")
+        if (int.options.getString("off") === "true") {
+            counting = false
+            data["counting"] = false
+            int.reply("Counting game turned **off**.")
+            writedata()
+        } else {
+            counting = true
+            channelid = int.channel.id
+            oldid = 0
+            ncount = 0
+            int.reply("Counting game channel set to <#"+channelid+">! **Count has also reset to 0.**")
+            data["counting"] = true
+            data["channel"] = channelid
+            writedata()
+        }
     } else if (int.commandName === "collatz") {
         let collatz = int.options.getNumber("number")
         let colcount = 0
@@ -185,7 +297,17 @@ client.on("interactionCreate", async int => {
             }
         }
         const colmax = colnums.reduce((a,b) => Math.max(a,b), -Infinity)
-        int.reply(int.options.getNumber("number")+" works and became 1 after "+colcount+" iterations.\n"+"Peak value: "+colmax+"\nList: "+colnums)
+        let collist = ""
+        colnums.forEach(x => {
+            if (x == 1) {
+                collist+=String(x)
+            } else if (x == colmax) {
+                collist+="**"+String(x)+"**, "
+            } else {
+                collist+=String(x)+", "
+            }
+        })
+        int.reply(int.options.getNumber("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
      } else if (int.commandName === "unnick") {
         if (nicked == false) {
           const server = int.guild
@@ -198,17 +320,18 @@ client.on("interactionCreate", async int => {
                   nick = member.nickname
               }
               nicks[member.user.id] = nick
-              console.log(nick)
           })
-          console.log(nicks)
+          writenicks()
           members.forEach(memb => {
               if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
                   memb.setNickname(memb.user.tag)
           })
           int.reply("Unnicked all non-admins >:)")
           nicked = true
+          data["nicked"] = true
+          writedata()
         } else {
-          int.reply({ content: "You already used /unnick, use /renick to use it again", ephemeral: true });
+          int.reply({ content: "You already used /unnick, use **/renick** to use it again", ephemeral: true });
         }
      } else if (int.commandName === "renick") {
         let server = int.guild
@@ -222,17 +345,24 @@ client.on("interactionCreate", async int => {
             })
             int.reply("Re-nicked all non-admins :)")
             nicked = false
+            data["nicked"] = false
             nicks = {}
+            writedata()
+            writenicks()
         } else {
-            int.reply({ content: "You didn't use /unnick", ephemeral: true });
+            int.reply({ content: "You didn't use **/unnick**", ephemeral: true });
         }
      } else if (int.commandName === "nerdmode") {
         if (nerdmode == false) {
           nerdmode = true
-          int.reply("Nerd reactions toggled on!")
+          int.reply("Nerd reactions toggled **on**!")
+          data["nerdmode"] = true
+          writedata()
         } else {
           nerdmode = false
-          int.reply("Nerd reactions toggled off!")
+          int.reply("Nerd reactions toggled **off**!")
+          data["nerdmode"] = false
+          writedata()
         }
      } else if (int.commandName === "owner") {
         const owner = await int.guild.fetchOwner()
@@ -240,37 +370,76 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
      } else if (int.commandName === "info") {
-        int.reply("Creation date: May 28th 2024"+"\nCreator: slyer1\nGender: Male\nHeight: undefined\nWeight: 32 MB\nSexuality: Straight\nStatus: Single 😏")
+        int.reply("Creation date: **May 28th 2024**"+"\nCreator: **slyer1**\nGender: **Male**\nHeight: **undefined**\nWeight: **472.45 MB**\nSexuality: **Straight**\nStatus: **Single 😏**")
+     } else if (int.commandName === "kill") {
+        if (int.user.id == "816099107545940008") {
+            int.reply("Bot successfully terminated 💀🫡")
+            .then(() => {
+                process.exit()  
+            })
+        } else {
+            int.reply({ content: "You're not my creator...", ephemeral: true })
+        }
+     } else if (int.commandName === "quoting") {
+        if (quoting == false) {
+          quoting = true
+          int.reply("Quoting toggled **on**!")
+          data["quoting"] = true
+          writedata()
+        } else {
+          quoting = false
+          int.reply("Quoting toggled **off**!")
+          data["quoting"] = false
+          writedata()
+        }
+     } else if (int.commandName === "hangman") {
+        hangman = true
+        word = list[Math.floor(Math.random() * list.length)]
+        for (let x=0;x<word.length;x++) {
+          r+="_ "
+        }
+        console.log(r)
+        console.log(word)
+        c = []
+        i =  []
+        s = 0
+        l = 0
+        g = ""
+        gtxt = stages[s]+"\n"+r+"\n"
+        console.log(r)
+        int.reply(r)
+        int.channel.messages.cache.get
      }
   }
 });
 client.on("messageCreate", async msg => {
-    if ((counting == true) && (msg.channel.id == channelid) && (msg.author.id != "1244853392942170143")) {
+    if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
             msg.react("✅")
-        } else {
+            oldid = msg.author.id
+        } else if (! isNaN(msg.content)) {
+            x = Number(msg.content)
+            console.log(x)
             console.log(ncount)
             console.log("count fail")
             msg.react("😡")
             msg.react("❌")
-            msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Counting game turned off.")
+            msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Count reset to 0.")
             ncount = 0
+            oldid = 0
+        } else {
+            ncount = ncount-1
         }
-        oldid = msg.author.id
+        data["count"] = ncount
+        data["countid"] = oldid 
+        writedata()
     }
-    if (filter == true) {
-        for (x of curses) {
-            if (msg.content.includes(x)) {
-                msg.reply("that's a no-no word! 😡👎")
-            }
-        }
-    }
-    if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "816099107545940008") && (msg.author.id != "1244853392942170143")) {
+    if ((nerdmode == true) && (randomnum(10) == 1) && (msg.author.id != "1244853392942170143")) {
       try {
         msg.react("🤓")
-        msg.react("👆")
+        msg.react("☝️")
       } catch(err) {
         console.log(err)
       }
@@ -282,5 +451,50 @@ client.on("messageCreate", async msg => {
         }
       }
     }
+    if ((hangman == true) && (msg.content.includes("!guess")) && (alphabet.includes(msg.content.replace("!guess ", "")))) {
+      function writetxt() {
+          r = ""
+          l = 0
+          for (y of word) {
+            let added = false
+            for (x of c) {
+              if (x == y) {
+                r+=(x+" ")
+                added = true
+                l+=1
+              }
+            }
+            if (! added) {
+              r+="_ "  
+            }
+          }
+          gtxt = stages[s]+"\n"+r+"\n"
+      }
+      g = msg.content.replace("!guess ","")
+      if (c.includes(g)) {
+        msg.reply("Already said that letter")
+      } else if (word.includes(g)) {
+        c.push(g)
+        writetxt()
+        msg.reply(gtxt+"Correct letter!")
+      } else {
+        s+=1
+        i.push(g)
+        writetxt()
+        msg.reply(gtxt+"Incorrect letter.")
+      }
+      if (s == 6) {
+        msg.reply(gtxt+"You lost!")
+        hangman = false
+      } else if (l == word.length) {
+        msg.reply(gtxt+"You won!")
+        hangman = false
+      }
+    }
 })
-client.login(token)
+client.on("messageDelete", async dmsg => {
+    if (quoting == true) {
+        client.channels.cache.get("1179602392367517766").send('"'+dmsg.content+'" - <@'+dmsg.author.id+'>')
+    }
+})
+client.login(process.env.token)
