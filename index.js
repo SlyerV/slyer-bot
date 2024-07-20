@@ -563,7 +563,7 @@ client.on("messageCreate", async msg => {
             console.log("count fail")
             msg.react("😡")
             msg.react("❌")
-            msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT "+ncount+"!!! Count reset to 0.")
+            msg.reply("<@"+msg.author.id+"> MESSED UP DA COUNT AT **"+ncount+"**!!! Count reset to 0.")
             ncount = 0
             oldid = 0
         } else {
@@ -628,7 +628,7 @@ client.on("messageCreate", async msg => {
         msg.reply(gtxt+"Incorrect letter.")
       }
       if (s == 6) {
-        msg.reply("You lost! :(\n\nThe word was "+word)
+        msg.reply("You lost! :(\n\nThe word was **"+word+"**")
         hangman = false
       } else if (l == word.length) {
         msg.reply("You won! :)")
