@@ -575,12 +575,13 @@ client.on("interactionCreate", async int => {
 		    }
 		    a+=r
 		    console.log(r)
+		    console.log(20 % 3)
 		    n = n/b
 		    if (n <= 1) {
 			    break
 		    }
 	    }
-	    int.reply(`${n} converted to Base ${b} is **${reverse(a)}**`)
+	    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
      }
    }
 });
