@@ -164,6 +164,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({intents: ["Guilds","GuildMessages","MessageContent","GuildEmojisAndStickers","GuildMembers","GuildMessageReactions"]})
 client.on("interactionCreate", async int => {
   client.user.setActivity('/hangman');
+  const subint = int.options.getSubcommand()
   if (int.isCommand()) {
     if (int.commandName === "rdate") {
       let currentT = new Date();
@@ -513,7 +514,7 @@ client.on("interactionCreate", async int => {
 	      int.reply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 	    }
         }
-     } else if (int.commandName === "average") {
+     } else if (subint === "average") {
         if (int.options.getNumber("5")) {
             if ((! (int.options.getNumber(4))) || (! (int.options.getNumber(3)))) {
                 int.reply({ content: "Invalid input(s)", ephemeral: true })
