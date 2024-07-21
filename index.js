@@ -190,7 +190,7 @@ client.on("interactionCreate", async int => {
       }
       const T = new Date(startT.getTime()+7*(currentT.getTime()-oldT.getTime()-h*60*60*1000)+a*24*60*60*1000);
       const d = T.toLocaleDateString();
-      int.reply({ content: ("The Rathnorian date is **"+d+"**"), ephemeral: true });
+      int.reply({ content: ("The Rathnorian date is **"+d+"**"), ephemeral: false });
     } else if (int.commandName === "praise") {
       int.reply("slyer1 is so "+random(compliments)+"!")
     } else if (int.commandName === "echo") {
@@ -552,8 +552,8 @@ client.on("interactionCreate", async int => {
             int.reply(String((n1+n2)/2))
         }
      } else if (int.commandName === "math" && subint === "base") {
-	    let n = subint.options.getNumber("number")
-	    const b = subint.options.getInteger("base")
+	    let n = int.options.getNumber("number")
+	    const b = int.options.getInteger("base")
 	    let a = ""
 	    let r = ""
 	    while (true) {
