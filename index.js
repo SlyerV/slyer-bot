@@ -546,6 +546,8 @@ client.on("interactionCreate", async int => {
             const n2 = int.options.getNumber("2")
             int.reply(String((n1+n2)/2))
         }
+     } else if (subint === "base") {
+	    const n = subint.options.getNumber("number")
      }
    }
 });
