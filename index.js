@@ -158,7 +158,9 @@ con.connect(function(err) {
   // });
 });
 app.listen(3000, () => {
-  console.log("Project is running.")
+  const d = new Date()
+  const t = d.toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+  console.log("Project is running.\n"+t)
 })
 app.get("/",(req,res) => {
   res.send("Hello World!");
