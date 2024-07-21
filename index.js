@@ -576,7 +576,7 @@ client.on("interactionCreate", async int => {
 		    a+=r
 		    console.log(r)
 		    n = n/b
-		    if (n <= 1) {
+		    if (n < 1) {
 			    break
 		    }
 	    }
