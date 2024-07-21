@@ -99,6 +99,9 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
+function reverse(str) {
+	return str.split('').reverse().join('')
+}
 function writewarns() {
   fs.writeFile(
     "warns.json",
@@ -514,7 +517,7 @@ client.on("interactionCreate", async int => {
 	      int.reply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 	    }
         }
-     } else if (subint === "average") {
+     } else if (int.commandName === "math" && subint === "average") {
         if (int.options.getNumber("5")) {
             if ((! (int.options.getNumber(4))) || (! (int.options.getNumber(3)))) {
                 int.reply({ content: "Invalid input(s)", ephemeral: true })
@@ -546,8 +549,35 @@ client.on("interactionCreate", async int => {
             const n2 = int.options.getNumber("2")
             int.reply(String((n1+n2)/2))
         }
-     } else if (subint === "base") {
-	    const n = subint.options.getNumber("number")
+     } else if (int.commandName === "math" && subint === "base") {
+	    let n = subint.options.getNumber("number")
+	    const b = subint.options.getInteger("base")
+	    let a = ""
+	    let r = ""
+	    while (true) {
+		    r = n % b
+		    if (r >= 10) {
+			    if (r == 10) {
+				    r = "A"
+			    } else if (r == 11) {
+				    r = "B"
+			    } else if (r == 12) {
+				    r = "C"
+			    } else if (r == 13) {
+				    r = "D"
+			    } else if (r == 14) {
+				    r = "E"
+			    } else if (r == 15) {
+				    r = "F"
+			    }
+		    }
+		    a+=r
+		    n = n/b
+		    if (n <= 1) {
+			    break
+		    }
+	    }
+	    int.reply(`${n} converted to Base ${b} is **${reverse(a)}**`)
      }
    }
 });
