@@ -557,7 +557,7 @@ client.on("interactionCreate", async int => {
 	    let a = ""
 	    let r = ""
 	    while (true) {
-		    r = n % b
+		    r = Math.floor(n % b)
 		    if (r >= 10) {
 			    if (r == 10) {
 				    r = "A"
@@ -575,7 +575,6 @@ client.on("interactionCreate", async int => {
 		    }
 		    a+=r
 		    console.log(r)
-		    console.log(20 % 3)
 		    n = n/b
 		    if (n <= 1) {
 			    break
