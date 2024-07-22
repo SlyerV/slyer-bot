@@ -170,7 +170,9 @@ const Discord = require("discord.js");
 const client = new Discord.Client({intents: ["Guilds","GuildMessages","MessageContent","GuildEmojisAndStickers","GuildMembers","GuildMessageReactions"]})
 client.on("interactionCreate", async int => {
   client.user.setActivity('/hangman');
-  const subint = int.options.getSubcommand()
+  if (int.options.getSubcommand()) {
+  	const subint = int.options.getSubcommand()
+  }
   if (int.isCommand()) {
     if (int.commandName === "rdate") {
       let currentT = new Date();
