@@ -11,7 +11,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
 const smembers= []
-const rmsg = ""
+let rmsg = ""
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 // Hangman
 const words = fs.readFileSync("./words.txt").toString('utf-8');
