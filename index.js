@@ -170,9 +170,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client({intents: ["Guilds","GuildMessages","MessageContent","GuildEmojisAndStickers","GuildMembers","GuildMessageReactions"]})
 client.on("interactionCreate", async int => {
   client.user.setActivity('/hangman');
-  if (int.options.getSubcommand()) {
-  	const subint = int.options.getSubcommand()
-  }
   if (int.isCommand()) {
     if (int.commandName === "rdate") {
       let currentT = new Date();
@@ -522,68 +519,70 @@ client.on("interactionCreate", async int => {
 	      int.reply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 	    }
         }
-     } else if (int.commandName === "math" && subint === "average") {
-        if (int.options.getNumber("5")) {
-            if ((! (int.options.getNumber(4))) || (! (int.options.getNumber(3)))) {
-                int.reply({ content: "Invalid input(s)", ephemeral: true })
-            } else {
-                const n1 = int.options.getNumber("1")
-                const n2 = int.options.getNumber("2")
-                const n3 = int.options.getNumber("3")
-                const n4 = int.options.getNumber("4")
-                const n5 = int.options.getNumber("5")
-                int.reply(String((n1+n2+n3+n4+n5)/5))
-            }
-        } else if (int.options.getNumber("4")) {
-            if (! (int.options.getNumber(3))) {
-                int.reply({ content: "Invalid input(s)", ephemeral: true })
-            } else {
-                const n1 = int.options.getNumber("1")
-                const n2 = int.options.getNumber("2")
-                const n3 = int.options.getNumber("3")
-                const n4 = int.options.getNumber("4")
-                int.reply(String((n1+n2+n3+n4)/4))
-            }
-        } else if (int.options.getNumber("3")) {
-            const n1 = int.options.getNumber("1")
-            const n2 = int.options.getNumber("2")
-            const n3 = int.options.getNumber("3")
-            int.reply(String((n1+n2+n3)/3))
-        } else {
-            const n1 = int.options.getNumber("1")
-            const n2 = int.options.getNumber("2")
-            int.reply(String((n1+n2)/2))
-        }
-     } else if (int.commandName === "math" && subint === "base") {
-	    let n = int.options.getNumber("number")
-	    const b = int.options.getInteger("base")
-	    let a = ""
-	    let r = ""
-	    while (true) {
-		    r = Math.floor(n % b)
-		    if (r >= 10) {
-			    if (r == 10) {
-				    r = "A"
-			    } else if (r == 11) {
-				    r = "B"
-			    } else if (r == 12) {
-				    r = "C"
-			    } else if (r == 13) {
-				    r = "D"
-			    } else if (r == 14) {
-				    r = "E"
-			    } else if (r == 15) {
-				    r = "F"
+     } else if (int.commandName === "math") {
+	    if (int.options.getSubcommand() === "average") {
+	        if (int.options.getNumber("5")) {
+	            if ((! (int.options.getNumber(4))) || (! (int.options.getNumber(3)))) {
+	                int.reply({ content: "Invalid input(s)", ephemeral: true })
+	            } else {
+	                const n1 = int.options.getNumber("1")
+	                const n2 = int.options.getNumber("2")
+	                const n3 = int.options.getNumber("3")
+	                const n4 = int.options.getNumber("4")
+	                const n5 = int.options.getNumber("5")
+	                int.reply(String((n1+n2+n3+n4+n5)/5))
+	            }
+	        } else if (int.options.getNumber("4")) {
+	            if (! (int.options.getNumber(3))) {
+	                int.reply({ content: "Invalid input(s)", ephemeral: true })
+	            } else {
+	                const n1 = int.options.getNumber("1")
+	                const n2 = int.options.getNumber("2")
+	                const n3 = int.options.getNumber("3")
+	                const n4 = int.options.getNumber("4")
+	                int.reply(String((n1+n2+n3+n4)/4))
+	            }
+	        } else if (int.options.getNumber("3")) {
+	            const n1 = int.options.getNumber("1")
+	            const n2 = int.options.getNumber("2")
+	            const n3 = int.options.getNumber("3")
+	            int.reply(String((n1+n2+n3)/3))
+	        } else {
+	            const n1 = int.options.getNumber("1")
+	            const n2 = int.options.getNumber("2")
+	            int.reply(String((n1+n2)/2))
+	        }
+	    } else if (int.options.getSubcommand() === "base") {
+		    let n = int.options.getNumber("number")
+		    const b = int.options.getInteger("base")
+		    let a = ""
+		    let r = ""
+		    while (true) {
+			    r = Math.floor(n % b)
+			    if (r >= 10) {
+				    if (r == 10) {
+					    r = "A"
+				    } else if (r == 11) {
+					    r = "B"
+				    } else if (r == 12) {
+					    r = "C"
+				    } else if (r == 13) {
+					    r = "D"
+				    } else if (r == 14) {
+					    r = "E"
+				    } else if (r == 15) {
+					    r = "F"
+				    }
+			    }
+			    a+=r
+			    console.log(r)
+			    n = n/b
+			    if (n < 1) {
+				    break
 			    }
 		    }
-		    a+=r
-		    console.log(r)
-		    n = n/b
-		    if (n < 1) {
-			    break
-		    }
+		    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
 	    }
-	    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
      } else if (int.commandName === "react") {
 	    let caught = false
 	    const emoji = int.options.getString("emoji")
