@@ -39,6 +39,34 @@ const highbase = {
 	"34":"Y",
 	"35":"Z"
 }
+const lowbase = {
+	"A":"10",
+	"B":"11",
+	"C":"12",
+	"D":"13",
+	"E":"14",
+	"F":"15",
+	"G":"16",
+	"H":"17",
+	"I":"18",
+	"J":"19",
+	"K":"20",
+	"L":"21",
+	"M":"22",
+	"N":"23",
+	"O":"24",
+	"P":"25",
+	"Q":"26",
+	"R":"27",
+	"S":"28",
+	"T":"29",
+	"U":"30",
+	"V":"31",
+	"W":"32",
+	"X":"33",
+	"Y":"34",
+	"Z":"35"
+}
 let rmsg = ""
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 // Hangman
@@ -611,6 +639,25 @@ client.on("interactionCreate", async int => {
 		    }
 		    if (! caught) {
 			    int.reply(`The answer to ${expr} is **${ans}**`)
+		    }
+	    } else if (int.options.getSubcommand() === "base36") {
+		    let n = int.options.getNumber("number")
+		    let p = n.length-1
+		    let caught = false
+		    let r = 0
+		    let v = 0
+		    try {
+			for (x of n.length) {
+				v = lowbase[x]
+				r+=(v*(36**p))
+				p--
+			}    
+		    } catch {
+			    int.reply("Invalid number, or number was too big")
+			    caught = true
+		    }
+		    if (! caught) {
+			    int.reply(`${n} converted to Base 10 is ${r}`)
 		    }
 	    }
      } else if (int.commandName === "react") {
