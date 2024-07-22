@@ -778,17 +778,6 @@ client.on("messageCreate", async msg => {
         hangman = false
       }
     }
-    if ((msg.author.id == "947534567781331024") && (randomnum(20) == 1)) {
-        try {
-            msg.react("🇸")
-            msg.react("🇹")
-            msg.react("🇫")
-            msg.react("🇺")
-            msg.react("🐒")
-        } catch(err) {
-            console.log(err)
-        }
-    }
 })
 client.on("messageDelete", async dmsg => {
     const d = new Date()
