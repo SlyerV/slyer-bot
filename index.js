@@ -11,6 +11,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
 const smembers= []
+const rmsg = ""
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 // Hangman
 const words = fs.readFileSync("./words.txt").toString('utf-8');
@@ -581,11 +582,29 @@ client.on("interactionCreate", async int => {
 		    }
 	    }
 	    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
+     } else if (int.commandName === "react") {
+	    let caught = false
+	    const emoji = int.options.getString("emoji")
+	    try {
+		    if (int.options.getString("message")) {
+			    int.channel.messages.cache.get(int.options.getString("message")).react(emoji)
+		    } else {
+			    rmsg.react(emoji)
+		    }
+	    } catch {
+		    int.reply({content:"Invalid message or emoji",ephemeral: true)
+	    }
+	    if (! caught) {
+		    int.reply({content:"Message reacted to!",ephemeral: true})
+	    }
+     } else if (int.commandName === "test") {
+	    int.reply({content:"Bot is fully functional",ephemeral: true})
      }
    }
 });
 // MESSAGES
 client.on("messageCreate", async msg => {
+    rmsg = msg
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
