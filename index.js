@@ -641,7 +641,7 @@ client.on("interactionCreate", async int => {
 			    int.reply(`The answer to ${expr} is **${ans}**`)
 		    }
 	    } else if (int.options.getSubcommand() === "base36") {
-		    let n = int.options.getNumber("number")
+		    let n = int.options.getString("number")
 		    let p = (n.length)-1
 		    let caught = false
 		    let r = 0
