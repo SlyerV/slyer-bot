@@ -11,6 +11,34 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const app = express()
 const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
 const smembers= []
+const highbase = {
+	"10":"A",
+	"11":"B",
+	"12":"C",
+	"13":"D",
+	"14":"E",
+	"15":"F",
+	"16":"G",
+	"17":"H",
+	"18":"I",
+	"19":"J",
+	"20":"K",
+	"21":"L",
+	"22":"M",
+	"23":"N",
+	"24":"O",
+	"25":"P",
+	"26":"Q",
+	"27":"R",
+	"28":"S",
+	"29":"T",
+	"30":"U",
+	"31":"V",
+	"32":"W",
+	"33":"X",
+	"34":"Y",
+	"35":"Z"
+}
 let rmsg = ""
 const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1 could ask a question better than that garbage","no 🗿","probably","stop asking stupid questions and get a life","I don't answer to morons like u","u thought u could ask such a dumb question? fuck off","affirmative","non-affirmative","yesn't","maybe...? 🤷‍♂️","why u asking me","ofc","DEF NOT","I would say yes but actually it's a no","I would say no but actually it's a yes","unaffirmative","hell yes","fuck no"]
 // Hangman
@@ -560,19 +588,7 @@ client.on("interactionCreate", async int => {
 		    while (true) {
 			    r = Math.floor(n % b)
 			    if (r >= 10) {
-				    if (r == 10) {
-					    r = "A"
-				    } else if (r == 11) {
-					    r = "B"
-				    } else if (r == 12) {
-					    r = "C"
-				    } else if (r == 13) {
-					    r = "D"
-				    } else if (r == 14) {
-					    r = "E"
-				    } else if (r == 15) {
-					    r = "F"
-				    }
+				    r = highbase[r]
 			    }
 			    a+=r
 			    console.log(r)
