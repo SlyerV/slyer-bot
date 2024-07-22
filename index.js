@@ -592,7 +592,7 @@ client.on("interactionCreate", async int => {
 			    rmsg.react(emoji)
 		    }
 	    } catch {
-		    int.reply({content:"Invalid message or emoji",ephemeral: true)
+		    int.reply({content:"Invalid message or emoji",ephemeral: true})
 	    }
 	    if (! caught) {
 		    int.reply({content:"Message reacted to!",ephemeral: true})
