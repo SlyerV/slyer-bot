@@ -585,8 +585,8 @@ client.on("interactionCreate", async int => {
 	    }
      } else if (int.commandName === "react") {
 	    let caught = false
-	    const emoji = int.options.getString("emoji")
 	    try {
+		    const emoji = int.options.getString("emoji")
 		    if (int.options.getString("message")) {
 			    int.channel.messages.cache.get(int.options.getString("message")).react(emoji)
 		    } else {
