@@ -646,9 +646,10 @@ client.on("interactionCreate", async int => {
 		    let caught = false
 		    let r = 0
 		    let v = 0
+		    x.
 		    try {
 			for (x of n) {
-				v = lowbase[x]
+				v = lowbase[x.toUpperCase()]
 				r+=(v*(36**p))
 				p--
 			}    
