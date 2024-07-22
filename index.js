@@ -584,9 +584,11 @@ client.on("interactionCreate", async int => {
 		    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
 	    } else if (int.options.getSubcommand() === "calc") {
 		    let caught = false
+		    let expr = ""
+		    let ans = ""
 		    try {
-			    const expr = int.options.getString("expression")
-			    const ans = eval(expr)
+			    expr = int.options.getString("expression")
+			    ans = eval(expr)
 		    } catch {
 			    int.reply({content:"Invalid expression",ephemeral: true})
 			    caught = true
