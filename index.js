@@ -642,12 +642,12 @@ client.on("interactionCreate", async int => {
 		    }
 	    } else if (int.options.getSubcommand() === "base36") {
 		    let n = int.options.getNumber("number")
-		    let p = n.length-1
+		    let p = (n.length)-1
 		    let caught = false
 		    let r = 0
 		    let v = 0
 		    try {
-			for (x of n.length) {
+			for (x of n) {
 				v = lowbase[x]
 				r+=(v*(36**p))
 				p--
