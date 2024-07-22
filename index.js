@@ -647,7 +647,6 @@ client.on("interactionCreate", async int => {
 		    let r = 0
 		    let v = 0
 		    const nums = ["1","2","3","4","5","6","7","8","9","0"]
-		    x.
 		    try {
 			for (x of n) {
 				if (! nums.includes(x)) {
