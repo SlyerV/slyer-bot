@@ -582,6 +582,18 @@ client.on("interactionCreate", async int => {
 			    }
 		    }
 		    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
+	    } else if (int.options.getSubcommand() === "calc") {
+		    let caught = false
+		    try {
+			    const expr = int.options.getString("expression")
+			    const ans = eval(expr)
+		    } catch {
+			    int.reply({content:"Invalid expression",ephemeral: true})
+			    caught = true
+		    }
+		    if (! caught) {
+			    int.reply(`The answer to ${expr} is **${ans}**`)
+		    }
 	    }
      } else if (int.commandName === "react") {
 	    let caught = false
@@ -601,6 +613,10 @@ client.on("interactionCreate", async int => {
 	    }
      } else if (int.commandName === "test") {
 	    int.reply({content:"Bot is fully functional",ephemeral: true})
+     } else if (int.commandName === "date") {
+	    let d = new Date()
+	    d = d.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+	    int.reply("The date is "+d)
      }
    }
 });
