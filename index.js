@@ -430,7 +430,7 @@ client.on("interactionCreate", async int => {
           writedata()
         } else {
           nerdmode = false
-          int.reply({content:"Reactions toggled **off**!",ephemeral:eph})
+          int.reply({content:"Reactions toggled **off**!",ephemeral:false})
           data["nerdmode"] = false
           writedata()
         }
