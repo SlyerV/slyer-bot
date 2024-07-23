@@ -717,7 +717,7 @@ client.on("interactionCreate", async int => {
 			    try {
 				const r = rmsg.id
 				console.log(r)
-				if (id == "") {
+				if (r == undefined) {
 					throw "err"
 				}
 			    } catch {
