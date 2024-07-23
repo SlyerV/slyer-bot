@@ -703,7 +703,9 @@ client.on("interactionCreate", async int => {
 			    try {
 				    const parts = link.split("/")
 				    id = Number(parts[parts.length-1])
-				    if (isNaN(id)) throw "err"
+				    if (isNaN(id)) {
+					    throw "err"
+				    }
 			    } catch {
 				    int.reply({content:"Invalid link",ephemeral:true})
 				    caught = true
@@ -715,7 +717,9 @@ client.on("interactionCreate", async int => {
 			    try {
 				const r = rmsg.id
 				console.log(r)
-				if (id == "") throw "err"
+				if (id == "") {
+					throw "err"
+				}
 			    } catch {
 			        int.reply({content:"Unable to fetch ID of most recent message", ephemeral: true})
 				caught = true
