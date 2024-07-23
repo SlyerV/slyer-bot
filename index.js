@@ -701,10 +701,6 @@ client.on("messageCreate", async msg => {
             console.log("count success")
             msg.react("✅")
             oldid = msg.author.id
-	} else if ((eval(msg.content) == ncount) && (msg.author.id != oldid)) {
-	    console.log("count success")
-            msg.react("☑️")
-            oldid = msg.author.id
         } else if (! isNaN(msg.content)) {
             x = Number(msg.content)
             console.log(x)
