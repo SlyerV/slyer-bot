@@ -717,67 +717,65 @@ client.on("messageCreate", async msg => {
         data["count"] = ncount
         data["countid"] = oldid 
         writedata()
-    }
-    if ((nerdmode == true) && (randomnum(10) == 1) && (! msg.author.bot)) {
-      try {
-          const r = randomnum(3)
-          if (r == 1) {
-            msg.react("🤓")
-            msg.react("☝️")
-          } else if (r == 2) {
-            msg.react("<:womp:1255197707040194652>")
-          } else {
-            msg.react('🏳️‍🌈')
-          }
-      } catch(err) {
-        console.log(err)
-      }
+    } else if ((hangman == true) && (alphabet.includes(msg.content))) {
+	      function writetxt() {
+	          r = ""
+	          l = 0
+	          for (y of word) {
+	            let added = false
+	            for (x of c) {
+	              if (x == y) {
+	                r+=(x+" ")
+	                added = true
+	                l+=1
+	              }
+	            }
+	            if (! added) {
+	              r+="\\_ "  
+	            }
+	          }
+	          gtxt = stages[s]+"\n"+r+"\n"
+	      }
+	      g = msg.content.toLowerCase()
+	      if (c.includes(g)) {
+	        msg.reply("Already said that letter.")
+	      } else if (word.includes(g)) {
+	        c.push(g)
+	        writetxt()
+	        msg.reply(gtxt+"Correct letter!")
+	      } else {
+	        s+=1
+	        i.push(g)
+	        writetxt()
+	        msg.reply(gtxt+"Incorrect letter.")
+	      }
+	      if (s == 6) {
+	        msg.reply("You lost! :(\n\nThe word was **"+word+"**")
+	        hangman = false
+	      } else if (l == word.length) {
+	        msg.reply("You won! :)")
+	        hangman = false
+	      }
+    } else if ((nerdmode == true) && (randomnum(10) == 1) && (! msg.author.bot)) {
+	      try {
+	          const r = randomnum(3)
+	          if (r == 1) {
+	            msg.react("🤓")
+	            msg.react("☝️")
+	          } else if (r == 2) {
+	            msg.react("<:womp:1255197707040194652>")
+	          } else {
+	            msg.react('🏳️‍🌈')
+	          }
+	      } catch(err) {
+	        console.log(err)
+	      }
     }
     if (msg.channel.id != "1253010049199243398") {
       if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718")) {
         if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷")) {
           msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
         }
-      }
-    }
-    if ((hangman == true) && (alphabet.includes(msg.content))) {
-      function writetxt() {
-          r = ""
-          l = 0
-          for (y of word) {
-            let added = false
-            for (x of c) {
-              if (x == y) {
-                r+=(x+" ")
-                added = true
-                l+=1
-              }
-            }
-            if (! added) {
-              r+="\\_ "  
-            }
-          }
-          gtxt = stages[s]+"\n"+r+"\n"
-      }
-      g = msg.content.toLowerCase()
-      if (c.includes(g)) {
-        msg.reply("Already said that letter.")
-      } else if (word.includes(g)) {
-        c.push(g)
-        writetxt()
-        msg.reply(gtxt+"Correct letter!")
-      } else {
-        s+=1
-        i.push(g)
-        writetxt()
-        msg.reply(gtxt+"Incorrect letter.")
-      }
-      if (s == 6) {
-        msg.reply("You lost! :(\n\nThe word was **"+word+"**")
-        hangman = false
-      } else if (l == word.length) {
-        msg.reply("You won! :)")
-        hangman = false
       }
     }
 })
