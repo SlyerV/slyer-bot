@@ -696,12 +696,13 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "getid") {
 	    const subint = int.options.getSubcommand()
 	    if (subint === "message") {
+		    let caught = false
 		    if (int.options.getString("link")) {
 			    const link = int.options.getString("link")
-			    let caught = false
+			    let id = ""
 			    try {
 				    const parts = link.split("/")
-				    const id = Number(parts[parts.length-1])
+				    id = Number(parts[parts.length-1])
 				    if (isNaN(id)) throw "err"
 			    } catch {
 				    int.reply({content:"Invalid link",ephemeral:true})
@@ -711,7 +712,15 @@ client.on("interactionCreate", async int => {
 				    int.reply({content:id,ephemeral:true})
 			    }
 		    } else {
-			    int.reply({content:rmsg.id,ephemeral:true})
+			    try {
+				const r = rmsg.id
+			    } catch {
+			        int.reply({content:"Unable to fetch ID of most recent message", ephemeral: true})
+				caught = true
+		    	    }
+			    if (! caught) {
+			    	int.reply({content:rmsg.id,ephemeral:true})
+			    }
 		    }
 	    }
      }
