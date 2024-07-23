@@ -673,12 +673,15 @@ client.on("interactionCreate", async int => {
 		    const emoji = int.options.getString("emoji")
 		    if (int.options.getString("message")) {
 			    int.channel.messages.cache.get(int.options.getString("message")).react(emoji)
+			    .then(() => {
+                		console.log("Reacted "+emoji)  
+            	    	    })
 		    } else {
 			    rmsg.react(emoji)
+			    .then(() => {
+                		console.log("Reacted "+emoji)  
+            	    	    })
 		    }
-		    .then(() => {
-                	console.log("Reacted "+emoji)  
-            	    })
 	    } catch {
 		    int.reply({content:"Invalid message or emoji",ephemeral: true})
 		    caught = true
