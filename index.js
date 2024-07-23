@@ -335,7 +335,9 @@ client.on("interactionCreate", async int => {
     } else if (int.commandName === "counting") {
         if (int.options.getString("off") === "true") {
             counting = false
+	    channelid = ""
             data["counting"] = false
+	    data["channel"] = channelid
             int.reply("Counting game turned **off**.")
             writedata()
         } else {
@@ -463,7 +465,7 @@ client.on("interactionCreate", async int => {
           writedata()
         }
      } else if (int.commandName === "hangman") {
-        if (hangman == false) {
+        if ((hangman == false) && (int.channel.id != channelid)) {
             hangman = true
             word = list[Math.floor(Math.random() * list.length)]
             r = ""
@@ -480,6 +482,8 @@ client.on("interactionCreate", async int => {
             gtxt = stages[s]+"\n"+r+"\n"
             console.log(r)
             int.reply(gtxt+"Hangman game started! Type any letter to guess.")
+	} else if (int.channel.id === channelid) {
+	    int.reply({ content:"You can't start a hangman game in the counting channel!", ephemeral: true })
         } else {
             int.reply({ content: "A game has already started!", ephemeral: true })
         }
