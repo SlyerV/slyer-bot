@@ -491,8 +491,8 @@ client.on("interactionCreate", async int => {
         const id = int.options.getString("receiver")
         let caught = false
         try {
-            const rmsg = int.channel.messages.cache.get(id)
-            rmsg.reply(int.options.getString("message"))
+            const remsg = int.channel.messages.cache.get(id)
+            remsg.reply(int.options.getString("message"))
         } catch {
             caught = true
             int.reply({ content:"Receiving-message ID is either invalid or in a different channel", ephemeral: true })
@@ -693,6 +693,27 @@ client.on("interactionCreate", async int => {
 	    let d = new Date()
 	    d = d.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
 	    int.reply("The date is "+d)
+     } else if (int.commandName === "getid") {
+	    const subint = int.options.getSubcommand()
+	    if (subint === "message") {
+		    if (int.options.getString("link")) {
+			    const link = int.options.getString("link")
+			    let caught = false
+			    try {
+				    const parts = link.split("/")
+				    const id = Number(parts[parts.length-1])
+				    if (isNaN(id)) throw "err"
+			    } catch {
+				    int.reply({content:"Invalid link",ephemeral:true})
+				    caught = true
+			    }
+			    if (! caught) {
+				    int.reply({content:id,ephemeral:true})
+			    }
+		    } else {
+			    int.reply({content:rmsg.id,ephemeral:true})
+		    }
+	    }
      }
    }
 });
