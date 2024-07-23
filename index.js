@@ -377,6 +377,7 @@ client.on("interactionCreate", async int => {
         })
         int.reply(int.options.getNumber("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
      } else if (int.commandName === "unnick") {
+	const eph = int.options.getBoolean("ephemeral")
         if (nicked == false) {
           const server = int.guild
           const members = await server.members.fetch()
@@ -394,7 +395,7 @@ client.on("interactionCreate", async int => {
               if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
                   memb.setNickname(memb.user.tag)
           })
-          int.reply("Unnicked all non-admins >:)")
+          int.reply({content:"Unnicked all non-admins >:)",ephemeral: eph})
           nicked = true
           data["nicked"] = true
           writedata()
@@ -421,14 +422,15 @@ client.on("interactionCreate", async int => {
             int.reply({ content: "You didn't use **/unnick**", ephemeral: true });
         }
      } else if (int.commandName === "reactions") {
+	const eph = int.options.getBoolean("ephemeral")
         if (nerdmode == false) {
           nerdmode = true
-          int.reply("Reactions toggled **on**!")
+          int.reply({content:"Reactions toggled **on**!", ephemeral: eph})
           data["nerdmode"] = true
           writedata()
         } else {
           nerdmode = false
-          int.reply("Reactions toggled **off**!")
+          int.reply({content:"Reactions toggled **off**!",ephemeral:eph})
           data["nerdmode"] = false
           writedata()
         }
