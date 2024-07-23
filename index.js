@@ -672,15 +672,9 @@ client.on("interactionCreate", async int => {
 	    try {
 		    const emoji = int.options.getString("emoji")
 		    if (int.options.getString("message")) {
-			    int.channel.messages.cache.get(int.options.getString("message")).react(emoji)
-			    .then(() => {
-                		console.log("Reacted "+emoji)  
-            	    	    })
+			    await int.channel.messages.cache.get(int.options.getString("message")).react(emoji)
 		    } else {
-			    rmsg.react(emoji)
-			    .then(() => {
-                		console.log("Reacted "+emoji)  
-            	    	    })
+			    await rmsg.react(emoji)
 		    }
 	    } catch {
 		    int.reply({content:"Invalid message or emoji",ephemeral: true})
@@ -706,6 +700,10 @@ client.on("messageCreate", async msg => {
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
             console.log("count success")
             msg.react("✅")
+            oldid = msg.author.id
+	} else if ((eval(msg.content) == ncount) && (msg.author.id != oldid)) {
+	    console.log("count success")
+            msg.react("☑️")
             oldid = msg.author.id
         } else if (! isNaN(msg.content)) {
             x = Number(msg.content)
