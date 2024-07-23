@@ -714,6 +714,7 @@ client.on("interactionCreate", async int => {
 		    } else {
 			    try {
 				const r = rmsg.id
+				if (id == "") throw "err"
 			    } catch {
 			        int.reply({content:"Unable to fetch ID of most recent message", ephemeral: true})
 				caught = true
