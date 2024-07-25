@@ -713,7 +713,7 @@ client.on("interactionCreate", async int => {
 				    caught = true
 			    }
 			    if (! caught) {
-				    int.reply({content:String(id),ephemeral:true})
+				    int.reply({content:parts[parts.length-1],ephemeral:true})
 			    }
 		    } else {
 			    try {
