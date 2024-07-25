@@ -727,7 +727,8 @@ client.on("interactionCreate", async int => {
 	    } else if (subint === "role") {
 		    int.reply({content:String(int.options.getRole("role").id), ephemeral: true})
 	    }
-   }
+     }
+  }  
 });
 // MESSAGES
 client.on("messageCreate", async msg => {
