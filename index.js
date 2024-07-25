@@ -149,6 +149,70 @@ let stages = [s1,s2,s3,s4,s5,s6,s7]
 // RPS
 let c1 = ""
 let c2 = ""
+// Tic Tac Toe
+const pos = {}
+const usyms = {
+  "1":"_X_",
+  "2":"_O_"
+}
+const dsyms = {
+  "1":"X",
+  "2":"O"
+}
+pos[1] ="_"
+pos[2] ="_"
+pos[3] ="_"
+pos[4] ="_"
+pos[5] ="_"
+pos[6] ="_"
+pos[7]=" "
+pos[8]=" "
+pos[9] = " "
+let p1 = ""
+let p2 = ""
+let p3 = ""
+let p4 = ""
+let p5 = ""
+let p6 = ""
+let p7 = ""
+let p8 = ""
+let p9 = ""
+let board = ""
+let n = "\n"
+let l = "|"
+let player = 2
+let usym = usyms[player]
+let dsym = dsyms[player]
+let stop = false
+const inps = ["1","2","3","4","5","6","7","8","9"]
+function update() {
+  board = pos[1]+l+pos[2]+l+pos[3]+n+pos[4]+l+pos[5]+l+pos[6]+n+pos[7]+l+pos[8]+l+pos[9]
+  usym = usyms[player]
+  dsym = dsyms[player]
+  p1=pos[1]
+  p2 = pos[2]
+  p3=pos[3]
+  p4=pos[4]
+  p5=pos[5]
+  p6=pos[6]
+  p7=pos[7]
+  p8=pos[8]
+  p9=pos[9]
+  if (((p1==usym)&&(p2==usym)&&(p3==usym)) ||
+     ((p4==usym)&&(p5==usym)&&p6==usym) ||
+     ((p7==dsym)&&(p8==dsym)&&(p9==dsym)) ||
+     ((p1==usym)&&(p4==usym)&&(p7==dsym)) ||
+     ((p2==usym)&&(p5==usym)&&(p8==dsym)) ||
+     ((p3==usym)&&(p6==usym)&&(p9==dsym)) ||
+     ((p1==usym)&&(p5==usym)&&(p9==dsym)) ||
+     ((p3==usym)&&(p5==usym)&&(p7==dsym))) {
+    stop = true
+  }
+  if (player == 1) {
+    player++
+  } else {
+    player--
+  }
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
