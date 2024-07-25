@@ -702,7 +702,9 @@ client.on("interactionCreate", async int => {
 			    let id = ""
 			    try {
 				    const parts = link.split("/")
+				    console.log(parts)
 				    id = Number(parts[parts.length-1])
+				    console.log(id)
 				    if (isNaN(id)) {
 					    throw "err"
 				    }
