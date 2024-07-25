@@ -726,6 +726,8 @@ client.on("interactionCreate", async int => {
 		    }
 	    } else if (subint === "role") {
 		    int.reply({content:String(int.options.getRole("role").id), ephemeral: true})
+	    } else if (subint === "guild") {
+		    int.reply({content:String(int.guild.id), ephemeral: true})
 	    }
      }
   }  
