@@ -697,43 +697,36 @@ client.on("interactionCreate", async int => {
 	    const subint = int.options.getSubcommand()
 	    if (subint === "message") {
 		    let caught = false
-		    if (int.options.getString("link")) {
-			    const link = int.options.getString("link")
-			    let id = ""
-			    let stringid = ""
-			    try {
-				    const parts = link.split("/")
-				    console.log(parts)
-				    stringid = parts[parts.length-1]
-				    id = Number(stringid)
-				    console.log(id)
-				    if (isNaN(id)) {
-					    throw "err"
-				    }
-			    } catch {
-				    int.reply({content:"Invalid link",ephemeral:true})
-				    caught = true
+		    const link = int.options.getString("link")
+		    let id = ""
+		    let stringid = ""
+		    try {
+			    const parts = link.split("/")
+			    console.log(parts)
+			    stringid = parts[parts.length-1]
+			    id = Number(stringid)
+			    console.log(id)
+			    if (isNaN(id)) {
+				    throw "err"
 			    }
-			    if (! caught) {
-				    int.reply({content:stringid,ephemeral:true})
-			    }
-		    } else {
-			    try {
-				const r = rmsg.id
-				console.log(r)
-				if (r == undefined) {
-					throw "err"
-				}
-			    } catch {
-			        int.reply({content:"Unable to fetch ID of most recent message", ephemeral: true})
-				caught = true
-		    	    }
-			    if (! caught) {
-			    	int.reply({content:rmsg.id,ephemeral:true})
-			    }
+		    } catch {
+			    int.reply({content:"Invalid link",ephemeral:true})
+			    caught = true
 		    }
+		    if (! caught) {
+			    int.reply({content:stringid,ephemeral:true})
+		    }
+    	    } else if (subint === "user") {
+		    int.reply({content:String(int.options.getUser("user").id), ephemeral: true})
+	    } else if (subint === "channel") {
+		    if (int.options.getChannel("channel")) {
+			    int.reply({content:String(int.options.getChannel("channel").id), ephemeral: true})
+		    } else {
+			    int.reply({content:String(int.channel.id), ephemeral: true})
+		    }
+	    } else if (subint === "role") {
+		    int.reply({content:String(int.options.getRole("role").id), ephemeral: true})
 	    }
-     }
    }
 });
 // MESSAGES
