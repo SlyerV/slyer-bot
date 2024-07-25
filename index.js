@@ -700,10 +700,12 @@ client.on("interactionCreate", async int => {
 		    if (int.options.getString("link")) {
 			    const link = int.options.getString("link")
 			    let id = ""
+			    let stringid = ""
 			    try {
 				    const parts = link.split("/")
 				    console.log(parts)
-				    id = Number(parts[parts.length-1])
+				    stringid = parts[parts.length-1]
+				    id = Number(stringid)
 				    console.log(id)
 				    if (isNaN(id)) {
 					    throw "err"
@@ -713,7 +715,7 @@ client.on("interactionCreate", async int => {
 				    caught = true
 			    }
 			    if (! caught) {
-				    int.reply({content:parts[parts.length-1],ephemeral:true})
+				    int.reply({content:stringid,ephemeral:true})
 			    }
 		    } else {
 			    try {
