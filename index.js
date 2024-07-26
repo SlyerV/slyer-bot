@@ -151,8 +151,8 @@ let c1 = ""
 let c2 = ""
 // Tic Tac Toe
 let tic = false
-let tp1 = "1"
-let tp2 = "2"
+let tp1 = ""
+let tp2 = ""
 const pos = {}
 const usyms = {
   "1":"__X__",
@@ -183,7 +183,7 @@ let p9 = ""
 let board = ""
 let n = "\n"
 let b = "\\|"
-let player = tp2
+let player = tp1
 let playerid = ""
 let usym = usyms[player]
 let dsym = dsyms[player]
@@ -827,13 +827,9 @@ client.on("interactionCreate", async int => {
 			console.log(i)
 			try {
 				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
-				if (confirmation.customId === "a") {
+				if (confirmation.customId === "a") 
+					player = tp1
 					update()
-					if (player == tp1) {
-					    player = tp2
-				        } else {
-					    player = tp1
-				        }
 		  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
 				} else if (confirmation.customId === "c") {
 					tic = false
