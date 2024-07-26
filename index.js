@@ -822,10 +822,10 @@ client.on("interactionCreate", async int => {
 				update()
 	  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
 			} else if (confirmation.customId === "c") {
-				int.editReply("Game cancelled")
+				int.editReply({content:"Game cancelled", components: []})
 			}
 		} catch {
-			int.editReply("Confirmation not received within 20 seconds, cancelling")
+			int.editReply({content:"Confirmation not received within 20 seconds, cancelling", components: []})
 		}
      }
   }  
@@ -895,18 +895,19 @@ client.on("messageCreate", async msg => {
 	        hangman = false
 	      }
     } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
+	      let x = ""
 	      if (msg.content < 7) {
 		      if (player == tp1) {
-			  let x = usyms[tp1]
+			  x = usyms[tp1]
 		      } else {
-			  let x = usyms[tp2]
+			  x = usyms[tp2]
 		      }
 		      pos[msg.content]= x
 	      } else {
 		      if (player == tp1) {
-			  let x = dsyms[tp1]
+			  x = dsyms[tp1]
 		      } else {
-			  let x = dsyms[tp2]
+			  x = dsyms[tp2]
 		      }
 		      pos[msg.content]= x
 	      }
