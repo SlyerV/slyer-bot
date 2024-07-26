@@ -155,12 +155,12 @@ let tp1 = ""
 let tp2 = ""
 const pos = {}
 const usyms = {
-  tp1:"_X_",
-  tp2:"_O_"
+  "1":"_X_",
+  "2":"_O_"
 }
 const dsyms = {
-  p1:"X",
-  p2:"O"
+  "1":"X",
+  "2":"O"
 }
 pos[1] ="\\_"
 pos[2] ="\\_"
@@ -898,16 +898,16 @@ client.on("messageCreate", async msg => {
 	      let x = ""
 	      if (msg.content < 7) {
 		      if (player == tp1) {
-			  x = usyms[tp1]
+			  x = usyms["1"]
 		      } else {
-			  x = usyms[tp2]
+			  x = usyms["2"]
 		      }
 		      pos[msg.content]= x
 	      } else {
 		      if (player == tp1) {
-			  x = dsyms[tp1]
+			  x = dsyms["1"]
 		      } else {
-			  x = dsyms[tp2]
+			  x = dsyms["2"]
 		      }
 		      pos[msg.content]= x
 	      }
