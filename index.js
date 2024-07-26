@@ -168,9 +168,9 @@ pos[3] ="\\_"
 pos[4] ="\\_"
 pos[5] ="\\_"
 pos[6] ="\\_"
-pos[7]=" "
-pos[8]=" "
-pos[9] = " "
+pos[7]="  "
+pos[8]="  "
+pos[9] = "  "
 let p1 = ""
 let p2 = ""
 let p3 = ""
@@ -190,7 +190,7 @@ let dsym = dsyms[player]
 let stop = false
 const inps = ["1","2","3","4","5","6","7","8","9"]
 function update() {
-  board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+" "+b+pos[8]+" "+b+pos[9]
+  board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
   usym = usyms[player]
   dsym = dsyms[player]
   p1=pos[1]
@@ -896,11 +896,19 @@ client.on("messageCreate", async msg => {
 	      }
     } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
 	      if (msg.content < 7) {
-		let x = usyms[player]
-		pos[msg.content]= x
+		      if (player == tp1) {
+			  let x = usyms[tp1]
+		      } else {
+			  let x = usyms[tp2]
+		      }
+		      pos[msg.content]= x
 	      } else {
-		let x = dsyms[player]
-		pos[msg.content] = x
+		      if (player == tp1) {
+			  let x = dsyms[tp1]
+		      } else {
+			  let x = dsyms[tp2]
+		      }
+		      pos[msg.content]= x
 	      }
 	      update()
 	      if (stop) {
