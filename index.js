@@ -189,7 +189,7 @@ let dsym = dsyms[player]
 let stop = false
 const inps = ["1","2","3","4","5","6","7","8","9"]
 function update() {
-  board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
+  board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+" "+b+pos[8]+" "+b+pos[9]
   usym = usyms[player]
   dsym = dsyms[player]
   p1=pos[1]
@@ -798,8 +798,8 @@ client.on("interactionCreate", async int => {
 		    int.reply({content:String(int.guild.id), ephemeral: true})
 	    }
      } else if (int.commandName === "tictactoe") {
-	        p1 = "<@"+int.user.id+">"
-	    	p2 = "<@"+int.options.getUser("user").id+">"
+	        tp1 = "<@"+int.user.id+">"
+	    	tp2 = "<@"+int.options.getUser("user").id+">"
 	    	const accept = new ButtonBuilder()
 		.setCustomId("a")
 		.setLabel('✅ Accept')
