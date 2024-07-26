@@ -184,6 +184,7 @@ let board = ""
 let n = "\n"
 let b = "\\|"
 let player = tp1
+let playerid = ""
 let usym = usyms[player]
 let dsym = dsyms[player]
 let stop = false
@@ -216,6 +217,7 @@ function update() {
   } else {
     player = tp1
   }
+  playerid = player.replace("<@","").replace(">","")
 }
 // Funcs
 function random(list) {
@@ -892,7 +894,7 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You won! :)")
 	        hangman = false
 	      }
-    } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==player)) {
+    } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
 	      if (msg.content < 7) {
 		let x = usyms[player]
 		pos[msg.content]= x
