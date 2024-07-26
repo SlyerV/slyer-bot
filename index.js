@@ -193,9 +193,9 @@ function update() {
   board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
   if (player == tp1) {
 	  usym = usyms["1"]
-	  dsym = dsyms["2"]
+	  dsym = dsyms["1"]
   } else {
-	  usym = usyms["1"]
+	  usym = usyms["2"]
 	  dsym = dsyms["2"]
   }
   p1=pos[1]
