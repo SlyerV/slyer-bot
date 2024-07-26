@@ -151,14 +151,16 @@ let c1 = ""
 let c2 = ""
 // Tic Tac Toe
 let tic = false
+let tp1 = ""
+let tp2 = ""
 const pos = {}
 const usyms = {
-  "1":"_X_",
-  "2":"_O_"
+  tp1:"_X_",
+  tp2:"_O_"
 }
 const dsyms = {
-  "1":"X",
-  "2":"O"
+  p1:"X",
+  p2:"O"
 }
 pos[1] ="\\_"
 pos[2] ="\\_"
@@ -181,8 +183,6 @@ let p9 = ""
 let board = ""
 let n = "\n"
 let b = "\\|"
-let tp1 = ""
-let tp2 = "" 
 let player = tp1
 let usym = usyms[player]
 let dsym = dsyms[player]
@@ -892,10 +892,10 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You won! :)")
 	        hangman = false
 	      }
-    } else if ((tic == true)&&(inps.includes(msg.content))) {
+    } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==player)) {
 	      if (msg.content < 7) {
 		let x = usyms[player]
-		pos[msg.content]= "X"
+		pos[msg.content]= x
 	      } else {
 		let x = dsyms[player]
 		pos[msg.content] = x
