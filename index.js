@@ -180,7 +180,7 @@ let p8 = ""
 let p9 = ""
 let board = ""
 let n = "\n"
-let l = "|"
+let b = "|"
 let p1 = ""
 let p2 = "" 
 let player = p1
@@ -189,7 +189,7 @@ let dsym = dsyms[player]
 let stop = false
 const inps = ["1","2","3","4","5","6","7","8","9"]
 function update() {
-  board = pos[1]+l+pos[2]+l+pos[3]+n+pos[4]+l+pos[5]+l+pos[6]+n+pos[7]+l+pos[8]+l+pos[9]
+  board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
   usym = usyms[player]
   dsym = dsyms[player]
   p1=pos[1]
