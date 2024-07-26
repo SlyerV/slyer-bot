@@ -906,7 +906,6 @@ client.on("messageCreate", async msg => {
 	      } else {
 		      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 	      }
-    }
     } else if ((nerdmode == true) && (randomnum(10) == 1) && (! msg.author.bot)) {
 	      try {
 	          const r = randomnum(3)
