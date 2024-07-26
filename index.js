@@ -150,6 +150,7 @@ let stages = [s1,s2,s3,s4,s5,s6,s7]
 let c1 = ""
 let c2 = ""
 // Tic Tac Toe
+let tic = false
 const pos = {}
 const usyms = {
   "1":"_X_",
@@ -180,7 +181,9 @@ let p9 = ""
 let board = ""
 let n = "\n"
 let l = "|"
-let player = 2
+let p1 = ""
+let p2 = "" 
+let player = p1
 let usym = usyms[player]
 let dsym = dsyms[player]
 let stop = false
@@ -208,10 +211,10 @@ function update() {
      ((p3==usym)&&(p5==usym)&&(p7==dsym))) {
     stop = true
   }
-  if (player == 1) {
-    player++
+  if (player == p1) {
+    player = p2
   } else {
-    player--
+    player = p1
   }
 // Funcs
 function random(list) {
@@ -793,6 +796,34 @@ client.on("interactionCreate", async int => {
 	    } else if (subint === "guild") {
 		    int.reply({content:String(int.guild.id), ephemeral: true})
 	    }
+     } else if (int.commandName === "tictactoe") {
+	        p1 = int.user
+	    	p2 = int.options.getUser("user")
+	    	const accept = new ButtonBuilder()
+		.setCustomId("a")
+		.setLabel('✅ Accept')
+		.setStyle(ButtonStyle.Success);
+		const cancel = new ButtonBuilder()
+		.setCustomId("c")
+		.setLabel('❌ Cancel')
+		.setStyle(ButtonStyle.Danger);
+		const row = new ActionRowBuilder()
+		.addComponents(accept, cancel);
+		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> do you accept a game of Tic Tac Toe with <@"+int.user.id+">?", components: [row]})
+		const collectorFilter = i => i.user.id === int.options.getUser("user").id;
+		console.log(i)
+		try {
+			confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
+			if (confirmation.customId === "a") {
+				tic = true
+				update()
+	  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
+			} else if (confirmation.customId === "c") {
+				int.editReply("Game cancelled")
+			}
+		} catch {
+			int.editReply("Confirmation not received within 20 seconds, cancelling")
+		}
      }
   }  
 });
@@ -860,6 +891,22 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You won! :)")
 	        hangman = false
 	      }
+    } else if ((tic == true)&&(inps.includes(msg))) {
+	      if (msg < 7) {
+		let x = usyms[player]
+		pos[msg]= "X"
+	      } else {
+		let x = dsyms[player]
+		pos[msg] = x
+	      }
+	      update()
+	      if (stop) {
+		      msg.reply(board+"\n"+player+" wins!!!")
+		      tic = false
+	      } else {
+		      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
+	      }
+    }
     } else if ((nerdmode == true) && (randomnum(10) == 1) && (! msg.author.bot)) {
 	      try {
 	          const r = randomnum(3)
