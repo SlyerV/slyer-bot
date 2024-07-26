@@ -151,8 +151,8 @@ let c1 = ""
 let c2 = ""
 // Tic Tac Toe
 let tic = false
-let tp1 = ""
-let tp2 = ""
+let tp1 = "1"
+let tp2 = "2"
 const pos = {}
 const usyms = {
   "1":"__X__",
@@ -183,7 +183,7 @@ let p9 = ""
 let board = ""
 let n = "\n"
 let b = "\\|"
-let player = tp1
+let player = tp2
 let playerid = ""
 let usym = usyms[player]
 let dsym = dsyms[player]
@@ -811,6 +811,7 @@ client.on("interactionCreate", async int => {
 		} else if (tic == true) {
 			ephreply("Another tic-tac-toe game is already going on!")
 		} else {
+			tic = true
 		    	const accept = new ButtonBuilder()
 			.setCustomId("a")
 			.setLabel('✅ Accept')
@@ -827,18 +828,19 @@ client.on("interactionCreate", async int => {
 			try {
 				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
 				if (confirmation.customId === "a") {
-					tic = true
 					update()
 					if (player == tp1) {
-					    x = dsyms["1"]
+					    player = tp2
 				        } else {
-					    x = dsyms["2"]
+					    player = tp1
 				        }
 		  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
 				} else if (confirmation.customId === "c") {
+					tic = false
 					int.editReply({content:"Game cancelled", components: []})
 				}
 			} catch {
+				tic = false
 				int.editReply({content:"Confirmation not received within 20 seconds, cancelling", components: []})
 			}
     		}
@@ -920,9 +922,9 @@ client.on("messageCreate", async msg => {
 		      pos[msg.content]= x
 	      } else {
 		      if (player == tp1) {
-			  x = dsyms["1"]
+			  player = tp2
 		      } else {
-			  x = dsyms["2"]
+			  player = tp1
 		      }
 		      pos[msg.content]= x
 	      }
