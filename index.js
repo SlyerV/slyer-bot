@@ -191,8 +191,13 @@ let stop = false
 const inps = ["1","2","3","4","5","6","7","8","9"]
 function update() {
   board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
-  usym = usyms[player]
-  dsym = dsyms[player]
+  if (player == tp1) {
+	  usym = usyms["1"]
+	  dsym = dsyms["2"]
+  } else {
+	  usym = usyms["1"]
+	  dsym = dsyms["2"]
+  }
   p1=pos[1]
   p2 = pos[2]
   p3=pos[3]
