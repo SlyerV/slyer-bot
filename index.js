@@ -798,8 +798,8 @@ client.on("interactionCreate", async int => {
 		    int.reply({content:String(int.guild.id), ephemeral: true})
 	    }
      } else if (int.commandName === "tictactoe") {
-	        p1 = int.user
-	    	p2 = int.options.getUser("user")
+	        p1 = "<@"+int.user.id+">"
+	    	p2 = "<@"+int.options.getUser("user").id+">"
 	    	const accept = new ButtonBuilder()
 		.setCustomId("a")
 		.setLabel('✅ Accept')
@@ -892,13 +892,13 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You won! :)")
 	        hangman = false
 	      }
-    } else if ((tic == true)&&(inps.includes(msg))) {
-	      if (msg < 7) {
+    } else if ((tic == true)&&(inps.includes(msg.content))) {
+	      if (msg.content < 7) {
 		let x = usyms[player]
-		pos[msg]= "X"
+		pos[msg.content]= "X"
 	      } else {
 		let x = dsyms[player]
-		pos[msg] = x
+		pos[msg.content] = x
 	      }
 	      update()
 	      if (stop) {
@@ -907,7 +907,7 @@ client.on("messageCreate", async msg => {
 	      } else {
 		      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 	      }
-    } else if ((nerdmode == true) && (randomnum(10) == 1) && (! msg.author.bot)) {
+    } else if ((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) {
 	      try {
 	          const r = randomnum(3)
 	          if (r == 1) {
