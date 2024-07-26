@@ -217,11 +217,6 @@ function update() {
      ((p3==usym)&&(p5==usym)&&(p7==dsym))) {
     stop = true
   }
-  if (player == tp1) {
-    player = tp2
-  } else {
-    player = tp1
-  }
   playerid = player.replace("<@","").replace(">","")
 }
 // Funcs
@@ -931,6 +926,11 @@ client.on("messageCreate", async msg => {
 		      msg.reply(board+"\n"+player+" wins!!!")
 		      tic = false
 	      } else {
+		      if (player == tp1) {
+    			    player = tp2
+  		      } else {
+    			    player = tp1
+  		      }
 		      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 	      }
     } else if ((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) {
