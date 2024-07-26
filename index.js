@@ -181,9 +181,9 @@ let p9 = ""
 let board = ""
 let n = "\n"
 let b = "\\|"
-let p1 = ""
-let p2 = "" 
-let player = p1
+let tp1 = ""
+let tp2 = "" 
+let player = tp1
 let usym = usyms[player]
 let dsym = dsyms[player]
 let stop = false
@@ -211,10 +211,10 @@ function update() {
      ((p3==usym)&&(p5==usym)&&(p7==dsym))) {
     stop = true
   }
-  if (player == p1) {
-    player = p2
+  if (player == tp1) {
+    player = tp2
   } else {
-    player = p1
+    player = tp1
   }
 // Funcs
 function random(list) {
