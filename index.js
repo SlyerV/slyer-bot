@@ -827,7 +827,7 @@ client.on("interactionCreate", async int => {
 			console.log(i)
 			try {
 				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
-				if (confirmation.customId === "a") 
+				if (confirmation.customId === "a") {
 					player = tp1
 					update()
 		  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
