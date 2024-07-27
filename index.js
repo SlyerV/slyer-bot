@@ -923,9 +923,9 @@ client.on("messageCreate", async msg => {
 		      pos[msg.content]= x
 	      } else {
 		      if (player == tp1) {
-			  player = tp2
+			  x = dsyms["1"]
 		      } else {
-			  player = tp1
+			  x = dsyms["2"]
 		      }
 		      pos[msg.content]= x
 	      }
