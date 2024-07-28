@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const fs = require("fs");
 const warns = require('./warns.json')
 let nicks = require('./nicks.json')
+let status = require('./status.json')
 let data = require("./data.json")
 const { token } = require('./config.json')
 const insults = require('./insults.json');
@@ -266,6 +267,17 @@ function writedata() {
     // Success 
     console.log("Wrote data");
   }); 
+}
+function writestatus() {
+  fs.writeFile(
+    "status.json",
+    JSON.stringify(data),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote status");
+  });
 }
 // Stored data
 let counting = data.counting
@@ -854,6 +866,45 @@ client.on("interactionCreate", async int => {
 				int.editReply({content:"Confirmation not received within 20 seconds, cancelling", components: []})
 			}
     		}
+     } else if (int.commandName === "afk") {
+	    const subint = int.options.getSubcommand()
+	    if (subint === "set") {
+		    status[int.user.id] = int.options.getString("message")
+		    writestatus()
+		    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
+	    } else if (subint === "list") {
+		    let l = ""
+		    Object.values(status).forEach((msg, index) => {
+        		const user = Object.keys(status)[index];
+        		l+=`<@${user}> is AFK: ${msg}\n`
+    		    });
+		    int.reply(l)
+	    } else if (subint === "clear") {
+		    if (int.options.getUser("user")) {
+			    const id = int.options.getUser("user").id
+			    delete status[id]
+			    writestatus()
+			    int.reply(`Cleared <@${id}>'s AFK status`)
+		    } else {
+			    status = {}
+			    writestatus()
+			    int.reply("All AFK statuses have been cleared")
+		    }
+	    } else if (subint === "remove") {
+		    if (status[int.user.id]) {
+			    delete status[int.user.id]
+		    	    writestatus()
+		    	    int.reply("<@${int.user.id}> Removed your AFK status")
+		    } else {
+			    ephreply("You don't have an AFK status")
+		    }
+	    } else if (subint === "edit") {
+		    if (status[int.user.id]) {
+			    status[int.user.id] = int.options.getString("message")
+			    writestatus()
+			    int.reply(`<@${int.user.id}> Status changed: ${int.options.getString("message")}`)
+		    }
+	    }
      }
   }  
 });
@@ -965,6 +1016,7 @@ client.on("messageCreate", async msg => {
 	        console.log(err)
 	      }
     }
+    if (msg.content.
     if (msg.channel.id != "1253010049199243398") {
       if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718")) {
         if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷")) {
