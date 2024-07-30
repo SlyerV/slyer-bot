@@ -189,6 +189,7 @@ let playerid = ""
 let usym = usyms[player]
 let dsym = dsyms[player]
 let stop = false
+let tie = false
 const inps = ["1","2","3","4","5","6","7","8","9"]
 function update() {
   board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
@@ -217,6 +218,16 @@ function update() {
      ((p1==usym)&&(p5==usym)&&(p9==dsym)) ||
      ((p3==usym)&&(p5==usym)&&(p7==dsym))) {
     stop = true
+  } else if ((usyms.values.includes(pos[1])) && 
+	     (usyms.values.includes(pos[2])) && 
+	     (usyms.values.includes(pos[3])) && 
+	     (usyms.values.includes(pos[4])) && 
+	     (usyms.values.includes(pos[5])) && 
+	     (usyms.values.includes(pos[6])) && 
+	     (dsyms.values.includes(pos[7])) && 
+	     (dsyms.values.includes(pos[8])) && 
+	     (dsyms.values.includes(pos[9]))) {
+	  tie = true
   }
   if (player == tp1) {
     	player = tp2
@@ -845,7 +856,6 @@ client.on("interactionCreate", async int => {
 			try {
 				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
 				if (confirmation.customId === "a") {
-					update()
 					player = tp1
 					pos[1] ="\\_"
 					pos[2] ="\\_"
@@ -856,6 +866,7 @@ client.on("interactionCreate", async int => {
 					pos[7]="  "
 					pos[8]="  "
 					pos[9] = "  "
+					update()
 		  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
 				} else if (confirmation.customId === "c") {
 					tic = false
@@ -984,34 +995,41 @@ client.on("messageCreate", async msg => {
 	        hangman = false
 	      }
     } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
-	      let x = ""
-	      if (msg.content < 7) {
-		      if (player == tp1) {
-			  x = usyms["1"]
+	    if ((! (pos[msg.content] == "\\_")) || (! (pos[msg.content] == "  "))) {
+		      let x = ""
+		      if (msg.content < 7) {
+			      if (player == tp1) {
+				  x = usyms["1"]
+			      } else {
+				  x = usyms["2"]
+			      }
+			      pos[msg.content]= x
 		      } else {
-			  x = usyms["2"]
+			      if (player == tp1) {
+				  x = dsyms["1"]
+			      } else {
+				  x = dsyms["2"]
+			      }
+			      pos[msg.content]= x
 		      }
-		      pos[msg.content]= x
-	      } else {
-		      if (player == tp1) {
-			  x = dsyms["1"]
+		      update()
+		      if (stop) {
+			      if (player == tp1) {
+	    			    player = tp2
+	  		      } else {
+	    			    player = tp1
+	  		      }
+			      msg.reply(board+"\n"+player+" wins!!!")
+			      tic = false
+		      } else if (tie) {
+			      msg.reply("Tie!")
+			      tic = false
 		      } else {
-			  x = dsyms["2"]
+			      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 		      }
-		      pos[msg.content]= x
-	      }
-	      update()
-	      if (stop) {
-		      if (player == tp1) {
-    			    player = tp2
-  		      } else {
-    			    player = tp1
-  		      }
-		      msg.reply(board+"\n"+player+" wins!!!")
-		      tic = false
-	      } else {
-		      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
-	      }
+	    } else {
+		    msg.reply("Space is already taken!")
+	    }
     } else if ((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) {
 	      try {
 	          const r = randomnum(3)
