@@ -873,10 +873,11 @@ client.on("interactionCreate", async int => {
 		    writestatus()
 		    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
 	    } else if (subint === "list") {
-		    let l = ""
+		    let l = "List:\n"
 		    Object.values(status).forEach((msg, index) => {
         		const user = Object.keys(status)[index];
-        		l+=`<@${user}> is AFK: ${msg}\n`
+			const tag = msg.guild.members.cache.get(id).user.tag
+        		l+=`**${tag}** is AFK: ${msg}\n`
     		    });
 		    int.reply(l)
 	    } else if (subint === "clear") {
@@ -894,7 +895,8 @@ client.on("interactionCreate", async int => {
 		    if (status[int.user.id]) {
 			    delete status[int.user.id]
 		    	    writestatus()
-		    	    int.reply("<@${int.user.id}> Removed your AFK status")
+			    const id = int.user.id
+		    	    int.reply("<@${id}> Removed your AFK status")
 		    } else {
 			    ephreply("You don't have an AFK status")
 		    }
@@ -1019,7 +1021,7 @@ client.on("messageCreate", async msg => {
     if (status != {}) {
     	Object.keys(status).forEach((id) => {
         	if (msg.content.includes(id)) {
-			const tag = msg.guild.members.cache.get(id).tag
+			const tag = msg.guild.members.cache.get(id).user.tag
 			msg.reply(`**${tag}** is AFK: ${status[id]}`)
 		}
     	});
