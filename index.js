@@ -876,7 +876,7 @@ client.on("interactionCreate", async int => {
 		    let l = "List:\n"
 		    Object.values(status).forEach((msg, index) => {
         		const user = Object.keys(status)[index];
-			const tag = int.guild.members.cache.get(id).user.tag
+			const tag = int.guild.members.cache.get(user).user.tag
         		l+=`**${tag}** is AFK: ${msg}\n`
     		    });
 		    int.reply(l)
