@@ -1020,7 +1020,7 @@ client.on("messageCreate", async msg => {
     }
     if (status != {}) {
     	Object.keys(status).forEach((id) => {
-        	if (msg.content.includes(id)) {
+        	if ((msg.content.includes(id)) && (! (msg.author.id == "1244853392942170143"))) {
 			const tag = msg.guild.members.cache.get(id).user.tag
 			msg.reply(`**${tag}** is AFK: ${status[id]}`)
 		}
