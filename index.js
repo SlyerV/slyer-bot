@@ -1020,9 +1020,11 @@ client.on("messageCreate", async msg => {
 	    			    player = tp1
 	  		      }
 			      msg.reply(board+"\n"+player+" wins!!!")
+			      stop = false
 			      tic = false
 		      } else if (tie) {
 			      msg.reply(board+"\nTie!")
+			      tie = false
 			      tic = false
 		      } else {
 			      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
