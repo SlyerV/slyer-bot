@@ -872,6 +872,13 @@ client.on("interactionCreate", async int => {
 		    if (! status[int.user.id]) {
 			    status[int.user.id] = int.options.getString("message")
 			    writestatus()
+			    const nick = ""
+		            if (int.user.nickname == null) {
+		                  nick = int.user.displayName
+		            } else {
+		                  nick = int.user.nickname
+		            }
+			    int.user.setNickname("[AFK] "+nick)
 			    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
 		    } else {
 			    ephreply("You already have an AFK status; run /afk edit to change your status message")
