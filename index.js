@@ -271,7 +271,7 @@ function writedata() {
 function writestatus() {
   fs.writeFile(
     "status.json",
-    JSON.stringify(data),
+    JSON.stringify(status),
     err => {
     // Checking for errors 
     if (err) throw err;
