@@ -10,7 +10,7 @@ const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const app = express()
-const compliments = ["cool","awesome","intelligent","handsome","amazing","wonderful","talented"]
+const compliments = ["cool","awesome","intelligent","amazing","talented"]
 const smembers= []
 const highbase = {
 	"10":"A",
