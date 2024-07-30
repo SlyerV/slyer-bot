@@ -218,15 +218,15 @@ function update() {
      ((p1==usym)&&(p5==usym)&&(p9==dsym)) ||
      ((p3==usym)&&(p5==usym)&&(p7==dsym))) {
     stop = true
-  } else if ((usyms.values.includes(pos[1])) && 
-	     (usyms.values.includes(pos[2])) && 
-	     (usyms.values.includes(pos[3])) && 
-	     (usyms.values.includes(pos[4])) && 
-	     (usyms.values.includes(pos[5])) && 
-	     (usyms.values.includes(pos[6])) && 
-	     (dsyms.values.includes(pos[7])) && 
-	     (dsyms.values.includes(pos[8])) && 
-	     (dsyms.values.includes(pos[9]))) {
+  } else if ((Object.values(usyms).includes(pos[1])) && 
+	     (Object.values(usyms).includes(pos[2])) && 
+	     (Object.values(usyms).includes(pos[3])) && 
+	     (Object.values(usyms).includes(pos[4])) && 
+	     (Object.values(usyms).includes(pos[5])) && 
+	     (Object.values(usyms).includes(pos[6])) && 
+	     (Object.values(dsyms).includes(pos[7])) && 
+	     (Object.values(dsyms).includes(pos[8])) && 
+	     (Object.values(dsyms).includes(pos[9]))) {
 	  tie = true
   }
   if (player == tp1) {
