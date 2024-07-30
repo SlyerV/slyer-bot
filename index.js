@@ -872,7 +872,7 @@ client.on("interactionCreate", async int => {
 		    if (! status[int.user.id]) {
 			    status[int.user.id] = int.options.getString("message")
 			    writestatus()
-			    const nick = ""
+			    let nick = ""
 		            if (int.user.nickname == null) {
 		                  nick = int.user.displayName
 		            } else {
