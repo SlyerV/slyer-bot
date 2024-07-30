@@ -879,7 +879,11 @@ client.on("interactionCreate", async int => {
 		            } else {
 		                  nick = memb.nickname
 		            }
-			    memb.setNickname("[AFK] "+nick)
+			    try {
+			    	memb.setNickname(nick)
+	    		    } catch {
+				console.log("Can't change nick")
+			    }			    
 			    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
 		    } else {
 			    ephreply("You already have an AFK status; run /afk edit to change your status message")
@@ -908,7 +912,11 @@ client.on("interactionCreate", async int => {
 		                  nick = memb.nickname
 		            }
 			    nick = nick.replace("[AFK] ","")
-			    memb.setNickname(nick)
+			    try {
+			    	memb.setNickname(nick)
+	    		    } catch {
+				console.log("Can't change nick")
+			    }		    
 		    } else {
 			    const members = await server.members.fetch()
 			    members.forEach(memb => {
@@ -919,7 +927,11 @@ client.on("interactionCreate", async int => {
 		                  		nick = memb.nickname
 		            		    }
 			    		    nick = nick.replace("[AFK] ","")
-			    		    memb.setNickname(nick)
+					    try {
+					    	memb.setNickname(nick)
+			    		    } catch {
+						console.log("Can't change nick")
+					    }				    
 				    }
 			    })
 			    status = {}
@@ -938,7 +950,11 @@ client.on("interactionCreate", async int => {
 		                  nick = memb.nickname
 		            }
 			    nick = nick.replace("[AFK] ","")
-			    memb.setNickname(nick)
+			    try {
+			    	memb.setNickname(nick)
+	    		    } catch {
+				console.log("Can't change nick")
+			    }
 		    	    int.reply("<@${id}> Removed your AFK status")
 		    } else {
 			    ephreply("You don't have an AFK status")
