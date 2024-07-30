@@ -912,6 +912,8 @@ client.on("interactionCreate", async int => {
 			    status[int.user.id] = int.options.getString("message")
 			    writestatus()
 			    int.reply(`<@${int.user.id}> Status changed: ${int.options.getString("message")}`)
+		    } else {
+			    ephreply("You don't have an AFK status")
 		    }
 	    }
      }
