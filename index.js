@@ -855,17 +855,17 @@ client.on("interactionCreate", async int => {
 			console.log(i)
 			try {
 				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
+				player = tp1
+				pos[1] ="\\_"
+				pos[2] ="\\_"
+				pos[3] ="\\_"
+				pos[4] ="\\_"
+				pos[5] ="\\_"
+				pos[6] ="\\_"
+				pos[7]="  "
+				pos[8]="  "
+				pos[9] = "  "
 				if (confirmation.customId === "a") {
-					player = tp1
-					pos[1] ="\\_"
-					pos[2] ="\\_"
-					pos[3] ="\\_"
-					pos[4] ="\\_"
-					pos[5] ="\\_"
-					pos[6] ="\\_"
-					pos[7]="  "
-					pos[8]="  "
-					pos[9] = "  "
 					update()
 		  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
 				} else if (confirmation.customId === "c") {
