@@ -995,7 +995,7 @@ client.on("messageCreate", async msg => {
 	        hangman = false
 	      }
     } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
-	    if ((! (pos[msg.content] == "\\_")) || (! (pos[msg.content] == "  "))) {
+	    if ((pos[msg.content] == "\\_") || (pos[msg.content] == "  ")) {
 		      let x = ""
 		      if (msg.content < 7) {
 			      if (player == tp1) {
@@ -1022,7 +1022,7 @@ client.on("messageCreate", async msg => {
 			      msg.reply(board+"\n"+player+" wins!!!")
 			      tic = false
 		      } else if (tie) {
-			      msg.reply("Tie!")
+			      msg.reply(board+"\nTie!")
 			      tic = false
 		      } else {
 			      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
