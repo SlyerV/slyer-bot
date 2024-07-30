@@ -869,9 +869,13 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "afk") {
 	    const subint = int.options.getSubcommand()
 	    if (subint === "set") {
-		    status[int.user.id] = int.options.getString("message")
-		    writestatus()
-		    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
+		    if (! status[int.user.id]) {
+			    status[int.user.id] = int.options.getString("message")
+			    writestatus()
+			    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
+		    } else {
+			    ephreply("You already have an AFK status; run /afk edit to change your status message")
+		    }
 	    } else if (subint === "list") {
 		    let l = "List:\n"
 		    Object.values(status).forEach((msg, index) => {
@@ -879,6 +883,9 @@ client.on("interactionCreate", async int => {
 			const tag = int.guild.members.cache.get(user).user.tag
         		l+=`**${tag}** is AFK: ${msg}\n`
     		    });
+		    if (l == "List:\n") {
+			    l+="No one is AFK"
+		    }
 		    int.reply(l)
 	    } else if (subint === "clear") {
 		    if (int.options.getUser("user")) {
