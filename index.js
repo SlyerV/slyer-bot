@@ -872,18 +872,6 @@ client.on("interactionCreate", async int => {
 		    if (! status[int.user.id]) {
 			    status[int.user.id] = int.options.getString("message")
 			    writestatus()
-			    let nick = ""
-			    const memb = int.guild.members.cache.get(int.user.id)
-		            if (int.user.nickname == null) {
-		                  nick = memb.displayName
-		            } else {
-		                  nick = memb.nickname
-		            }
-			    try {
-			    	memb.setNickname(nick)
-	    		    } catch {
-				console.log("Can't change nick")
-			    }			    
 			    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
 		    } else {
 			    ephreply("You already have an AFK status; run /afk edit to change your status message")
@@ -905,35 +893,7 @@ client.on("interactionCreate", async int => {
 			    delete status[id]
 			    writestatus()
 			    int.reply(`Cleared <@${id}>'s AFK status`)
-			    const memb = int.guild.members.cache.get(id)
-		            if (int.user.nickname == null) {
-		                  nick = memb.displayName
-		            } else {
-		                  nick = memb.nickname
-		            }
-			    nick = nick.replace("[AFK] ","")
-			    try {
-			    	memb.setNickname(nick)
-	    		    } catch {
-				console.log("Can't change nick")
-			    }		    
 		    } else {
-			    const members = await server.members.fetch()
-			    members.forEach(memb => {
-				    if (status[memb.user.id]) {
-					    if (int.user.nickname == null) {
-		                  		nick = memb.displayName
-		            		    } else {
-		                  		nick = memb.nickname
-		            		    }
-			    		    nick = nick.replace("[AFK] ","")
-					    try {
-					    	memb.setNickname(nick)
-			    		    } catch {
-						console.log("Can't change nick")
-					    }				    
-				    }
-			    })
 			    status = {}
 			    writestatus()
 			    int.reply("All AFK statuses have been cleared")
@@ -943,19 +903,7 @@ client.on("interactionCreate", async int => {
 			    delete status[int.user.id]
 		    	    writestatus()
 			    const id = int.user.id
-			    const memb = int.guild.members.cache.get(id)
-		            if (int.user.nickname == null) {
-		                  nick = memb.displayName
-		            } else {
-		                  nick = memb.nickname
-		            }
-			    nick = nick.replace("[AFK] ","")
-			    try {
-			    	memb.setNickname(nick)
-	    		    } catch {
-				console.log("Can't change nick")
-			    }
-		    	    int.reply("<@${id}> Removed your AFK status")
+		    	    int.reply(`<@${id}> Removed your AFK status`)
 		    } else {
 			    ephreply("You don't have an AFK status")
 		    }
