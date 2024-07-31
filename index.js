@@ -1072,7 +1072,43 @@ client.on("messageCreate", async msg => {
 				      console.log(avinps)
 				      await msg.reply(`${board}\nAI is thinking of move...`)
 				      player = tp2
-				      const move = random(avinps)
+				      const move = ""
+				      if (((p2 == usym) && (p3 == usym)) ||
+					 ((p4 == usym) && (p7 == dsym)) ||
+					 ((p5 == usym) && (p9 == dsym))) {
+					      move = "1"
+				      } else if (((p1 == usym) && (p3 == usym)) ||
+					 ((p5 == usym) && (p8 == dsym))) {
+					      move = "2"
+				      } else if (((p1 == usym) && (p2 == usym)) ||
+					 ((p6 == usym) && (p9 == dsym)) ||
+					 ((p5 == usym) && (p7 == dsym))) {
+				      		move = "3"
+				      } else if (((p1 == usym) && (p7 == dsym)) ||
+					 ((p5 == usym) && (p6 == usym))) {
+					      move = "4"
+				      } else if (((p2 == usym) && (p8 == dsym)) ||
+					 ((p4 == usym) && (p6 == usym)) ||
+					 ((p1 == usym) && (p9 == dsym)) ||
+					 ((p3 == usym) && (p7 == dsym))) {
+					      move = "5"
+				      } else if (((p3 == usym) && (p9 == dsym)) ||
+					 ((p4 == usym) && (p5 == usym))) {
+					      move = "6"
+				      } else if (((p1 == usym) && (p4 == usym)) ||
+					 ((p8 == dsym) && (p9 == dsym)) ||
+					 ((p3 == usym) && (p5 == usym))) {
+				      		move = "7"
+				      } else if (((p2 == usym) && (p5 == usym)) ||
+					 ((p7 == dsym) && (p9 == dsym))) {
+					      move = "8"
+				      } else if (((p3 == usym) && (p6 == usym)) ||
+					 ((p7 == dsym) && (p8 == dsym)) ||
+					 ((p1 == usym) && (p5 == usym))) {
+				      		move = "9"
+				      } else {
+				      	      move = random(avinps)
+				      }
 				      avinps.splice(avinps.indexOf(move),1)
 				      console.log(avinps)
 				      let x = ""
