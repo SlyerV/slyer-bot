@@ -833,50 +833,56 @@ client.on("interactionCreate", async int => {
 	    }
      } else if (int.commandName === "tictactoe") {
 	        tp1 = "<@"+int.user.id+">"
-	    	tp2 = "<@"+int.options.getUser("user").id+">"
-	    	if (tp1 == tp2) {
-			ephreply("You can't play against yourself")
-		} else if (tic == true) {
+		if (tic == true) {
 			ephreply("Another tic-tac-toe game is already going on!")
-		} else {
-			tic = true
-		    	const accept = new ButtonBuilder()
-			.setCustomId("a")
-			.setLabel('✅ Accept')
-			.setStyle(ButtonStyle.Success);
-			const cancel = new ButtonBuilder()
-			.setCustomId("c")
-			.setLabel('❌ Cancel')
-			.setStyle(ButtonStyle.Danger);
-			const row = new ActionRowBuilder()
-			.addComponents(accept, cancel);
-			const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> do you accept a game of Tic Tac Toe with <@"+int.user.id+">?", components: [row]})
-			const collectorFilter = i => i.user.id === int.options.getUser("user").id;
-			console.log(i)
-			player = tp1
-			pos[1] ="\\_"
-			pos[2] ="\\_"
-			pos[3] ="\\_"
-			pos[4] ="\\_"
-			pos[5] ="\\_"
-			pos[6] ="\\_"
-			pos[7]="  "
-			pos[8]="  "
-			pos[9] = "  "
-			update()
-			try {
-				confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
-				if (confirmation.customId === "a") {
-		  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
-				} else if (confirmation.customId === "c") {
+		} else if (int.options.getUser("user")) {
+			tp2 = "<@"+int.options.getUser("user").id+">"
+			if (tp1 == tp2) {
+				ephreply("You can't play against yourself")
+			} else {
+				tic = true
+			    	const accept = new ButtonBuilder()
+				.setCustomId("a")
+				.setLabel('✅ Accept')
+				.setStyle(ButtonStyle.Success);
+				const cancel = new ButtonBuilder()
+				.setCustomId("c")
+				.setLabel('❌ Cancel')
+				.setStyle(ButtonStyle.Danger);
+				const row = new ActionRowBuilder()
+				.addComponents(accept, cancel);
+				const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> do you accept a game of Tic Tac Toe with <@"+int.user.id+">?", components: [row]})
+				const collectorFilter = i => i.user.id === int.options.getUser("user").id;
+				console.log(i)
+				player = tp1
+				pos[1] ="\\_"
+				pos[2] ="\\_"
+				pos[3] ="\\_"
+				pos[4] ="\\_"
+				pos[5] ="\\_"
+				pos[6] ="\\_"
+				pos[7]="  "
+				pos[8]="  "
+				pos[9] = "  "
+				update()
+				try {
+					confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
+					if (confirmation.customId === "a") {
+			  			int.editReply({content:`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`, components: []})
+					} else if (confirmation.customId === "c") {
+						tic = false
+						int.editReply({content:"Game cancelled", components: []})
+					}
+				} catch {
 					tic = false
-					int.editReply({content:"Game cancelled", components: []})
+					int.editReply({content:"Confirmation not received within 20 seconds, cancelling", components: []})
 				}
-			} catch {
-				tic = false
-				int.editReply({content:"Confirmation not received within 20 seconds, cancelling", components: []})
 			}
-    		}
+    		} else if (int.options.getBoolean("ai")) {
+			int.reply("WIP")
+		} else {
+			ephreply("Please choose one of the options")
+		}
      } else if (int.commandName === "afk") {
 	    const subint = int.options.getSubcommand()
 	    if (subint === "set") {
