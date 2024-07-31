@@ -1072,6 +1072,8 @@ client.on("messageCreate", async msg => {
 				      console.log(avinps)
 				      await msg.reply(`${board}\nAI is thinking of move...`)
 				      player = tp2
+				      usym = usyms["2"]
+				      dsym = dsyms["2"]
 				      let move = ""
 				      if ((((p2 == usym) && (p3 == usym)) ||
 					 ((p4 == usym) && (p7 == dsym)) ||
@@ -1107,8 +1109,8 @@ client.on("messageCreate", async msg => {
 					 ((p1 == usym) && (p5 == usym))) && (avinps.includes("9"))) {
 				      		move = "9"
 				      } else {
-					      usym = usyms["2"]
-					      dsym = dsym["2"]
+					      usym = usyms["1"]
+					      dsym = dsym["1"]
 					      if ((((p2 == usym) && (p3 == usym)) ||
 						 ((p4 == usym) && (p7 == dsym)) ||
 						 ((p5 == usym) && (p9 == dsym))) && (avinps.includes("1"))) {
