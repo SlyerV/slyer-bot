@@ -152,6 +152,7 @@ let c1 = ""
 let c2 = ""
 // Tic Tac Toe
 let tic = false
+let ticai = false
 let tp1 = ""
 let tp2 = ""
 const pos = {}
@@ -191,6 +192,7 @@ let dsym = dsyms[player]
 let stop = false
 let tie = false
 const inps = ["1","2","3","4","5","6","7","8","9"]
+const avinps = ["1","2","3","4","5","6","7","8","9"]
 function update() {
   board = pos[1]+b+pos[2]+b+pos[3]+n+pos[4]+b+pos[5]+b+pos[6]+n+pos[7]+b+pos[8]+b+pos[9]
   if (player == tp1) {
@@ -229,12 +231,14 @@ function update() {
 	     (Object.values(dsyms).includes(pos[9]))) {
 	  tie = true
   }
-  if (player == tp1) {
-    	player = tp2
-  } else {
-    	player = tp1
+  if (! ticai) {
+	  if (player == tp1) {
+	    	player = tp2
+	  } else {
+	    	player = tp1
+	  }
+	  playerid = player.replace("<@","").replace(">","")
   }
-  playerid = player.replace("<@","").replace(">","")
 }
 // Funcs
 function random(list) {
@@ -864,6 +868,7 @@ client.on("interactionCreate", async int => {
 				pos[7]="  "
 				pos[8]="  "
 				pos[9] = "  "
+				avinps = ["1","2","3","4","5","6","7","8","9"]
 				update()
 				try {
 					confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
@@ -879,7 +884,21 @@ client.on("interactionCreate", async int => {
 				}
 			}
     		} else if (int.options.getBoolean("ai")) {
-			int.reply("WIP")
+			ticai = true
+			player = tp1
+			playerid = int.user.id
+			pos[1] ="\\_"
+			pos[2] ="\\_"
+			pos[3] ="\\_"
+			pos[4] ="\\_"
+			pos[5] ="\\_"
+			pos[6] ="\\_"
+			pos[7]="  "
+			pos[8]="  "
+			pos[9] = "  "
+			avinps = ["1","2","3","4","5","6","7","8","9"]
+			update()
+			int.reply("`${board}\n$<@{playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`")
 		} else {
 			ephreply("Please choose one of the options")
 		}
@@ -1019,21 +1038,68 @@ client.on("messageCreate", async msg => {
 			      pos[msg.content]= x
 		      }
 		      update()
-		      if (stop) {
-			      if (player == tp1) {
-	    			    player = tp2
-	  		      } else {
-	    			    player = tp1
-	  		      }
-			      msg.reply(board+"\n"+player+" wins!!!")
-			      stop = false
-			      tic = false
-		      } else if (tie) {
-			      msg.reply(board+"\nTie!")
-			      tie = false
-			      tic = false
+		      if (! ticai) {
+			      if (stop) {
+				      if (player == tp1) {
+		    			    player = tp2
+		  		      } else {
+		    			    player = tp1
+		  		      }
+				      msg.reply(board+"\n"+player+" wins!!!")
+				      stop = false
+				      tic = false
+			      } else if (tie) {
+				      msg.reply(board+"\nTie!")
+				      tie = false
+				      tic = false
+			      } else {
+				      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
+			      }
 		      } else {
-			      msg.reply(`${board}\n${player}'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
+			      avinps.splice(avinps.indexOf(msg.content), 1)
+			      if (stop) {
+				      msg.reply(board+"\n<@"+playerid+"> wins!!!")
+				      stop = false
+				      tic = false
+				      ticai = false
+			      } else if (tie) {
+				      msg.reply(board+"\nTie!")
+				      tie = false
+				      tic = false
+				      ticai = false
+			      } else {
+				      await msg.reply(`${board}\nAI is thinking of move...`)
+				      const move = random(avinps)
+				      let x = ""
+				      if (move < 7) {
+					      if (player == tp1) {
+						  x = usyms["1"]
+					      } else {
+						  x = usyms["2"]
+					      }
+					      pos[move]= x
+				      } else {
+					      if (player == tp1) {
+						  x = dsyms["1"]
+					      } else {
+						  x = dsyms["2"]
+					      }
+					      pos[move]= x
+				      }
+				      if (stop) {
+					      msg.reply(board+"\nThe AI wins!!!")
+					      stop = false
+					      tic = false
+					      ticai = false
+				      } else if (tie) {
+					      msg.reply(board+"\nTie!")
+					      tie = false
+					      tic = false
+					      ticai = false
+				      } else {
+				      	      msg.reply("`${board}\n$<@{playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`")
+				      }
+			      }
 		      }
 	    } else {
 		    msg.reply("Space is already taken!")
