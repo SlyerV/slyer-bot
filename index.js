@@ -1073,18 +1073,10 @@ client.on("messageCreate", async msg => {
 				      const move = random(avinps)
 				      let x = ""
 				      if (move < 7) {
-					      if (player == tp1) {
-						  x = usyms["1"]
-					      } else {
-						  x = usyms["2"]
-					      }
+					      x = usyms["2"]
 					      pos[move]= x
 				      } else {
-					      if (player == tp1) {
-						  x = dsyms["1"]
-					      } else {
-						  x = dsyms["2"]
-					      }
+					      x = dsyms["2"]
 					      pos[move]= x
 				      }
 				      if (stop) {
@@ -1098,7 +1090,7 @@ client.on("messageCreate", async msg => {
 					      tic = false
 					      ticai = false
 				      } else {
-				      	      msg.reply("`${board}\n$<@{playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`")
+				      	      msg.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 				      }
 			      }
 		      }
