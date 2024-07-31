@@ -1145,32 +1145,32 @@ client.on("messageCreate", async msg => {
 					      } else {
 					      	      move = random(avinps)
 					      }
-					      avinps.splice(avinps.indexOf(move),1)
-					      console.log(avinps)
-					      console.log(move)
-					      let x = ""
-					      if (move < 7) {
-						      x = usyms["2"]
-						      pos[move]= x
-					      } else {
-						      x = dsyms["2"]
-						      pos[move]= x
-					      }
-					      update()
-					      if (stop) {
-						      msg.reply(board+"\nThe AI wins!!!")
-						      stop = false
-						      tic = false
-						      ticai = false
-					      } else if (tie) {
-						      msg.reply(board+"\nTie!")
-						      tie = false
-						      tic = false
-						      ticai = false
-					      } else {
-						      player = tp1
-					      	      msg.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
-					      }
+				      }
+				      avinps.splice(avinps.indexOf(move),1)
+				      console.log(avinps)
+				      console.log(move)
+				      let x = ""
+				      if (move < 7) {
+					      x = usyms["2"]
+					      pos[move]= x
+				      } else {
+					      x = dsyms["2"]
+					      pos[move]= x
+				      }
+				      update()
+				      if (stop) {
+					      msg.reply(board+"\nThe AI wins!!!")
+					      stop = false
+					      tic = false
+					      ticai = false
+				      } else if (tie) {
+					      msg.reply(board+"\nTie!")
+					      tie = false
+					      tic = false
+					      ticai = false
+				      } else {
+					      player = tp1
+					      msg.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 				      }
 			      }
 		      }
