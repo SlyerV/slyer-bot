@@ -885,6 +885,7 @@ client.on("interactionCreate", async int => {
 			}
     		} else if (int.options.getBoolean("ai")) {
 			ticai = true
+			tic = true
 			player = tp1
 			playerid = int.user.id
 			pos[1] ="\\_"
@@ -898,7 +899,7 @@ client.on("interactionCreate", async int => {
 			pos[9] = "  "
 			avinps = ["1","2","3","4","5","6","7","8","9"]
 			update()
-			int.reply("`${board}\n$<@{playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`")
+			int.reply(`${board}\n$<@{playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 		} else {
 			ephreply("Please choose one of the options")
 		}
