@@ -1073,38 +1073,38 @@ client.on("messageCreate", async msg => {
 				      await msg.reply(`${board}\nAI is thinking of move...`)
 				      player = tp2
 				      let move = ""
-				      if (((p2 == usym) && (p3 == usym)) ||
+				      if ((((p2 == usym) && (p3 == usym)) ||
 					 ((p4 == usym) && (p7 == dsym)) ||
-					 ((p5 == usym) && (p9 == dsym))) {
+					 ((p5 == usym) && (p9 == dsym))) && (avinps.includes("1"))) {
 					      move = "1"
-				      } else if (((p1 == usym) && (p3 == usym)) ||
-					 ((p5 == usym) && (p8 == dsym))) {
+				      } else if ((((p1 == usym) && (p3 == usym)) ||
+					 ((p5 == usym) && (p8 == dsym))) && (avinps.includes("2"))) {
 					      move = "2"
-				      } else if (((p1 == usym) && (p2 == usym)) ||
+				      } else if ((((p1 == usym) && (p2 == usym)) ||
 					 ((p6 == usym) && (p9 == dsym)) ||
-					 ((p5 == usym) && (p7 == dsym))) {
+					 ((p5 == usym) && (p7 == dsym))) && (avinps.includes("3"))) {
 				      		move = "3"
-				      } else if (((p1 == usym) && (p7 == dsym)) ||
-					 ((p5 == usym) && (p6 == usym))) {
+				      } else if ((((p1 == usym) && (p7 == dsym)) ||
+					 ((p5 == usym) && (p6 == usym))) && (avinps.includes("4"))) {
 					      move = "4"
-				      } else if (((p2 == usym) && (p8 == dsym)) ||
+				      } else if ((((p2 == usym) && (p8 == dsym)) ||
 					 ((p4 == usym) && (p6 == usym)) ||
 					 ((p1 == usym) && (p9 == dsym)) ||
-					 ((p3 == usym) && (p7 == dsym))) {
+					 ((p3 == usym) && (p7 == dsym))) && (avinps.includes("5"))) {
 					      move = "5"
-				      } else if (((p3 == usym) && (p9 == dsym)) ||
-					 ((p4 == usym) && (p5 == usym))) {
+				      } else if ((((p3 == usym) && (p9 == dsym)) ||
+					 ((p4 == usym) && (p5 == usym))) && (avinps.includes("6"))) {
 					      move = "6"
-				      } else if (((p1 == usym) && (p4 == usym)) ||
+				      } else if ((((p1 == usym) && (p4 == usym)) ||
 					 ((p8 == dsym) && (p9 == dsym)) ||
-					 ((p3 == usym) && (p5 == usym))) {
+					 ((p3 == usym) && (p5 == usym))) && (avinps.includes("7"))) {
 				      		move = "7"
-				      } else if (((p2 == usym) && (p5 == usym)) ||
-					 ((p7 == dsym) && (p9 == dsym))) {
+				      } else if ((((p2 == usym) && (p5 == usym)) ||
+					 ((p7 == dsym) && (p9 == dsym))) && (avinps.includes("8"))) {
 					      move = "8"
-				      } else if (((p3 == usym) && (p6 == usym)) ||
+				      } else if ((((p3 == usym) && (p6 == usym)) ||
 					 ((p7 == dsym) && (p8 == dsym)) ||
-					 ((p1 == usym) && (p5 == usym))) {
+					 ((p1 == usym) && (p5 == usym))) && (avinps.includes("9"))) {
 				      		move = "9"
 				      } else {
 				      	      move = random(avinps)
