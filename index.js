@@ -1111,6 +1111,7 @@ client.on("messageCreate", async msg => {
 				      }
 				      avinps.splice(avinps.indexOf(move),1)
 				      console.log(avinps)
+				      console.log(move)
 				      let x = ""
 				      if (move < 7) {
 					      x = usyms["2"]
