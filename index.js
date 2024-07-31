@@ -1071,6 +1071,7 @@ client.on("messageCreate", async msg => {
 			      } else {
 				      console.log(avinps)
 				      await msg.reply(`${board}\nAI is thinking of move...`)
+				      player = tp2
 				      const move = random(avinps)
 				      avinps.splice(avinps.indexOf(move),1)
 				      console.log(avinps)
@@ -1094,6 +1095,7 @@ client.on("messageCreate", async msg => {
 					      tic = false
 					      ticai = false
 				      } else {
+					      player = tp1
 				      	      msg.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 				      }
 			      }
