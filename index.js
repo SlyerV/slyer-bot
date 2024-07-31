@@ -607,7 +607,7 @@ client.on("interactionCreate", async int => {
             int.reply({ content:"Message replied to!", ephemeral: true })
         }
      } else if (int.commandName === "preview") {
-        int.reply("**FUTURE COMMANDS:**\n/tictactoe [user]: Challenge a user to a game of tic-tac-toe!\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
+        int.reply("**FUTURE COMMANDS:**\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
      } else if (int.commandName === "rps") {
         c1 = int.options.getString("choice")
 	const p1 = "<@"+int.user.id+">"
@@ -899,7 +899,7 @@ client.on("interactionCreate", async int => {
 			pos[9] = "  "
 			avinps = ["1","2","3","4","5","6","7","8","9"]
 			update()
-			int.reply(`${board}\n$<@{playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
+			int.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 		} else {
 			ephreply("Please choose one of the options")
 		}
@@ -1079,6 +1079,7 @@ client.on("messageCreate", async msg => {
 					      x = dsyms["2"]
 					      pos[move]= x
 				      }
+				      update()
 				      if (stop) {
 					      msg.reply(board+"\nThe AI wins!!!")
 					      stop = false
