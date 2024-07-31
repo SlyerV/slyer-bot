@@ -1069,9 +1069,11 @@ client.on("messageCreate", async msg => {
 				      tic = false
 				      ticai = false
 			      } else {
+				      console.log(avinps)
 				      await msg.reply(`${board}\nAI is thinking of move...`)
 				      const move = random(avinps)
-				      console.log(move)
+				      avinps.splice(avinps.indexOf(move),1)
+				      console.log(avinps)
 				      let x = ""
 				      if (move < 7) {
 					      x = usyms["2"]
