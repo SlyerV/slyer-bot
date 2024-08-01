@@ -5,6 +5,7 @@ const fs = require("fs");
 const warns = require('./warns.json')
 let nicks = require('./nicks.json')
 let status = require('./status.json')
+let xp = require('./xp.json')
 let data = require("./data.json")
 const { token } = require('./config.json')
 const insults = require('./insults.json');
@@ -254,6 +255,19 @@ function randomnum(max) {
 function reverse(str) {
 	return str.split('').reverse().join('')
 }
+function level(xp) {
+	if (xp < 5) {
+		return 0
+	} else if (xp < 25) {
+		return 1
+	} else if (xp < 100) {
+		return 2
+	} else if (xp < 250) {
+		return 3
+	} else if (xp < 500) {
+		return 4
+	}
+}
 function writewarns() {
   fs.writeFile(
     "warns.json",
@@ -298,6 +312,17 @@ function writestatus() {
     console.log("Wrote status");
   });
 }
+function writestatus() {
+  fs.writeFile(
+    "xp.json",
+    JSON.stringify(xp),
+    err => {
+    // Checking for errors 
+    if (err) throw err;
+    // Success 
+    console.log("Wrote xp");
+  });
+}
 // Stored data
 let counting = data.counting
 let ncount = data.count
@@ -339,6 +364,11 @@ client.on("interactionCreate", async int => {
 	  int.reply({content:msg,ephemeral:true})
   }
   client.user.setActivity('/hangman');
+  if (xp[int.user.id]) {
+	  xp[int.user.id] = xp[int.user.id] + 5
+  } else {
+	  xp[int.user.id] = 5
+  }
   // Commands
   if (int.isCommand()) {
     if (int.commandName === "rdate") {
