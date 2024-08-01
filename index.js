@@ -324,7 +324,7 @@ function writestatus() {
     console.log("Wrote status");
   });
 }
-function writestatus() {
+function writexp() {
   fs.writeFile(
     "xp.json",
     JSON.stringify(xp),
@@ -376,13 +376,14 @@ client.on("interactionCreate", async int => {
 	  int.reply({content:msg,ephemeral:true})
   }
   client.user.setActivity('/hangman');
-  if (xp[int.user.id]) {
-	  xp[int.user.id] = xp[int.user.id] + 5
-  } else {
-	  xp[int.user.id] = 5
-  }
   // Commands
   if (int.isCommand()) {
+    if (xp[int.user.id]) {
+	  xp[int.user.id] = xp[int.user.id] + 5
+    } else {
+	  xp[int.user.id] = 5
+    }
+    writexp()
     if (int.commandName === "rdate") {
       let currentT = new Date();
       const oldT = new Date("Wed May 15 2024 00:00:00 GMT-0700 (Pacific Daylight Time)")
@@ -621,6 +622,7 @@ client.on("interactionCreate", async int => {
           writedata()
         }
      } else if (int.commandName === "hangman") {
+	xp[int.user.id] = xp[int.user.id] + 5
         if ((hangman == false) && (int.channel.id != channelid)) {
             hangman = true
 	    hangid = int.channel.id
@@ -1022,6 +1024,13 @@ client.on("interactionCreate", async int => {
 	          data["alpha"] = false
 	          writedata()
 	        }
+     } else if (int.commandName === "level") {
+	    level = level(xp[int.user.id])
+	    if (level == 10) {
+		    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+"xp.")
+	    } else {
+	    	int.reply("You are Level **"+level+"** and have "+xp[int.user.id]+"xp.")
+	    }
      }
   }  
 });
