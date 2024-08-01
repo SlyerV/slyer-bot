@@ -75,6 +75,7 @@ const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1
 // Hangman
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
+let hangid = ""
 let word = ""
 let r = ""
 let c = []
@@ -155,6 +156,7 @@ let c2 = ""
 // Tic Tac Toe
 let tic = false
 let ticai = false
+let ticid = ""
 let tp1 = ""
 let tp2 = ""
 const pos = {}
@@ -578,6 +580,7 @@ client.on("interactionCreate", async int => {
      } else if (int.commandName === "hangman") {
         if ((hangman == false) && (int.channel.id != channelid)) {
             hangman = true
+	    hangid = int.channel.id
             word = list[Math.floor(Math.random() * list.length)]
             r = ""
             for (let x=0;x<word.length;x++) {
@@ -848,8 +851,11 @@ client.on("interactionCreate", async int => {
 			tp2 = "<@"+int.options.getUser("user").id+">"
 			if (tp1 == tp2) {
 				ephreply("You can't play against yourself")
+			} else if (int.channel.id == channelid) {
+				ephreply("You can't start a tic-tac-toe game in the counting channel!")
 			} else {
 				tic = true
+				ticid = int.channel.id
 			    	const accept = new ButtonBuilder()
 				.setCustomId("a")
 				.setLabel('✅ Accept')
@@ -891,6 +897,7 @@ client.on("interactionCreate", async int => {
     		} else if (int.options.getBoolean("ai")) {
 			ticai = true
 			tic = true
+			ticid = int.channel.id
 			player = tp1
 			playerid = int.user.id
 			pos[1] ="\\_"
@@ -988,7 +995,7 @@ client.on("messageCreate", async msg => {
         data["countid"] = oldid 
         writedata()
     // Hangman Game
-    } else if ((hangman == true) && (alphabet.includes(msg.content))) {
+    } else if ((hangman == true) && (alphabet.includes(msg.content)) && (msg.channel.id == hangid)) {
 	      function writetxt() {
 	          r = ""
 	          l = 0
@@ -1028,7 +1035,7 @@ client.on("messageCreate", async msg => {
 	        hangman = false
 	      }
     // Tic Tac Toe Game
-    } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
+    } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)&&(msg.channel.id == ticid)) {
 	    if ((pos[msg.content] == "\\_") || (pos[msg.content] == "  ")) {
 		      let x = ""
 		      if (msg.content < 7) {
