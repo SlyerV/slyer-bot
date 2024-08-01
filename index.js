@@ -6,7 +6,6 @@ const warns = require('./warns.json')
 let nicks = require('./nicks.json')
 let status = require('./status.json')
 let data = require("./data.json")
-data["alpha"] = false
 const { token } = require('./config.json')
 const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
