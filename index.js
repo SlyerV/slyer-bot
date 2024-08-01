@@ -974,8 +974,9 @@ client.on("interactionCreate", async int => {
 	          data["alpha"] = true
 	          writedata()
 	        } else {
-	          nerdmode = false
-	          int.reply({content:"Reactions toggled **off**! 🤫❌",ephemeral:false})
+		  alpha = false
+		  console.log(alpha)
+	          int.reply({content:"Gen Alpha mode toggled **off**! 🤫❌",ephemeral:false})
 	          data["alpha"] = false
 	          writedata()
 	        }
