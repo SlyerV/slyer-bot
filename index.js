@@ -1041,7 +1041,7 @@ client.on("interactionCreate", async int => {
 	    if (rank == 10) {
 		    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+" XP")
 	    } else {
-	    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp(rank)+" XP until you reach the next level.")
+	    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
 	    }
      }
   }  
