@@ -266,6 +266,18 @@ function level(xp) {
 		return 3
 	} else if (xp < 500) {
 		return 4
+	} else if (xp < 1000) {
+		return 5
+	} else if (xp < 2000) {
+		return 6
+	} else if (xp < 5000) {
+		return 7
+	} else if (xp < 7500) {
+		return 8
+	} else if (xp < 10000) {
+		return 9
+	} else {
+		return 10
 	}
 }
 function writewarns() {
