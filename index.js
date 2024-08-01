@@ -337,8 +337,13 @@ function writestatus() {
     console.log("Wrote status");
   });
 }
-function writexp(user,channel) {
+function writexp(user,channel, xp) {
   const oldrank = level(xp[user])
+  if (xp[user]) {
+	  xp[int.user.id] = xp[int.user.id] + xp
+  } else {
+	  xp[int.user.id] = 5
+  }
   fs.writeFile(
     "xp.json",
     JSON.stringify(xp),
@@ -396,12 +401,7 @@ client.on("interactionCreate", async int => {
   client.user.setActivity('/hangman');
   // Commands
   if (int.isCommand()) {
-    if (xp[int.user.id]) {
-	  xp[int.user.id] = xp[int.user.id] + 5
-    } else {
-	  xp[int.user.id] = 5
-    }
-    writexp(int.user.id,int.channel)
+    writexp(int.user.id,int.channel,5)
     if (int.commandName === "rdate") {
       let currentT = new Date();
       const oldT = new Date("Wed May 15 2024 00:00:00 GMT-0700 (Pacific Daylight Time)")
@@ -1117,8 +1117,7 @@ client.on("messageCreate", async msg => {
 	        hangman = false
 	      } else if (l == word.length) {
 	        msg.reply("You won! :)\n+10 XP")
-		xp[hangplayer] = xp[hangplayer] + 10
-		writexp(hangplayer,msg.channel)
+		writexp(hangplayer,msg.channel,10)
 	        hangman = false
 	      }
     // Tic Tac Toe Game
@@ -1150,7 +1149,7 @@ client.on("messageCreate", async msg => {
 		  		      }
 				      msg.reply(board+"\n"+player+" wins!!!\n+10 XP")
 				      xp[player.replace("<@","").replace(">","")] = xp[player.replace("<@","").replace(">","")] + 10
-				      writexp(player.replace("<@","").replace(">",""),msg.channel)
+				      writexp(player.replace("<@","").replace(">",""),msg.channel,10)
 				      stop = false
 				      tic = false
 			      } else if (tie) {
@@ -1164,8 +1163,7 @@ client.on("messageCreate", async msg => {
 			      avinps.splice(avinps.indexOf(msg.content), 1)
 			      if (stop) {
 				      msg.reply(board+"\n<@"+playerid+"> wins!!!\n+10 XP")
-				      xp[playerid] = xp[playerid] + 10
-				      writexp(playerid,msg.channel)
+				      writexp(playerid,msg.channel,10)
 				      stop = false
 				      tic = false
 				      ticai = false
