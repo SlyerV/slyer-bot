@@ -76,6 +76,7 @@ const replies = ["obviously","hell no","u really think so?","ask ur mom","slyer1
 // Hangman
 const words = fs.readFileSync("./words.txt").toString('utf-8');
 const list = words.split("\n")
+let hangplayer = ""
 let hangid = ""
 let word = ""
 let r = ""
@@ -638,6 +639,7 @@ client.on("interactionCreate", async int => {
         if ((hangman == false) && (int.channel.id != channelid)) {
             hangman = true
 	    hangid = int.channel.id
+	    hangplayer = int.user.id
             word = list[Math.floor(Math.random() * list.length)]
             r = ""
             for (let x=0;x<word.length;x++) {
@@ -1073,7 +1075,7 @@ client.on("messageCreate", async msg => {
         data["countid"] = oldid 
         writedata()
     // Hangman Game
-    } else if ((hangman == true) && (alphabet.includes(msg.content)) && (msg.channel.id == hangid)) {
+    } else if ((hangman == true) && (alphabet.includes(msg.content)) && (msg.channel.id == hangid) && (msg.author.id == hangplayer)) {
 	      function writetxt() {
 	          r = ""
 	          l = 0
@@ -1109,7 +1111,9 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You lost! :(\n\nThe word was **"+word+"**")
 	        hangman = false
 	      } else if (l == word.length) {
-	        msg.reply("You won! :)")
+	        msg.reply("You won! :)\n+10 XP")
+		xp[hangplayer] = xp[hangplayer] + 10
+		writexp()
 	        hangman = false
 	      }
     // Tic Tac Toe Game
@@ -1139,7 +1143,9 @@ client.on("messageCreate", async msg => {
 		  		      } else {
 		    			    player = tp1
 		  		      }
-				      msg.reply(board+"\n"+player+" wins!!!")
+				      msg.reply(board+"\n"+player+" wins!!!\n+10 XP")
+				      xp[player.replace("<@","").replace(">","")] = xp[player.replace("<@","").replace(">","")] + 10
+				      writexp()
 				      stop = false
 				      tic = false
 			      } else if (tie) {
@@ -1152,7 +1158,9 @@ client.on("messageCreate", async msg => {
 		      } else {
 			      avinps.splice(avinps.indexOf(msg.content), 1)
 			      if (stop) {
-				      msg.reply(board+"\n<@"+playerid+"> wins!!!")
+				      msg.reply(board+"\n<@"+playerid+"> wins!!!\n+10 XP")
+				      xp[playerid] = xp[playerid] + 10
+				      writexp()
 				      stop = false
 				      tic = false
 				      ticai = false
