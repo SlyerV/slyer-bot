@@ -340,9 +340,9 @@ function writestatus() {
 function writexp(user,channel, xp) {
   const oldrank = level(xp[user])
   if (xp[user]) {
-	  xp[int.user.id] = xp[int.user.id] + xp
+	  xp[user] = xp[user] + xp
   } else {
-	  xp[int.user.id] = 5
+	  xp[user] = 5
   }
   fs.writeFile(
     "xp.json",
