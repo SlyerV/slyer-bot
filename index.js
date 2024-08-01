@@ -337,13 +337,7 @@ function writestatus() {
     console.log("Wrote status");
   });
 }
-function writexp(user,channel, xp) {
-  const oldrank = level(xp[user])
-  if (xp[user]) {
-	  xp[user] = xp[user] + xp
-  } else {
-	  xp[user] = 5
-  }
+function writexp() {
   fs.writeFile(
     "xp.json",
     JSON.stringify(xp),
@@ -353,10 +347,6 @@ function writexp(user,channel, xp) {
     // Success 
     console.log("Wrote xp");
   });
-  const newrank = level(xp[user])
-  if (newrank > oldrank) {
-	  channel.send("<@"+user+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
-  }
 }
 // Stored data
 let counting = data.counting
@@ -401,7 +391,17 @@ client.on("interactionCreate", async int => {
   client.user.setActivity('/hangman');
   // Commands
   if (int.isCommand()) {
-    writexp(int.user.id,int.channel,5)
+    const oldrank = level(xp[int.user.id])
+    if (xp[int.user.id]) {
+	  xp[int.user.id] = xp[int.user.id] + 5
+    } else {
+	  xp[int.user.id] = 5
+    }
+    writexp()
+    const newrank = level(xp[user])
+    if (newrank > oldrank) {
+	  channel.send("<@"+int.user.id+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+    }
     if (int.commandName === "rdate") {
       let currentT = new Date();
       const oldT = new Date("Wed May 15 2024 00:00:00 GMT-0700 (Pacific Daylight Time)")
@@ -1117,7 +1117,13 @@ client.on("messageCreate", async msg => {
 	        hangman = false
 	      } else if (l == word.length) {
 	        msg.reply("You won! :)\n+10 XP")
-		writexp(hangplayer,msg.channel,10)
+		const oldrank = level(xp[hangplayer])
+		xp[hangplayer] = xp[hangplayer] + 10
+		writexp()
+		const newrank = level(xp[hangplayer])
+	        if (newrank > oldrank) {
+		    channel.send("<@"+hangplayer+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+	        }
 	        hangman = false
 	      }
     // Tic Tac Toe Game
@@ -1148,8 +1154,13 @@ client.on("messageCreate", async msg => {
 		    			    player = tp1
 		  		      }
 				      msg.reply(board+"\n"+player+" wins!!!\n+10 XP")
+				      const oldrank = xp[player.replace("<@","").replace(">","")]
 				      xp[player.replace("<@","").replace(">","")] = xp[player.replace("<@","").replace(">","")] + 10
-				      writexp(player.replace("<@","").replace(">",""),msg.channel,10)
+				      writexp()
+				      const newrank = level(xp[player.replace("<@","").replace(">","")])
+				      if (newrank > oldrank) {
+						  channel.send("<@"+player.replace("<@","").replace(">","")+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+				      }
 				      stop = false
 				      tic = false
 			      } else if (tie) {
@@ -1163,7 +1174,13 @@ client.on("messageCreate", async msg => {
 			      avinps.splice(avinps.indexOf(msg.content), 1)
 			      if (stop) {
 				      msg.reply(board+"\n<@"+playerid+"> wins!!!\n+10 XP")
-				      writexp(playerid,msg.channel,10)
+				      const oldrank = xp[playerid]
+				      xp[playerid] = xp[playerid] + 10
+				      writexp()
+				      const newrank = level(xp[playerid])
+				      if (newrank > oldrank) {
+						  channel.send("<@"+playerid+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+				      }
 				      stop = false
 				      tic = false
 				      ticai = false
