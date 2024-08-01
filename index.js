@@ -398,7 +398,7 @@ client.on("interactionCreate", async int => {
 	  xp[int.user.id] = 5
     }
     writexp()
-    const newrank = level(xp[user])
+    const newrank = level(xp[int.user.id])
     if (newrank > oldrank) {
 	  int.channel.send("<@"+int.user.id+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
     }
