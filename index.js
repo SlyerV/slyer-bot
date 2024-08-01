@@ -1,3 +1,4 @@
+// Requirements
 const express = require("express");
 const mysql = require('mysql');
 const fs = require("fs");
@@ -10,6 +11,7 @@ const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const app = express()
+// Random global vars
 const compliments = ["cool","awesome","intelligent","amazing","talented"]
 const smembers= []
 const highbase = {
@@ -203,7 +205,7 @@ function update() {
 	  dsym = dsyms["2"]
   }
   p1=pos[1]
-  p2 = pos[2]
+  p2=pos[2]
   p3=pos[3]
   p4=pos[4]
   p5=pos[5]
@@ -316,6 +318,7 @@ con.connect(function(err) {
   //   console.log("Database created");
   // });
 });
+// Starting the Bot
 app.listen(3000, () => {
   const d = new Date()
   const t = d.toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
@@ -326,12 +329,14 @@ app.get("/",(req,res) => {
 })
 const Discord = require("discord.js");
 const client = new Discord.Client({intents: ["Guilds","GuildMessages","MessageContent","GuildEmojisAndStickers","GuildMembers","GuildMessageReactions"]})
+// Interaction Event Listener
 client.on("interactionCreate", async int => {
   // Int Funcs
   function ephreply(msg) {
 	  int.reply({content:msg,ephemeral:true})
   }
   client.user.setActivity('/hangman');
+  // Commands
   if (int.isCommand()) {
     if (int.commandName === "rdate") {
       let currentT = new Date();
@@ -956,9 +961,10 @@ client.on("interactionCreate", async int => {
      }
   }  
 });
-// MESSAGES
+// Message Event Listener
 client.on("messageCreate", async msg => {
     rmsg = msg
+    // Counting Game
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
         if ((msg.content == ncount) && (msg.author.id != oldid)) {
@@ -981,6 +987,7 @@ client.on("messageCreate", async msg => {
         data["count"] = ncount
         data["countid"] = oldid 
         writedata()
+    // Hangman Game
     } else if ((hangman == true) && (alphabet.includes(msg.content))) {
 	      function writetxt() {
 	          r = ""
@@ -1020,6 +1027,7 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You won! :)")
 	        hangman = false
 	      }
+    // Tic Tac Toe Game
     } else if ((tic == true)&&(inps.includes(msg.content))&&(msg.author.id==playerid)) {
 	    if ((pos[msg.content] == "\\_") || (pos[msg.content] == "  ")) {
 		      let x = ""
@@ -1111,6 +1119,7 @@ client.on("messageCreate", async msg => {
 				      } else {
 					      usym = usyms["1"]
 					      dsym = dsym["1"]
+					      // Incredibly long Tic Tac Toe AI code
 					      if ((((p2 == usym) && (p3 == usym)) ||
 						 ((p4 == usym) && (p7 == dsym)) ||
 						 ((p5 == usym) && (p9 == dsym))) && (avinps.includes("1"))) {
@@ -1188,6 +1197,7 @@ client.on("messageCreate", async msg => {
 	    } else {
 		    msg.reply("Space is already taken!")
 	    }
+    // Random Reactions
     } else if ((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) {
 	      try {
 	          const r = randomnum(3)
@@ -1203,6 +1213,7 @@ client.on("messageCreate", async msg => {
 	        console.log(err)
 	      }
     }
+    // AFK Ping Listener
     if (status != {}) {
     	Object.keys(status).forEach((id) => {
 		const user = msg.mentions.users.first()
@@ -1217,6 +1228,7 @@ client.on("messageCreate", async msg => {
 		}
     	});
     }
+    // Love Talk Listener (for 2 specific people)
     if (msg.channel.id != "1253010049199243398") {
       if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718")) {
         if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷")) {
@@ -1225,12 +1237,21 @@ client.on("messageCreate", async msg => {
       }
     }
 })
+// Deleted Messages Listener
 client.on("messageDelete", async dmsg => {
     const d = new Date()
+    // Quoting deleted messages by 2 specific people
     if (quoting == true) {
         if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718")) {
             client.channels.cache.get("1179602392367517766").send('"'+dmsg.content+'" - <@'+dmsg.author.id+'> in <#'+dmsg.channel.id+">")
         }
     }
 })
+// Logging in with token that you will never see :)
 client.login(token)
+
+
+
+
+
+// Damn you made it this far here's a cookie for your troubles 🍪
