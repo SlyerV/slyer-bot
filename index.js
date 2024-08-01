@@ -280,6 +280,18 @@ function level(xp) {
 		return 10
 	}
 }
+const maxxp = {
+	0:5
+	1:25
+	2:100
+	3:250
+	4:500
+	5:1000
+	6:2000
+	7:5000
+	8:7500
+	9:10000
+}
 function writewarns() {
   fs.writeFile(
     "warns.json",
@@ -1025,11 +1037,11 @@ client.on("interactionCreate", async int => {
 	          writedata()
 	        }
      } else if (int.commandName === "level") {
-	    level = level(xp[int.user.id])
-	    if (level == 10) {
-		    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+"xp.")
+	    rank = level(xp[int.user.id])
+	    if (rank == 10) {
+		    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+" XP")
 	    } else {
-	    	int.reply("You are Level **"+level+"** and have "+xp[int.user.id]+"xp.")
+	    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp(rank)+" XP until you reach the next level.")
 	    }
      }
   }  
