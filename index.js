@@ -6,6 +6,7 @@ const warns = require('./warns.json')
 let nicks = require('./nicks.json')
 let status = require('./status.json')
 let data = require("./data.json")
+data["alpha"] = false
 const { token } = require('./config.json')
 const insults = require('./insults.json');
 const { PermissionsBitField } = require('discord.js');
@@ -306,6 +307,7 @@ let oldid = data.countid
 let nicked = data.nicked
 let nerdmode = data.nerdmode
 let quoting = data.quoting
+let alpha = data.alpha
 let hangman = false
 const con = mysql.createConnection({
   host: "mysql.db.bot-hosting.net",
@@ -965,6 +967,19 @@ client.on("interactionCreate", async int => {
 			    ephreply("You don't have an AFK status")
 		    }
 	    }
+     } else if (int.commandName === "genalpha") {
+		const eph = int.options.getBoolean("ephemeral")
+	        if (alpha == false) {
+	          alpha = true
+	          int.reply({content:"Gen Alpha mode toggled **on**! 🤫🧏", ephemeral: eph})
+	          data["alpha"] = true
+	          writedata()
+	        } else {
+	          nerdmode = false
+	          int.reply({content:"Reactions toggled **off**! 🤫❌",ephemeral:false})
+	          data["alpha"] = false
+	          writedata()
+	        }
      }
   }  
 });
@@ -1205,20 +1220,36 @@ client.on("messageCreate", async msg => {
 		    msg.reply("Space is already taken!")
 	    }
     // Random Reactions
-    } else if ((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) {
-	      try {
-	          const r = randomnum(3)
-	          if (r == 1) {
-	            msg.react("🤓")
-	            msg.react("☝️")
-	          } else if (r == 2) {
-	            msg.react("<:womp:1255197707040194652>")
-	          } else {
-	            msg.react('🏳️‍🌈')
-	          }
-	      } catch(err) {
-	        console.log(err)
-	      }
+    } else if (((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) || ((alpha == true) && (randomnum(30) == 1) && (! msg.author.bot))) {
+	    if (nerdmode == true) {
+		      try {
+		          const r = randomnum(3)
+		          if (r == 1) {
+		            msg.react("🤓")
+		            msg.react("☝️")
+		          } else if (r == 2) {
+		            msg.react("<:womp:1255197707040194652>")
+		          } else {
+		            msg.react('🏳️‍🌈')
+		          }
+		      } catch(err) {
+		        console.log(err)
+		      }
+	    }
+	    if (alpha == true) {
+		    try {
+		          const r = randomnum(3)
+		          if (r == 1) {
+		            msg.reply("skibidi rizz?")
+		          } else if (r == 2) {
+		            msg.channel.send("🤫🧏")
+		          } else {
+		            msg.reply("only in ohio if fanum tax causes skibdi rizz with a looksmaxxed level 10 gyatt")
+		          }
+		      } catch(err) {
+		        console.log(err)
+		      }
+	    }
     }
     // AFK Ping Listener
     if (status != {}) {
