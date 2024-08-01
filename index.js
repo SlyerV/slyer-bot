@@ -400,7 +400,7 @@ client.on("interactionCreate", async int => {
     writexp()
     const newrank = level(xp[user])
     if (newrank > oldrank) {
-	  channel.send("<@"+int.user.id+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+	  int.channel.send("<@"+int.user.id+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
     }
     if (int.commandName === "rdate") {
       let currentT = new Date();
@@ -1122,7 +1122,7 @@ client.on("messageCreate", async msg => {
 		writexp()
 		const newrank = level(xp[hangplayer])
 	        if (newrank > oldrank) {
-		    channel.send("<@"+hangplayer+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+		    msg.channel.send("<@"+hangplayer+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
 	        }
 	        hangman = false
 	      }
@@ -1159,7 +1159,7 @@ client.on("messageCreate", async msg => {
 				      writexp()
 				      const newrank = level(xp[player.replace("<@","").replace(">","")])
 				      if (newrank > oldrank) {
-						  channel.send("<@"+player.replace("<@","").replace(">","")+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+						  msg.channel.send("<@"+player.replace("<@","").replace(">","")+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
 				      }
 				      stop = false
 				      tic = false
@@ -1179,7 +1179,7 @@ client.on("messageCreate", async msg => {
 				      writexp()
 				      const newrank = level(xp[playerid])
 				      if (newrank > oldrank) {
-						  channel.send("<@"+playerid+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+						  msg.channel.send("<@"+playerid+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
 				      }
 				      stop = false
 				      tic = false
