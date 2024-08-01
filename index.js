@@ -1331,7 +1331,7 @@ client.on("messageCreate", async msg => {
 		    try {
 		          const r = randomnum(3)
 		          if (r == 1) {
-		            msg.reply("skibidi rizz?")
+		            msg.reply("erm what da sigma 🤓☝️")
 		          } else if (r == 2) {
 		            msg.channel.send("🤫🧏")
 		          } else {
