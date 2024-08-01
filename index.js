@@ -1278,6 +1278,7 @@ client.on("messageCreate", async msg => {
 					      } else {
 					      	      move = random(avinps)
 					      }
+					      console.log(p1,p2,p3,p4,p5,p6,p7,p8,p9)
 				      }
 				      avinps.splice(avinps.indexOf(move),1)
 				      console.log(avinps)
