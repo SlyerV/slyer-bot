@@ -337,7 +337,8 @@ function writestatus() {
     console.log("Wrote status");
   });
 }
-function writexp() {
+function writexp(user,channel) {
+  const oldrank = level(xp[user])
   fs.writeFile(
     "xp.json",
     JSON.stringify(xp),
@@ -347,6 +348,10 @@ function writexp() {
     // Success 
     console.log("Wrote xp");
   });
+  const newrank = level(xp[user])
+  if (newrank > oldrank) {
+	  channel.send("<@"+user+"> LEVEL UP! "+oldrank+" => **"+newrank+"**")
+  }
 }
 // Stored data
 let counting = data.counting
@@ -396,7 +401,7 @@ client.on("interactionCreate", async int => {
     } else {
 	  xp[int.user.id] = 5
     }
-    writexp()
+    writexp(int.user.id,int.channel)
     if (int.commandName === "rdate") {
       let currentT = new Date();
       const oldT = new Date("Wed May 15 2024 00:00:00 GMT-0700 (Pacific Daylight Time)")
@@ -1113,7 +1118,7 @@ client.on("messageCreate", async msg => {
 	      } else if (l == word.length) {
 	        msg.reply("You won! :)\n+10 XP")
 		xp[hangplayer] = xp[hangplayer] + 10
-		writexp()
+		writexp(hangplayer,msg.channel)
 	        hangman = false
 	      }
     // Tic Tac Toe Game
@@ -1145,7 +1150,7 @@ client.on("messageCreate", async msg => {
 		  		      }
 				      msg.reply(board+"\n"+player+" wins!!!\n+10 XP")
 				      xp[player.replace("<@","").replace(">","")] = xp[player.replace("<@","").replace(">","")] + 10
-				      writexp()
+				      writexp(player.replace("<@","").replace(">",""),msg.channel)
 				      stop = false
 				      tic = false
 			      } else if (tie) {
@@ -1160,7 +1165,7 @@ client.on("messageCreate", async msg => {
 			      if (stop) {
 				      msg.reply(board+"\n<@"+playerid+"> wins!!!\n+10 XP")
 				      xp[playerid] = xp[playerid] + 10
-				      writexp()
+				      writexp(playerid,msg.channel)
 				      stop = false
 				      tic = false
 				      ticai = false
