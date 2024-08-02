@@ -256,6 +256,10 @@ function randomnum(max) {
 function reverse(str) {
 	return str.split('').reverse().join('')
 }
+function fetchKey(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
 function level(xp) {
 	if (xp < 5) {
 		return 0
@@ -1063,7 +1067,20 @@ client.on("interactionCreate", async int => {
 			    }
 		    }
 	    } else if (subint === "leaderboard") {
-		    int.reply("WIP")
+		    let list = Object.values(xp)
+		    let l = "Rank:\n"
+		    let r = 0
+		    let rank = ""
+		    list = list.sort(function(a, b){return b-a})
+		    for (x of list) {
+			    r++
+			    l+=("#"+r+": <@"+fetchKey(xp, x)+"> with **"+x+"** XP\n")
+			    if (fetchKey(xp, x)==int.user.id) {
+				    rank = r
+			    }
+		    }
+		    l+=("You are Rank **#"+rank+"**")
+		    int.reply(l)
 	    }
      }
   }  
