@@ -1087,7 +1087,7 @@ client.on("interactionCreate", async int => {
 			    xp = xpsave
 			    writexp()
 		    }
-		    int.reply(l)
+		    int.reply({content:"l", allowedMentions: { parse: [] }})
 	    }
      }
   }  
