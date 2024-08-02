@@ -622,7 +622,7 @@ client.on("interactionCreate", async int => {
         }
      } else if (int.commandName === "owner") {
         const owner = await int.guild.fetchOwner()
-        int.reply({ content:"The owner of the server is <@"+owner+">", ephemeral: true })
+        silreply("The owner of the server is <@"+owner+">")
      } else if (int.commandName === "ping") {
         int.reply("Pong!\n🏓")
      } else if (int.commandName === "info") {
