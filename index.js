@@ -1078,7 +1078,7 @@ client.on("interactionCreate", async int => {
 		    list = list.sort(function(a, b){return b-a})
 		    for (x of list) {
 			    r++
-			    l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP (Level "+level(x)+")\n")
+			    l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP (Level **"+level(x)+"**)\n")
 			    xpsave[fetchKey(xp, x)] = x
 			    if (fetchKey(xp, x)==int.user.id) {
 				    rank = r
