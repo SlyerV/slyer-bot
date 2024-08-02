@@ -1044,11 +1044,20 @@ client.on("interactionCreate", async int => {
 	          writedata()
 	        }
      } else if (int.commandName === "level") {
-	    rank = level(xp[int.user.id])
-	    if (rank == 10) {
-		    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+" XP")
-	    } else {
-	    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
+	    const subint = int.options.getSubcommand()
+	    if (subint === "view") {
+		    if (! int.options.getUser("user")) {
+			    rank = level(xp[int.user.id])
+			    if (rank == 10) {
+				    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+" XP.")
+			    } else {
+			    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
+			    }
+		    } else {
+			    int.reply(`<@${int.options.getUser("user")}> is Level **${level(xp[int.options.getUser("user").id])}** with ${xp[int.options.getUser("user").id]} XP.`)
+		    }
+	    } else if (subint === "leaderboard") {
+		    int.reply("WIP")
 	    }
      }
   }  
