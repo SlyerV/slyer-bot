@@ -393,6 +393,7 @@ client.on("interactionCreate", async int => {
   if (int.isCommand()) {
     const oldrank = level(xp[int.user.id])
     if (xp[int.user.id]) {
+	  console.log(int.user.id)
 	  xp[int.user.id] = xp[int.user.id] + 5
 	  const newrank = level(xp[int.user.id])
           if (newrank > oldrank) {
@@ -1055,7 +1056,7 @@ client.on("interactionCreate", async int => {
 			    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
 			    }
 		    } else {
-			    if (xp[int.options.getUser("user")]) {
+			    if (xp[int.options.getUser("user").id]) {
 				    int.reply(`${int.options.getUser("user")} is Level **${level(xp[int.options.getUser("user").id])}** with **${xp[int.options.getUser("user").id]}** XP.`)
 			    } else {
 				    int.reply(`${int.options.getUser("user")} is Level **0** with **0** XP 😑`)
