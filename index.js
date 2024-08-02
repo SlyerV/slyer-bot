@@ -1075,7 +1075,7 @@ client.on("interactionCreate", async int => {
 		    list = list.sort(function(a, b){return b-a})
 		    for (x of list) {
 			    r++
-			    l+=("#"+r+": "+int.client.users.cache.get(fetchKey(xp, x)).tag+" with **"+x+"** XP\n")
+			    l+=("#"+r+": "+int.client.users.cache.get(fetchKey(xp, x)).username+" with **"+x+"** XP\n")
 			    xpsave[fetchKey(xp, x)] = x
 			    if (fetchKey(xp, x)==int.user.id) {
 				    rank = r
@@ -1083,8 +1083,10 @@ client.on("interactionCreate", async int => {
 			    delete xp[fetchKey(xp,x)]
 		    }
 		    l+=("You are Rank **#"+rank+"**")
-		    xp = xpsave
-		    writexp()
+		    if (xpsave != {}) {
+			    xp = xpsave
+			    writexp()
+		    }
 		    int.reply(l)
 	    }
      }
