@@ -392,6 +392,9 @@ client.on("interactionCreate", async int => {
   function ephreply(msg) {
 	  int.reply({content:msg,ephemeral:true})
   }
+  function silreply(msg) {
+	  int.reply({content:msg, allowedMentions: { parse: [] }})
+  }
   client.user.setActivity('/hangman');
   // Commands
   if (int.isCommand()) {
@@ -1075,7 +1078,7 @@ client.on("interactionCreate", async int => {
 		    list = list.sort(function(a, b){return b-a})
 		    for (x of list) {
 			    r++
-			    l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP\n")
+			    l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP (Level "+level(x)+")\n")
 			    xpsave[fetchKey(xp, x)] = x
 			    if (fetchKey(xp, x)==int.user.id) {
 				    rank = r
@@ -1087,7 +1090,7 @@ client.on("interactionCreate", async int => {
 			    xp = xpsave
 			    writexp()
 		    }
-		    int.reply({content:l, allowedMentions: { parse: [] }})
+		    silreply(l)
 	    }
      }
   }  
