@@ -1054,7 +1054,7 @@ client.on("interactionCreate", async int => {
 			    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
 			    }
 		    } else {
-			    if (xp[int.options.getUser("user")) {
+			    if (xp[int.options.getUser("user")]) {
 				    int.reply(`${int.options.getUser("user")} is Level **${level(xp[int.options.getUser("user").id])}** with **${xp[int.options.getUser("user").id]}** XP.`)
 			    } else {
 				    int.reply(`${int.options.getUser("user")} is Level **0** with **0** XP 😑`)
