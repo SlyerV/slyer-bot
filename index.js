@@ -1091,6 +1091,25 @@ client.on("interactionCreate", async int => {
 			    writexp()
 		    }
 		    silreply(l)
+	    } else if (subint === "info") {
+		    int.reply(`Level up by using any slyer-bot commands. Every command will give you 5 XP, and winning a slyer-bot game will give you an additional 10 XP. After you reach a certain amount of XP, you will level up!\nHere is the list of XP requirements for each level:
+      Level 1: **5** XP
+      Level 2: **25** XP
+      Level 3: **100** XP
+      Level 4: **250** XP:
+      Level 5: **500** XP
+      Level 6: **1000** XP
+      Level 7: **2000** XP
+      Level 8: **5000** XP
+      Level 9: **7500** XP
+      Level 10: **10000** XP
+      Once you reach Level 10, you have reached the max level! You will continue to gain XP but will not level up anymore.`)
+	    } else if (subint === "next") {
+		    if (! (level(xp[int.user.id]) == 10)) {
+		    	int.reply("You need **"+(maxxp[rank]-xp[int.user.id])+"** more XP until you reach Level **"+(level(xp[int.user.id])+1)+"**.")
+		    } else {
+			    int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
+		    }
 	    }
      }
   }  
