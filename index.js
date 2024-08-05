@@ -402,15 +402,16 @@ client.on("interactionCreate", async int => {
     if (xp[int.user.id]) {
 	  console.log(int.user.id)
 	  xp[int.user.id] = xp[int.user.id] + 5
+	  writexp()
 	  const newrank = level(xp[int.user.id])
           if (newrank > oldrank) {
 	  int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
           }
     } else {
 	  xp[int.user.id] = 5
+	  writexp()
 	  int.channel.send("# <@"+int.user.id+"> LEVEL UP! 0 => 1")
     }
-    writexp()
     if (int.commandName === "rdate") {
       let currentT = new Date();
       const oldT = new Date("Wed May 15 2024 00:00:00 GMT-0700 (Pacific Daylight Time)")
@@ -1001,8 +1002,8 @@ client.on("interactionCreate", async int => {
 	    } else if (subint === "list") {
 		    let l = "List:\n"
 		    Object.values(status).forEach((msg, index) => {
-        		const user = Object.keys(status)[index];
-			const tag = int.guild.members.cache.get(user).user.tag
+        		const memb = Object.keys(status)[index];
+			const tag = int.guild.members.cache.get(memb).user.tag
         		l+=`**${tag}** is AFK: ${msg}\n`
     		    });
 		    if (l == "List:\n") {
