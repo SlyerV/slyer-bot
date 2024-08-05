@@ -1108,7 +1108,7 @@ Once you reach Level 10, you have reached the max level! You will continue to ga
 	    }
      } else if (int.commandName === "help") {
 	    let str
-	    const commandFiles = fs.readdirSync('./slash').filter(file => file.endsWith('.js'))
+	    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 	    for (const file of commandFiles) {
 		const command = require(`./${file}`);
 		str += `Name: ${command.data.name}, Description: ${command.data.description} \n`;
