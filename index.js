@@ -1151,14 +1151,21 @@ client.on("interactionCreate", async int => {
 			    const resp = await int.reply({ content:(tquestion["question"]+"\nA) "+tquestion["A"]+"\nB) "+tquestion["B"]+"\nC) "+tquestion["C"]+"\nD) "+tquestion["D"]), components: [row]})
 			    const collectorFilter = i => i.user.id === int.user.id;
 			    try {
-				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
+				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 10_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
-					    nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"** is the correct answer, good job!\n+10 XP")
+					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"** is the correct answer, good job!\n+10 XP")
+						const oldrank = level(xp[hangplayer])
+						xp[hangplayer] = xp[hangplayer] + 10
+						writexp()
+						const newrank = level(xp[hangplayer])
+					        if (newrank > oldrank) {
+						    msg.channel.send("# <@"+hangplayer+"> LEVEL UP! "+oldrank+" => "+newrank)
+					        }
 				    } else {
-					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"** :(")
+					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]"** :(")
 				    }
 			    } catch {
-				    int.editReply("You didn't answer the question within 15 seconds! You lose :(")
+				    nocompeditReply("You didn't answer the question within 10 seconds! You lose :( (The answer was **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]+"**)")
 			    }
 		    }
 	     } else {
