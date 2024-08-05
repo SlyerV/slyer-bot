@@ -1071,7 +1071,7 @@ client.on("interactionCreate", async int => {
 		    }
 	    } else if (subint === "leaderboard") {
 		    const sortable = Object.fromEntries(
-   		   	    Object.entries(maxSpeed).sort(([,a],[,b]) => b-a)
+   		   	    Object.entries(xp).sort(([,a],[,b]) => b-a)
 		    );
 		    // let list = Object.values(xp)
 		    let l = "Rank:\n"
