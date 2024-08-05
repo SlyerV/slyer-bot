@@ -1072,13 +1072,13 @@ client.on("interactionCreate", async int => {
 				    }
 			    }
 		    } else if (subint === "leaderboard") {
-			    const sortable = Object.fromEntries(
+			    const sorted = Object.fromEntries(
 	   		   	    Object.entries(xp).sort(([,a],[,b]) => b-a)
 			    );
 			    let l = "Rank:\n"
 			    let r = 0
 			    let rank = ""
-			    for (let key in xp) {
+			    for (let key in sorted) {
 				    r++
 				    l+=("#"+r+": <@!"+key+"> with **"+xp[key]+"** XP (Level **"+level(xp[key])+"**)\n")
 				    if (key==int.user.id) {
