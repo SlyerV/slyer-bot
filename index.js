@@ -1154,12 +1154,12 @@ client.on("interactionCreate", async int => {
 				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 10_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
 					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]"** is the correct answer, good job!\n+10 XP")
-						const oldrank = level(xp[hangplayer])
-						xp[hangplayer] = xp[hangplayer] + 10
+						const oldrank = level(xp[int.user.id])
+						xp[int.user.id] = xp[int.user.id] + 10
 						writexp()
-						const newrank = level(xp[hangplayer])
+						const newrank = level(xp[int.user.id])
 					        if (newrank > oldrank) {
-						    msg.channel.send("# <@"+hangplayer+"> LEVEL UP! "+oldrank+" => "+newrank)
+						    msg.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
 					        }
 				    } else {
 					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
