@@ -1073,7 +1073,6 @@ client.on("interactionCreate", async int => {
 		    const sortable = Object.fromEntries(
    		   	    Object.entries(xp).sort(([,a],[,b]) => b-a)
 		    );
-		    // let list = Object.values(xp)
 		    let l = "Rank:\n"
 		    let r = 0
 		    let rank = ""
