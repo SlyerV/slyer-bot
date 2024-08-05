@@ -1105,6 +1105,8 @@ Once you reach Level 10, you have reached the max level! You will continue to ga
 		    } else {
 			    int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
 		    }
+	    } else {
+		    ephreply("WIP (command hasn't been added yet)")
 	    }
      }
   }  
