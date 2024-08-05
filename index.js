@@ -9,6 +9,7 @@ const xp = require('./xp.json')
 let data = require("./data.json")
 const { token } = require('./config.json')
 const insults = require('./insults.json');
+const questions = require('./trivia.json')
 const { PermissionsBitField } = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const app = express()
@@ -246,6 +247,9 @@ function update() {
 	  playerid = player.replace("<@","").replace(">","")
   }
 }
+// Trivia
+let trivchannel
+let trivid
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -395,6 +399,12 @@ client.on("interactionCreate", async int => {
 	  }
 	  function silreply(msg) {
 		  int.reply({content:msg, allowedMentions: { parse: [] }})
+	  }
+	  function nocompreply(msg) {
+		  int.reply({content:msg, components:[]})
+	  }
+	  function nocompeditReply(msg) {
+		  int.editReply({content:msg, components:[]})
 	  }
 	  client.user.setActivity('/hangman');
 	  // Commands
@@ -1109,12 +1119,48 @@ client.on("interactionCreate", async int => {
 		    }
 	     } else if (int.commandName === "help") {
 		    let str
-		    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+		    const commandFiles = fs.readdirSync('./slash.js').filter(file => file.endsWith('.js'))
 		    for (const file of commandFiles) {
 			const command = require(`./${file}`);
 			str += `Name: ${command.data.name}, Description: ${command.data.description} \n`;
 		    }
 		    ephreply(str)
+	     } else if (int.commandName === "trivia") {
+		    const A = new ButtonBuilder()
+				.setCustomId("A")
+				.setLabel('A')
+				.setStyle(ButtonStyle.Primary)
+		    const B = new ButtonBuilder()
+				.setCustomId("B")
+				.setLabel('B')
+				.setStyle(ButtonStyle.Primary)
+		    const C = new ButtonBuilder()
+				.setCustomId("C")
+				.setLabel('C')
+				.setStyle(ButtonStyle.Primary)
+		    const D = new ButtonBuilder()
+				.setCustomId("D")
+				.setLabel('D')
+				.setStyle(ButtonStyle.Primary)
+		    const row = new ActionRowBuilder()
+				.addComponents(A,B,C,D);
+		    if (int.options.getUser("user")) {
+			    ephreply("WIP")
+		    } else {
+			    const tquestion = random(questions)
+			    const resp = await int.reply({ content:(tquestion["question"]+"\nA) "+tquestion["A"]+"\nB) "+tquestion["B"]+"\nC) "+tquestion["C"]+"\nD) "+tquestion["D"]), components: [row]})
+			    const collectorFilter = i => i.user.id === int.user.id;
+			    try {
+				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
+				    if (tquestion["answer"]==confirmation.customId) {
+					    nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"** is the correct answer, good job!\n+10 XP")
+				    } else {
+					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"** :(")
+				    }
+			    } catch {
+				    int.editReply("You didn't answer the question within 15 seconds! You lose :(")
+			    }
+		    }
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
 	     }
