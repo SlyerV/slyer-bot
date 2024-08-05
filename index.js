@@ -1101,7 +1101,7 @@ Level 10: **10000** XP
 Once you reach Level 10, you have reached the max level! You will continue to gain XP but will not level up anymore.`)
 	    } else if (subint === "next") {
 		    if (! (level(xp[int.user.id]) == 10)) {
-		    	int.reply("You need **"+(maxxp[rank]-xp[int.user.id])+"** more XP until you reach Level **"+(level(xp[int.user.id])+1)+"**.")
+		    	int.reply("You need **"+(maxxp[level(xp[int.user.id])]-xp[int.user.id])+"** more XP until you reach Level **"+(level(xp[int.user.id])+1)+"**.")
 		    } else {
 			    int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
 		    }
