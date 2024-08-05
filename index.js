@@ -1153,7 +1153,7 @@ client.on("interactionCreate", async int => {
 			    try {
 				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 10_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
-					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"** is the correct answer, good job!\n+10 XP")
+					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]"** is the correct answer, good job!\n+10 XP")
 						const oldrank = level(xp[hangplayer])
 						xp[hangplayer] = xp[hangplayer] + 10
 						writexp()
@@ -1162,10 +1162,10 @@ client.on("interactionCreate", async int => {
 						    msg.channel.send("# <@"+hangplayer+"> LEVEL UP! "+oldrank+" => "+newrank)
 					        }
 				    } else {
-					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]+"** :(")
+					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
 				    }
 			    } catch {
-				    nocompeditReply("You didn't answer the question within 10 seconds! You lose :( (The answer was **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]+"**)")
+				    nocompeditReply("You didn't answer the question within 10 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 			    }
 		    }
 	     } else {
