@@ -1070,26 +1070,36 @@ client.on("interactionCreate", async int => {
 			    }
 		    }
 	    } else if (subint === "leaderboard") {
-		    let list = Object.values(xp)
+		    const sortable = Object.fromEntries(
+   		   	    Object.entries(maxSpeed).sort(([,a],[,b]) => b-a)
+		    );
+		    // let list = Object.values(xp)
 		    let l = "Rank:\n"
 		    let r = 0
 		    let rank = ""
-		    let xpsave = {}
-		    list = list.sort(function(a, b){return b-a})
-		    for (x of list) {
+		    // let xpsave = {}
+		    // list = list.sort(function(a, b){return b-a})
+		    for (let key in xp) {
 			    r++
-			    l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP (Level **"+level(x)+"**)\n")
-			    xpsave[fetchKey(xp, x)] = x
-			    if (fetchKey(xp, x)==int.user.id) {
+			    l+=("#"+r+": <@!"+key+"> with **"+xp[key]+"** XP (Level **"+level(xp[key])+"**)\n")
+			    if (key==int.user.id) {
 				    rank = r
 			    }
-			    delete xp[fetchKey(xp,x)]
 		    }
+		    // for (x of list) {
+			   //  r++
+			   //  l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP (Level **"+level(x)+"**)\n")
+			   //  xpsave[fetchKey(xp, x)] = x
+			   //  if (fetchKey(xp, x)==int.user.id) {
+				  //   rank = r
+			   //  }
+			   //  delete xp[fetchKey(xp,x)]
+		    // }
 		    l+=("You are Rank **#"+rank+"**")
-		    if (xpsave != {}) {
-			    xp = xpsave
-			    writexp()
-		    }
+		    // if (xpsave != {}) {
+			   //  xp = xpsave
+			   //  writexp()
+		    // }
 		    silreply(l)
 	    } else if (subint === "info") {
 		    int.reply(`Level up by using any slyer-bot commands. Every command will give you 5 XP, and winning a slyer-bot game will give you an additional 10 XP. After you reach a certain amount of XP, you will level up!\nHere is the list of XP requirements for each level:
@@ -1434,7 +1444,7 @@ client.on("messageDelete", async dmsg => {
     // Quoting deleted messages by 2 specific people
     if (quoting == true) {
         if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718")) {
-            client.channels.cache.get("1179602392367517766").send('"'+dmsg.content+'" - <@'+dmsg.author.id+'> in <#'+dmsg.channel.id+">")
+            client.channels.cache.get("1179602392367517766").send({content:'"'+dmsg.content+'" - <@'+dmsg.author.id+'> in <#'+dmsg.channel.id+">",allowedMentions: { parse: [] }})
         }
     }
 })
