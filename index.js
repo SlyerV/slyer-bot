@@ -1347,6 +1347,7 @@ client.on("messageCreate", async msg => {
 						        console.log("smart")
 					      } else {
 					      	      move = random(avinps)
+						      console.log("random")
 					      }
 					      console.log(p1,p2,p3,p4,p5,p6,p7,p8,p9)
 				      }
