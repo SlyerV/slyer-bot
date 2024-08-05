@@ -399,20 +399,20 @@ client.on("interactionCreate", async int => {
 	  client.user.setActivity('/hangman');
 	  // Commands
 	  if (int.isCommand()) {
-	   //  const oldrank = level(xp[int.user.id])
-	   //  if (xp[int.user.id]) {
-		  // console.log(int.user.id)
-		  // xp[int.user.id] = xp[int.user.id] + 5
-		  // writexp()
-		  // const newrank = level(xp[int.user.id])
-	   //        if (newrank > oldrank) {
-		  // int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
-	   //        }
-	   //  } else {
-		  // xp[int.user.id] = 5
-		  // writexp()
-		  // int.channel.send("# <@"+int.user.id+"> LEVEL UP! 0 => 1")
-	   //  }
+	    const oldrank = level(xp[int.user.id])
+	    if (xp[int.user.id]) {
+		  console.log(int.user.id)
+		  xp[int.user.id] = xp[int.user.id] + 5
+		  writexp()
+		  const newrank = level(xp[int.user.id])
+	          if (newrank > oldrank) {
+		  int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
+	          }
+	    } else {
+		  xp[int.user.id] = 5
+		  writexp()
+		  int.channel.send("# <@"+int.user.id+"> LEVEL UP! 0 => 1")
+	    }
 	    if (int.commandName === "rdate") {
 	      let currentT = new Date();
 	      const oldT = new Date("Wed May 15 2024 00:00:00 GMT-0700 (Pacific Daylight Time)")
