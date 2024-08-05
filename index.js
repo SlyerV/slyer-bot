@@ -1162,7 +1162,7 @@ client.on("interactionCreate", async int => {
 						    msg.channel.send("# <@"+hangplayer+"> LEVEL UP! "+oldrank+" => "+newrank)
 					        }
 				    } else {
-					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]"** :(")
+					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]+"** :(")
 				    }
 			    } catch {
 				    nocompeditReply("You didn't answer the question within 10 seconds! You lose :( (The answer was **"+tquestion["answer"]+": "+tquestion[tquestion["answer"]]+"**)")
