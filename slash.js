@@ -89,6 +89,12 @@ const slashRegister = async () => {
             .setName("user")
             .setDescription("List the user.")
             .setRequired(true)
+          })
+          .addBooleanOption(option => {
+            return option
+            .setName("best")
+            .setDescription("Use the best insults handpicked from the list of nearly 200!")
+            .setRequired(false)
           }),
           new SlashCommandBuilder()
           .setName("flipcoin")
@@ -135,7 +141,13 @@ const slashRegister = async () => {
           new SlashCommandBuilder()
           .setName("unnick")
           .setDescription("Sets the nickname of everyone in this server to their username!")
-          .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
+          .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
+          .addBooleanOption(option => {
+            return option
+            .setName("ephemeral")
+            .setDescription("Makes the message ephemeral if set to true >:)")
+            .setRequired(false)
+          }),
           new SlashCommandBuilder()
           .setName("renick")
           .setDescription("Re-nicknames everyone after using the /unnick command.")
@@ -146,7 +158,13 @@ const slashRegister = async () => {
           new SlashCommandBuilder()
           .setName("reactions")
           .setDescription("Toggles random reactions on/off.")
-          .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageMessages),
+          .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageMessages)
+          .addBooleanOption(option => {
+            return option
+            .setName("ephemeral")
+            .setDescription("Makes the TOGGLE ON message ephemeral if set to true >:)")
+            .setRequired(false)
+          }),
           new SlashCommandBuilder()
           .setName("info")
           .setDescription("Displays bot info"),
@@ -205,34 +223,310 @@ const slashRegister = async () => {
             .setRequired(false)
           }),
           new SlashCommandBuilder()
-          .setName("average")
-          .setDescription("Calculates the average of up to 5 numbers.")
-          .addNumberOption(option => {
+          .setName("math")
+          .setDescription("Use many useful math commands without switching tabs!")
+          .addSubcommand(sub => {
+            return sub
+            .setName("average")
+            .setDescription("Calculates the average of up to 5 numbers.")
+            .addNumberOption(option => {
+              return option
+              .setName("1")
+              .setDescription("First number")
+              .setRequired(true)
+            })
+            .addNumberOption(option => {
+              return option
+              .setName("2")
+              .setDescription("Second number")
+              .setRequired(true)
+            })
+            .addNumberOption(option => {
+              return option
+              .setName("3")
+              .setDescription("Third number")
+            })
+            .addNumberOption(option => {
+              return option
+              .setName("4")
+              .setDescription("Fourth number")
+            })
+            .addNumberOption(option => {
+              return option
+              .setName("5")
+              .setDescription("Fifth number")
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("base")
+            .setDescription("Converts a decimal (base 10) number to any base from 2-36.")
+            .addNumberOption(option => {
+              return option
+              .setName("number")
+              .setDescription("Choose the decimal number you want to convert.")
+              .setRequired(true)
+            })
+            .addIntegerOption(option => {
+              return option
+              .setName("base")
+              .setDescription("Choose the base you want to convert to (from 2-36).")
+              .setRequired(true)
+              .setMaxValue(36)
+              .setMinValue(2)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("base36")
+            .setDescription("Converts a base 36 number to base 10. Use funny words! ('A' = 10, 'B' = 11, 'C' = 12, etc.)")
+            .addStringOption(option => {
+              return option
+              .setName("number")
+              .setDescription("Choose the base 36 number you want to convert.")
+              .setRequired(true)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("calc")
+            .setDescription("Calculate any mathematical expression!")
+            .addStringOption(option => {
+              return option
+              .setName("expression")
+              .setDescription("Choose the expression you want to calculate.")
+              .setRequired(true)
+            })
+          }),
+          new SlashCommandBuilder()
+          .setName("react")
+          .setDescription("React with a specific emoji!")
+          .addStringOption(option => {
             return option
-            .setName("1")
-            .setDescription("First number")
+            .setName("emoji")
+            .setDescription("Choose the emoji you want to react with.")
             .setRequired(true)
           })
-          .addNumberOption(option => {
+          .addStringOption(option => {
             return option
-            .setName("2")
-            .setDescription("Second number")
+            .setName("message")
+            .setDescription("Input message ID of the message you want to react to (leave blank for most recent channel message).")
+            .setRequired(false)
+          }),
+          new SlashCommandBuilder()
+          .setName("test")
+          .setDescription("Tests if the bot is online/functional."),
+          new SlashCommandBuilder()
+          .setName("date")
+          .setDescription("Get the current date in LA, California (PST)"),
+          new SlashCommandBuilder()
+          .setName("getid")
+          .setDescription("Fetch the ID of messages, users, channels, etc.")
+          .addSubcommand(sub => {
+            return sub
+            .setName("message")
+            .setDescription("Fetch the ID of a message using message link, or leave blank for most recent channel message.")
+            .addStringOption(option => {
+              return option
+              .setName("link")
+              .setDescription("Input the message link you want to get the ID of (leave blank for most recent msg)")
+              .setRequired(false)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("user")
+            .setDescription("Fetch the ID of a user.")
+            .addUserOption(option => {
+              return option
+              .setName("user")
+              .setDescription("Input the user you want to get the ID of.")
+              .setRequired(true)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("channel")
+            .setDescription("Fetch the ID of a specific channel, or leave blank for the channel command is ran in.")
+            .addChannelOption(option => {
+              return option
+              .setName("channel")
+              .setDescription("Input the channel you want to get the ID of (leave blank for current channel)")
+              .setRequired(false)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("role")
+            .setDescription("Fetch the ID of a role.")
+            .addRoleOption(option => {
+              return option
+              .setName("role")
+              .setDescription("Input the role you want to get the ID of.")
+              .setRequired(true)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("guild")
+            .setDescription("Fetch the id of the server/guild command is ran in.")
+          }),
+          new SlashCommandBuilder()
+          .setName("tictactoe")
+          .setDescription("Play tic-tac-toe with another user or the AI!")
+          .addUserOption(option => {
+            return option
+            .setName("user")
+            .setDescription("Choose a user")
+            .setRequired(false)
+          })
+          .addBooleanOption(option => {
+            return option
+            .setName("ai")
+            .setDescription("If you have no friends, play against the AI! (random moves)")
+            .setRequired(false)
+          }),
+          new SlashCommandBuilder()
+          .setName("afk")
+          .setDescription("Set, change and remove AFK status.")
+          .addSubcommand(sub => {
+            return sub
+            .setName("set")
+            .setDescription("Set your AFK status. Your nickname will also be changed to [AFK] + your nickname.")
+            .addStringOption(option => {
+              return option
+              .setName("message")
+              .setDescription("Whenever you are pinged, this AFK message will be sent.")
+              .setRequired(true)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("list")
+            .setDescription("List all AFK users.")
+            
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("clear")
+            .setDescription("Clear someone's AFK status, or clear all AFK statuses.")
+            .addUserOption(option => {
+              return option
+              .setName("user")
+              .setDescription("Choose a user to clear their AFK status (leave blank to clear all)")
+              .setRequired(false)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("remove")
+            .setDescription("Remove your AFK status if you have one.")
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("edit")
+            .setDescription("Edit your AFK status.")
+            .addStringOption(option => {
+              return option
+              .setName("message")
+              .setDescription("Write the message you want to change your AFK status message to.")
+              .setRequired(true)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("schedule")
+            .setDescription("Schedule times that you will be AFK. MUST DO /afk set BEFORE THIS")
+            .addIntegerOption(option => {
+              return option
+              .setName("starthour")
+              .setDescription("Set the starting hour that you will be AFK (LA, California, PST, 24-hour clock)")
+              .setRequired(true)
+              .setMaxValue(24)
+              .setMinValue(0)
+            })
+            .addIntegerOption(option => {
+              return option
+              .setName("startminute")
+              .setDescription("Set the starting minute that you will be AFK (LA, California, PST, 24-hour clock)")
+              .setRequired(true)
+              .setMaxValue(59)
+              .setMinValue(0)
+            })
+            .addIntegerOption(option => {
+              return option
+              .setName("endhour")
+              .setDescription("Set the ending hour that you will be AFK (LA, California, PST, 24-hour clock)")
+              .setRequired(true)
+              .setMaxValue(24)
+              .setMinValue(0)
+            })
+            .addIntegerOption(option => {
+              return option
+              .setName("endminute")
+              .setDescription("Set the ending minute that you will be AFK (LA, California, PST, 24-hour clock)")
+              .setRequired(true)
+              .setMaxValue(59)
+              .setMinValue(0)
+            })
+            .addStringOption(option => {
+              return option
+              .setName("days")
+              .setDescription("Choose the days that you will be AFK.")
+              .setRequired(true)
+              .addChoices(
+                {name:"Weekdays",value:"wkd"},
+                {name:"Weekends",value:"wkn"},
+                {name:"Everyday",value:"evd"}
+              )
+            })
+          }),
+          new SlashCommandBuilder()
+          .setName("genalpha")
+          .setDescription("Make the bot randomly talk using Gen Alpha slang 🤫🧏‍♂️")
+          .addBooleanOption(option => {
+            return option
+            .setName("ephemeral")
+            .setDescription("Makes the TOGGLE ON message ephemeral if set to true >:)")
+            .setRequired(false)
+          }),
+          new SlashCommandBuilder()
+          .setName("level")
+          .setDescription("Level system")
+          .addSubcommand(sub => {
+            return sub
+            .setName("view")
+            .setDescription("Check your or someone else's slyer-bot level! Level up by using slyer-bot commands.")
+            .addUserOption(option => {
+              return option
+              .setName("user")
+              .setDescription("View someone else's level rank.")
+              .setRequired(false)
+            })
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("leaderboard")
+            .setDescription("View the slyer-bot level leaderboard!")
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("info")
+            .setDescription("View info on how to level up.")
+          })
+          .addSubcommand(sub => {
+            return sub
+            .setName("next")
+            .setDescription("View how much XP you need to reach the next level.")
+          }),
+          new SlashCommandBuilder()
+          .setName("trivia")
+          .setDescription("Answer a random trivia question correctly against someone else first!")
+          .addUserOption(option => {
+            return option
+            .setName("user")
+            .setDescription("Choose a user to play against.")
             .setRequired(true)
-          })
-          .addNumberOption(option => {
-            return option
-            .setName("3")
-            .setDescription("Third number")
-          })
-          .addNumberOption(option => {
-            return option
-            .setName("4")
-            .setDescription("Fourth number")
-          })
-          .addNumberOption(option => {
-            return option
-            .setName("5")
-            .setDescription("Fifth number")
           })
         ]
       }
