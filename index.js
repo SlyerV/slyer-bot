@@ -1077,8 +1077,6 @@ client.on("interactionCreate", async int => {
 		    let l = "Rank:\n"
 		    let r = 0
 		    let rank = ""
-		    // let xpsave = {}
-		    // list = list.sort(function(a, b){return b-a})
 		    for (let key in xp) {
 			    r++
 			    l+=("#"+r+": <@!"+key+"> with **"+xp[key]+"** XP (Level **"+level(xp[key])+"**)\n")
@@ -1086,34 +1084,21 @@ client.on("interactionCreate", async int => {
 				    rank = r
 			    }
 		    }
-		    // for (x of list) {
-			   //  r++
-			   //  l+=("#"+r+": <@!"+fetchKey(xp, x)+"> with **"+x+"** XP (Level **"+level(x)+"**)\n")
-			   //  xpsave[fetchKey(xp, x)] = x
-			   //  if (fetchKey(xp, x)==int.user.id) {
-				  //   rank = r
-			   //  }
-			   //  delete xp[fetchKey(xp,x)]
-		    // }
 		    l+=("You are Rank **#"+rank+"**")
-		    // if (xpsave != {}) {
-			   //  xp = xpsave
-			   //  writexp()
-		    // }
 		    silreply(l)
 	    } else if (subint === "info") {
 		    int.reply(`Level up by using any slyer-bot commands. Every command will give you 5 XP, and winning a slyer-bot game will give you an additional 10 XP. After you reach a certain amount of XP, you will level up!\nHere is the list of XP requirements for each level:
-      Level 1: **5** XP
-      Level 2: **25** XP
-      Level 3: **100** XP
-      Level 4: **250** XP:
-      Level 5: **500** XP
-      Level 6: **1000** XP
-      Level 7: **2000** XP
-      Level 8: **5000** XP
-      Level 9: **7500** XP
-      Level 10: **10000** XP
-      Once you reach Level 10, you have reached the max level! You will continue to gain XP but will not level up anymore.`)
+Level 1: **5** XP
+Level 2: **25** XP
+Level 3: **100** XP
+Level 4: **250** XP:
+Level 5: **500** XP
+Level 6: **1000** XP
+Level 7: **2000** XP
+Level 8: **5000** XP
+Level 9: **7500** XP
+Level 10: **10000** XP
+Once you reach Level 10, you have reached the max level! You will continue to gain XP but will not level up anymore.`)
 	    } else if (subint === "next") {
 		    if (! (level(xp[int.user.id]) == 10)) {
 		    	int.reply("You need **"+(maxxp[rank]-xp[int.user.id])+"** more XP until you reach Level **"+(level(xp[int.user.id])+1)+"**.")
