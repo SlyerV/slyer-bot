@@ -1310,7 +1310,7 @@ client.on("messageCreate", async msg => {
 					        console.log("win")
 				      } else {
 					      usym = usyms["1"]
-					      dsym = dsym["1"]
+					      dsym = dsyms["1"]
 					      // Incredibly long Tic Tac Toe AI code
 					      if ((((p2 == usym) && (p3 == usym)) ||
 						 ((p4 == usym) && (p7 == dsym)) ||
