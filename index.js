@@ -1171,7 +1171,7 @@ client.on("interactionCreate", async int => {
 					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
 				    }
 			    } catch {
-				    nocompeditReply("You didn't answer the question within 5 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
+				    nocompeditReply(tquestion["question"]+"\nYou didn't answer the question within 15 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 			    }
 		    }
 	     } else {
