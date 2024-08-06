@@ -416,7 +416,7 @@ client.on("interactionCreate", async int => {
 		  writexp()
 		  const newrank = level(xp[int.user.id])
 	          if (newrank > oldrank) {
-		  int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
+		  int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
 	          }
 	    } else {
 		  xp[int.user.id] = 5
@@ -1163,7 +1163,7 @@ client.on("interactionCreate", async int => {
 						writexp()
 						const newrank = level(xp[int.user.id])
 					        if (newrank > oldrank) {
-						    msg.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
+						    msg.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
 					        }
 				    } else if (confirmation.customId === "x") {
 					    nocompeditReply("Trivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
@@ -1251,7 +1251,7 @@ client.on("messageCreate", async msg => {
 		writexp()
 		const newrank = level(xp[hangplayer])
 	        if (newrank > oldrank) {
-		    msg.channel.send("# <@"+hangplayer+"> LEVEL UP! "+oldrank+" => "+newrank)
+		    msg.channel.send("# <@"+hangplayer+"> LEVEL UP! "+oldrank+" → "+newrank)
 	        }
 	        hangman = false
 	      }
@@ -1288,7 +1288,7 @@ client.on("messageCreate", async msg => {
 				      writexp()
 				      const newrank = level(xp[player.replace("<@","").replace(">","")])
 				      if (newrank > oldrank) {
-						  msg.channel.send("# <@"+player.replace("<@","").replace(">","")+"> LEVEL UP! "+oldrank+" => "+newrank)
+						  msg.channel.send("# <@"+player.replace("<@","").replace(">","")+"> LEVEL UP! "+oldrank+" → "+newrank)
 				      }
 				      stop = false
 				      tic = false
@@ -1308,7 +1308,7 @@ client.on("messageCreate", async msg => {
 				      writexp()
 				      const newrank = level(xp[playerid])
 				      if (newrank > oldrank) {
-						  msg.channel.send("# <@"+playerid+"> LEVEL UP! "+oldrank+" => "+newrank)
+						  msg.channel.send("# <@"+playerid+"> LEVEL UP! "+oldrank+" → "+newrank)
 				      }
 				      stop = false
 				      tic = false
