@@ -1142,8 +1142,12 @@ client.on("interactionCreate", async int => {
 				.setCustomId("D")
 				.setLabel('D')
 				.setStyle(ButtonStyle.Primary)
+		    const Cancel = new ButtonBuilder()
+				.setCustomId("x")
+				.setLabel('Cancel')
+				.setStyle(ButtonStyle.Danger)
 		    const row = new ActionRowBuilder()
-				.addComponents(A,B,C,D);
+				.addComponents(A,B,C,D,Cancel);
 		    if (int.options.getUser("user")) {
 			    ephreply("WIP")
 		    } else {
@@ -1151,7 +1155,7 @@ client.on("interactionCreate", async int => {
 			    const resp = await int.reply({ content:(tquestion["question"]+"\nA) "+tquestion["A"]+"\nB) "+tquestion["B"]+"\nC) "+tquestion["C"]+"\nD) "+tquestion["D"]), components: [row]})
 			    const collectorFilter = i => i.user.id === int.user.id;
 			    try {
-				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 10_000 })
+				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
 					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n+10 XP")
 						const oldrank = level(xp[int.user.id])
@@ -1161,11 +1165,13 @@ client.on("interactionCreate", async int => {
 					        if (newrank > oldrank) {
 						    msg.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" => "+newrank)
 					        }
+				    } else if (confirmation.customId === "x") {
+					    nocompeditReply("Trivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 				    } else {
 					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
 				    }
 			    } catch {
-				    nocompeditReply("You didn't answer the question within 10 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
+				    nocompeditReply("You didn't answer the question within 5 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 			    }
 		    }
 	     } else {
