@@ -1166,12 +1166,13 @@ client.on("interactionCreate", async int => {
 						    msg.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
 					        }
 				    } else if (confirmation.customId === "x") {
-					    nocompeditReply("Trivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
+					    nocompeditReply(tquestion["question"]+"\n\nTrivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 				    } else {
 					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
 				    }
-			    } catch {
-				    nocompeditReply(tquestion["question"]+"\nYou didn't answer the question within 15 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
+			    } catch (e) {
+				    console.log(e)
+				    nocompeditReply(tquestion["question"]+"\n\nYou didn't answer the question within 15 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 			    }
 		    }
 	     } else {
