@@ -1163,7 +1163,7 @@ client.on("interactionCreate", async int => {
 						writexp()
 						const newrank = level(xp[int.user.id])
 					        if (newrank > oldrank) {
-						    msg.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
+						    int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
 					        }
 				    } else if (confirmation.customId === "x") {
 					    nocompeditReply(tquestion["question"]+"\n\nTrivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
