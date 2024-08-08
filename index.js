@@ -416,12 +416,12 @@ client.on("interactionCreate", async int => {
 		  writexp()
 		  const newrank = level(xp[int.user.id])
 	          if (newrank > oldrank) {
-		  int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
+		  int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank),ephemeral:true})
 	          }
 	    } else {
 		  xp[int.user.id] = 5
 		  writexp()
-		  int.channel.send("# <@"+int.user.id+"> LEVEL UP! 0 => 1")
+		  int.followUp({content:"# <@"+int.user.id+"> LEVEL UP! 0 => 1",ephemeral:true})
 	    }
 	    if (int.commandName === "rdate") {
 	      let currentT = new Date();
@@ -1163,7 +1163,7 @@ client.on("interactionCreate", async int => {
 						writexp()
 						const newrank = level(xp[int.user.id])
 					        if (newrank > oldrank) {
-						    int.channel.send("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
+						    int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank),ephemeral:true})
 					        }
 				    } else if (confirmation.customId === "x") {
 					    nocompeditReply(tquestion["question"]+"\n\nTrivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
