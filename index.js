@@ -1186,6 +1186,7 @@ client.on("interactionCreate", async int => {
 // Message Event Listener
 client.on("messageCreate", async msg => {
     rmsg = msg
+    const loot = randomnum(1)
     // Counting Game
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
@@ -1450,7 +1451,6 @@ client.on("messageCreate", async msg => {
 		    msg.reply("Space is already taken!")
 	    }
     // Random
-    const loot = randomnum(1)
     } else if (((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) || ((alpha == true) && (randomnum(30) == 1) && (! msg.author.bot)) || (loot == 1)) {
 	    if (nerdmode == true) {
 		      try {
