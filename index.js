@@ -1451,7 +1451,7 @@ client.on("messageCreate", async msg => {
 		    msg.reply("Space is already taken!")
 	    }
     // Random
-    } else if (((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) || ((alpha == true) && (randomnum(30) == 1) && (! msg.author.bot)) || (loot == 1)) {
+    } else if (((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) || ((alpha == true) && (randomnum(30) == 1) && (! msg.author.bot)) || ((loot == 1) && (! msg.author.bot))) {
 	    if (nerdmode == true) {
 		      try {
 		          const r = randomnum(3)
