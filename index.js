@@ -728,7 +728,7 @@ client.on("interactionCreate", async int => {
 				const collectorFilter = i => i.user.id === int.options.getUser("user").id;
 				console.log(i)
 				try {
-					confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 20_000 })
+					
 					if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
 						  c2 = confirmation.customId
 						  if ((c1 == 'r') && (c2 == 'r')) {
@@ -1449,8 +1449,9 @@ client.on("messageCreate", async msg => {
 	    } else {
 		    msg.reply("Space is already taken!")
 	    }
-    // Random Reactions
-    } else if (((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) || ((alpha == true) && (randomnum(30) == 1) && (! msg.author.bot))) {
+    // Random
+    const loot = randomnum(1)
+    } else if (((nerdmode == true) && (randomnum(20) == 1) && (! msg.author.bot)) || ((alpha == true) && (randomnum(30) == 1) && (! msg.author.bot)) || (loot == 1)) {
 	    if (nerdmode == true) {
 		      try {
 		          const r = randomnum(3)
@@ -1479,6 +1480,31 @@ client.on("messageCreate", async msg => {
 		      } catch(err) {
 		        console.log(err)
 		      }
+	    }
+	    if (loot == 1) {
+		     const accept = new ButtonBuilder()
+				.setCustomId("loot+")
+				.setLabel('ACCEPT!')
+				.setStyle(ButtonStyle.Primary);
+		     const decline = new ButtonBuilder()
+				.setCustomId("loot-")
+				.setLabel('Decline???')
+				.setStyle(ButtonStyle.Danger);
+		    const row = new ActionRowBuilder()
+				.addComponents(accept,decline);
+		    const box = client.guilds.cache.get("guild id").stickers.cache.filter(s => s.id === "sticker id")
+		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!", stickers:box, components: [row]})
+		    try {
+		    	confirmation = await resp.awaitMessageComponent({ time: 10_000 })
+			if (confirmation.customId === "loot+") {
+				msg.reply(`<@${int.user.id}> GOT THE 50 XP!!! +50 XP`)
+			} else if (confirmation.customId === "loot-") {
+				msg.reply("Soooo... <@"+int.user.id+"> you just denied an opportunity to gain 50 XP huh; to anyone who wanted the XP sorry ig")
+			}
+		    } catch {
+			    msg.edit({content:"Damn y'all were too late...",components:[]})
+		    }
+		    
 	    }
     }
     // AFK Ping Listener
