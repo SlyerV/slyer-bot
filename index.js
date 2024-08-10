@@ -1492,8 +1492,7 @@ client.on("messageCreate", async msg => {
 				.setStyle(ButtonStyle.Danger);
 		    const row = new ActionRowBuilder()
 				.addComponents(accept,decline);
-		    const box = client.guilds.cache.get("guild id").stickers.cache.filter(s => s.id === "sticker id")
-		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!", stickers:box, components: [row]})
+		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n<a:loot:1271692935389380608>", components: [row]})
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 10_000 })
 			if (confirmation.customId === "loot+") {
