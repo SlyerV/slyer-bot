@@ -979,7 +979,7 @@ client.on("interactionCreate", async int => {
 						int.editReply({content:"Confirmation not received within 20 seconds, cancelling", components: []})
 					}
 				}
-	    		} else if (int.options.getBoolean("ai")) {
+	    		} else {
 				ticai = true
 				tic = true
 				ticid = int.channel.id
@@ -997,8 +997,6 @@ client.on("interactionCreate", async int => {
 				avinps = ["1","2","3","4","5","6","7","8","9"]
 				update()
 				int.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
-			} else {
-				ephreply("Please choose one of the options")
 			}
 	     } else if (int.commandName === "afk") {
 		    const subint = int.options.getSubcommand()
