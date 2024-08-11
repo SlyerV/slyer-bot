@@ -470,7 +470,7 @@ client.on("interactionCreate", async int => {
 	      if (! (userS in warns)) {
 	        warns[userS] = 0
 	      }
-	      int.reply(userS+" has **"+warns[userS]+"** warns.")
+	      silreply(userS+" has **"+warns[userS]+"** warns.")
 	    } else if (int.commandName === "warnset") {
 	      let user = int.options.getUser('user')
 	      let userS = String(user)
@@ -479,7 +479,7 @@ client.on("interactionCreate", async int => {
 	        num = 0
 	      }
 	      warns[userS] = int.options.getNumber('number')
-	      int.reply(userS+"'s warn count is now **"+num+"**")
+	      silreply(userS+"'s warn count is now **"+num+"**")
 	      writewarns()
 	    } else if (int.commandName === "8ball") {
 	        int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
