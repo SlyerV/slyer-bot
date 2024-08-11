@@ -1157,7 +1157,7 @@ client.on("interactionCreate", async int => {
 			    try {
 				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
-					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n+10 XP")
+					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n# +10 XP")
 						const oldrank = level(xp[int.user.id])
 						xp[int.user.id] = xp[int.user.id] + 10
 						writexp()
@@ -1256,7 +1256,7 @@ client.on("messageCreate", async msg => {
 	        msg.reply("You lost! :(\n\nThe word was **"+word+"**")
 	        hangman = false
 	      } else if (l == word.length) {
-	        msg.reply("You won! :)\n+10 XP")
+	        msg.reply("You won! :)\n# +10 XP")
 		const oldrank = level(xp[hangplayer])
 		xp[hangplayer] = xp[hangplayer] + 10
 		writexp()
@@ -1293,7 +1293,7 @@ client.on("messageCreate", async msg => {
 		  		      } else {
 		    			    player = tp1
 		  		      }
-				      msg.reply(board+"\n"+player+" wins!!!\n+10 XP")
+				      msg.reply(board+"\n"+player+" wins!!!\n# +10 XP")
 				      const oldrank = xp[player.replace("<@","").replace(">","")]
 				      xp[player.replace("<@","").replace(">","")] = xp[player.replace("<@","").replace(">","")] + 10
 				      writexp()
@@ -1313,7 +1313,7 @@ client.on("messageCreate", async msg => {
 		      } else {
 			      avinps.splice(avinps.indexOf(msg.content), 1)
 			      if (stop) {
-				      msg.reply(board+"\n<@"+playerid+"> wins!!!\n+10 XP")
+				      msg.reply(board+"\n<@"+playerid+"> wins!!!\n# +10 XP")
 				      const oldrank = xp[playerid]
 				      xp[playerid] = xp[playerid] + 10
 				      writexp()
@@ -1505,7 +1505,7 @@ client.on("messageCreate", async msg => {
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 5_000 })
 			if (confirmation.customId === "loot+") {
-				resp.reply(`<@${confirmation.user.id}> GOT THE 50 XP!!! +50 XP`)
+				resp.reply(`<@${confirmation.user.id}> GOT THE 50 XP!!!\n# +50 XP`)
 				const oldrank = level(xp[confirmation.user.id])
 				xp[confirmation.user.id] = xp[confirmation.user.id] + 50
 				writexp()
