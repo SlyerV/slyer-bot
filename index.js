@@ -1501,26 +1501,26 @@ client.on("messageCreate", async msg => {
 				.setStyle(ButtonStyle.Danger);
 		    const row = new ActionRowBuilder()
 				.addComponents(accept,decline);
-		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
+		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 5_000 })
 			if (confirmation.customId === "loot+") {
-				resp.reply(`<@${confirmation.user.id}> GOT THE 50 XP!!!\n# +50 XP`)
+				resp.reply(`<@${confirmation.user.id}> GOT THE 25 XP!!!\n# +25 XP`)
 				const oldrank = level(xp[confirmation.user.id])
-				xp[confirmation.user.id] = xp[confirmation.user.id] + 50
+				xp[confirmation.user.id] = xp[confirmation.user.id] + 25
 				writexp()
 				const newrank = level(xp[confirmation.user.id])
 			        if (newrank > oldrank) {
 				    msg.channel.send("# <@"+confirmation.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
 			        }
-				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
+				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			} else if (confirmation.customId === "loot-") {
-				msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 50 XP huh; to anyone who wanted the XP sorry ig :(")
-				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
+				msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 25 XP huh; to anyone who wanted the XP sorry ig :(")
+				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			}
 		    } catch {
 			    resp.reply("Damn y'all were too late...")
-			    resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
+			    resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 		    }
 		    
 	    }
