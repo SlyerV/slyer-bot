@@ -1496,13 +1496,12 @@ client.on("messageCreate", async msg => {
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 10_000 })
 			if (confirmation.customId === "loot+") {
-				msg.reply(`<@${int.user.id}> GOT THE 50 XP!!! +50 XP`)
+				msg.reply(`<@${msg.author.id}> GOT THE 50 XP!!! +50 XP`)
 			} else if (confirmation.customId === "loot-") {
-				msg.reply("Soooo... <@"+int.user.id+"> you just denied an opportunity to gain 50 XP huh; to anyone who wanted the XP sorry ig")
+				msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 50 XP huh; to anyone who wanted the XP sorry ig :(")
 			}
-		    } catch (e){
-			    throw e
-			    msg.edit({content:"Damn y'all were too late...",components:[]})
+		    } catch {
+			    resp.edit({content:"Damn y'all were too late...",components:[]})
 		    }
 		    
 	    }
