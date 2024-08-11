@@ -837,7 +837,7 @@ client.on("interactionCreate", async int => {
 			    let ans = ""
 			    try {
 				    expr = int.options.getString("expression")
-				    ans = eval(expr)
+				    ans = Number(eval(expr))
 			    } catch {
 				    int.reply({content:"Invalid expression",ephemeral: true})
 				    caught = true
