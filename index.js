@@ -1500,7 +1500,8 @@ client.on("messageCreate", async msg => {
 			} else if (confirmation.customId === "loot-") {
 				msg.reply("Soooo... <@"+int.user.id+"> you just denied an opportunity to gain 50 XP huh; to anyone who wanted the XP sorry ig")
 			}
-		    } catch {
+		    } catch (e){
+			    throw e
 			    msg.edit({content:"Damn y'all were too late...",components:[]})
 		    }
 		    
