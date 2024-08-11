@@ -12,6 +12,7 @@ const insults = require('./insults.json');
 const questions = require('./trivia.json')
 const { PermissionsBitField } = require('discord.js');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const Parser = require('expr-eval').Parser;
 const app = express()
 // Random global vars
 const compliments = ["cool","awesome","intelligent","amazing","talented"]
@@ -836,8 +837,8 @@ client.on("interactionCreate", async int => {
 			    let expr = ""
 			    let ans = ""
 			    try {
-				    expr = int.options.getString("expression")
-				    ans = Number(eval(expr))
+				    const expr = int.options.getString("expression")
+				    const ans = Parser.evaluate(expr)
 			    } catch {
 				    int.reply({content:"Invalid expression",ephemeral: true})
 				    caught = true
