@@ -1484,8 +1484,8 @@ client.on("messageCreate", async msg => {
 	    if (loot == 1) {
 		     const accept = new ButtonBuilder()
 				.setCustomId("loot+")
-				.setLabel('ACCEPT!')
-				.setStyle(ButtonStyle.Primary);
+				.setLabel('ACCEPT!!!')
+				.setStyle(ButtonStyle.Success);
 		     const decline = new ButtonBuilder()
 				.setCustomId("loot-")
 				.setLabel('Decline???')
@@ -1494,7 +1494,7 @@ client.on("messageCreate", async msg => {
 				.addComponents(accept,decline);
 		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
 		    try {
-		    	confirmation = await resp.awaitMessageComponent({ time: 10_000 })
+		    	confirmation = await resp.awaitMessageComponent({ time: 5_000 })
 			if (confirmation.customId === "loot+") {
 				msg.reply(`<@${msg.author.id}> GOT THE 50 XP!!! +50 XP`)
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
@@ -1503,7 +1503,8 @@ client.on("messageCreate", async msg => {
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			}
 		    } catch {
-			    resp.edit({content:"Damn y'all were too late...",components:[]})
+			    resp.reply("Damn y'all were too late...")
+			    resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 		    }
 		    
 	    }
