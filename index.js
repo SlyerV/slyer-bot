@@ -726,33 +726,35 @@ client.on("interactionCreate", async int => {
 	    	    const row = new ActionRowBuilder()
 				.addComponents(rock, paper, scissors, cancel);
 	            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
-				const collectorFilter = i => i.user.id === int.options.getUser("user").id;
-				console.log(i)
 				try {
-					
-					if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
-						  c2 = confirmation.customId
-						  if ((c1 == 'r') && (c2 == 'r')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
-						  } else if ((c1 == 'p') && (c2 == 'p')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
-						  } else if ((c1 == 's') && (c2 == 's')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
-						  } else if ((c1 == 'r') && (c2 == 'p')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
-						  } else if ((c1 == 'r') && (c2 == 's')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
-						  } else if ((c1 == 'p') && (c2 == 'r')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
-						  } else if ((c1 == 'p') && (c2 == 's')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
-						  } else if ((c1 == 's') && (c2 == 'r')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
-						  } else if ((c1 == 's') && (c2 == 'p')) {
-						      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
-						  }
-					} else if (confirmation.customId === "c") {
-						int.editReply({ content: "Action cancelled", components: []})
+					confirmation = await resp.awaitMessageComponent({ time: 20_000 })
+					if (confirmation.user.id == int.options.getUser("user").id) {
+						if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
+							  c2 = confirmation.customId
+							  if ((c1 == 'r') && (c2 == 'r')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
+							  } else if ((c1 == 'p') && (c2 == 'p')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
+							  } else if ((c1 == 's') && (c2 == 's')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
+							  } else if ((c1 == 'r') && (c2 == 'p')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
+							  } else if ((c1 == 'r') && (c2 == 's')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
+							  } else if ((c1 == 'p') && (c2 == 'r')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
+							  } else if ((c1 == 'p') && (c2 == 's')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
+							  } else if ((c1 == 's') && (c2 == 'r')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
+							  } else if ((c1 == 's') && (c2 == 'p')) {
+							      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
+							  }
+						} else if (confirmation.customId === "c") {
+							int.editReply({ content: "Action cancelled", components: []})
+						}
+			    		} else {
+						ephreply("This game is not for you")
 					}
 				} catch (e) {
 					int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
