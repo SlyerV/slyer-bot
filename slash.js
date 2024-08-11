@@ -377,13 +377,7 @@ const slashRegister = async () => {
           .addUserOption(option => {
             return option
             .setName("user")
-            .setDescription("Choose a user")
-            .setRequired(false)
-          })
-          .addBooleanOption(option => {
-            return option
-            .setName("ai")
-            .setDescription("If you have no friends, play against the AI! (random moves)")
+            .setDescription("Choose a user (leave blank to play against AI)")
             .setRequired(false)
           }),
           new SlashCommandBuilder()
@@ -432,54 +426,6 @@ const slashRegister = async () => {
               .setDescription("Write the message you want to change your AFK status message to.")
               .setRequired(true)
             })
-          })
-          .addSubcommand(sub => {
-            return sub
-            .setName("schedule")
-            .setDescription("Schedule times that you will be AFK. MUST DO /afk set BEFORE THIS")
-            .addIntegerOption(option => {
-              return option
-              .setName("starthour")
-              .setDescription("Set the starting hour that you will be AFK (LA, California, PST, 24-hour clock)")
-              .setRequired(true)
-              .setMaxValue(24)
-              .setMinValue(0)
-            })
-            .addIntegerOption(option => {
-              return option
-              .setName("startminute")
-              .setDescription("Set the starting minute that you will be AFK (LA, California, PST, 24-hour clock)")
-              .setRequired(true)
-              .setMaxValue(59)
-              .setMinValue(0)
-            })
-            .addIntegerOption(option => {
-              return option
-              .setName("endhour")
-              .setDescription("Set the ending hour that you will be AFK (LA, California, PST, 24-hour clock)")
-              .setRequired(true)
-              .setMaxValue(24)
-              .setMinValue(0)
-            })
-            .addIntegerOption(option => {
-              return option
-              .setName("endminute")
-              .setDescription("Set the ending minute that you will be AFK (LA, California, PST, 24-hour clock)")
-              .setRequired(true)
-              .setMaxValue(59)
-              .setMinValue(0)
-            })
-            .addStringOption(option => {
-              return option
-              .setName("days")
-              .setDescription("Choose the days that you will be AFK.")
-              .setRequired(true)
-              .addChoices(
-                {name:"Weekdays",value:"wkd"},
-                {name:"Weekends",value:"wkn"},
-                {name:"Everyday",value:"evd"}
-              )
-            })
           }),
           new SlashCommandBuilder()
           .setName("genalpha")
@@ -521,13 +467,7 @@ const slashRegister = async () => {
           }),
           new SlashCommandBuilder()
           .setName("trivia")
-          .setDescription("Answer a random trivia question correctly against someone else first!")
-          .addUserOption(option => {
-            return option
-            .setName("user")
-            .setDescription("Choose a user to play against.")
-            .setRequired(true)
-          })
+          .setDescription("Answer a random trivia question!"),
         ]
       }
     );
