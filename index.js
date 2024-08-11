@@ -1505,7 +1505,14 @@ client.on("messageCreate", async msg => {
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 5_000 })
 			if (confirmation.customId === "loot+") {
-				msg.reply(`<@${msg.author.id}> GOT THE 50 XP!!! +50 XP`)
+				resp.reply(`<@${confirmation.user.id}> GOT THE 50 XP!!! +50 XP`)
+				const oldrank = level(xp[confirmation.user.id])
+				xp[confirmation.user.id] = xp[confirmation.user.id] + 50
+				writexp()
+				const newrank = level(xp[confirmation.user.id])
+			        if (newrank > oldrank) {
+				    msg.channel.send("# <@"+confirmation.user.id+"> LEVEL UP! "+oldrank+" → "+newrank)
+			        }
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 50 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			} else if (confirmation.customId === "loot-") {
 				msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 50 XP huh; to anyone who wanted the XP sorry ig :(")
