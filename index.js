@@ -837,8 +837,8 @@ client.on("interactionCreate", async int => {
 			    let expr = ""
 			    let ans = ""
 			    try {
-				    const expr = int.options.getString("expression")
-				    const ans = Parser.evaluate(expr)
+				    expr = int.options.getString("expression")
+				    ans = Parser.evaluate(expr)
 			    } catch {
 				    int.reply({content:"Invalid expression",ephemeral: true})
 				    caught = true
