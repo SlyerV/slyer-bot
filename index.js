@@ -754,7 +754,7 @@ client.on("interactionCreate", async int => {
 							int.editReply({ content: "Action cancelled", components: []})
 						}
 			    		} else {
-						ephreply("This game is not for you")
+						resp.reply({content:"This game is not for you",ephemeral:true})
 					}
 				} catch (e) {
 					int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
