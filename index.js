@@ -1186,8 +1186,8 @@ client.on("interactionCreate", async int => {
 // Message Event Listener
 client.on("messageCreate", async msg => {
     const rmsg = msg
-    const react
-    const alphmsg
+    let react
+    let alphmsg
     // Random vars
     if (nerdmode) {
 	    react = randomnum(15)
