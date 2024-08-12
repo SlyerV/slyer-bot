@@ -412,7 +412,7 @@ client.on("interactionCreate", async int => {
 	  // Commands
 	  if (int.isCommand()) {
 	    const oldrank = level(xp[int.user.id])
-	    const newrank = 0
+	    let newrank = 0
 	    if (xp[int.user.id]) {
 		  console.log(int.user.id)
 		  xp[int.user.id] = xp[int.user.id] + 5
