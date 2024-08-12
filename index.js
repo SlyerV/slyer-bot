@@ -11,7 +11,7 @@ const { token } = require('./config.json')
 const insults = require('./insults.json');
 const questions = require('./trivia.json')
 const { PermissionsBitField } = require('discord.js');
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder } = require('discord.js');
 const Parser = require('expr-eval').Parser;
 const app = express()
 // Random global vars
