@@ -758,6 +758,10 @@ client.on("interactionCreate", async int => {
 							i.deferUpdate()
 							i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
 						}
+					}
+					collector.on('end', collected => {
+						console.log(`gay`)
+					});
 				} catch (e) {
 					int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
 				}
