@@ -755,8 +755,8 @@ client.on("interactionCreate", async int => {
 								int.editReply({ content: "Action cancelled", components: []})
 							}
 						} else {
+							resp.followUp({ content: `This response isn't for you!`, ephemeral: true });
 							i.deferUpdate()
-							i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
 						}
 					})
 					collector.on('end', collected => {
