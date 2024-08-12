@@ -758,7 +758,7 @@ client.on("interactionCreate", async int => {
 							i.deferUpdate()
 							i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
 						}
-					}
+					})
 					collector.on('end', collected => {
 						console.log(`gay`)
 					});
