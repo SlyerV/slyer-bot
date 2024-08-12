@@ -347,15 +347,19 @@ function writestatus() {
   });
 }
 function writexp() {
-  fs.writeFile(
-    "xp.json",
-    JSON.stringify(xp),
-    err => {
-    // Checking for errors 
-    if (err) throw err;
-    // Success 
-    console.log("Wrote xp");
-  });
+    if (xp != {}) {
+	  fs.writeFile(
+	    "xp.json",
+	    JSON.stringify(xp),
+	    err => {
+	    // Checking for errors 
+	    if (err) throw err;
+	    // Success 
+	    console.log("Wrote xp");
+	  });
+    } else {
+	    console.log("Didn't clear XP file :)")
+    }
 }
 let follow = false
 // Stored data
@@ -411,14 +415,14 @@ client.on("interactionCreate", async int => {
 	  client.user.setActivity('/hangman');
 	  // Commands
 	  if (int.isCommand()) {
-	    const oldrank = level(xp[int.user.id])
-	    let newrank = 0
+	    const roldrank = level(xp[int.user.id])
+	    let rnewrank = 0
 	    if (xp[int.user.id]) {
 		  console.log(int.user.id)
 		  xp[int.user.id] = xp[int.user.id] + 5
 		  writexp()
-		  newrank = level(xp[int.user.id])
-	          if (newrank > oldrank) {
+		  rnewrank = level(xp[int.user.id])
+	          if (rnewrank > roldrank) {
 			  follow = true
 	          }
 	    } else {
@@ -1192,7 +1196,8 @@ client.on("interactionCreate", async int => {
 		    ephreply("WIP (command hasn't been added yet)")
 	     }
 	     if (follow) {
-		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank),ephemeral:true})
+		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank),ephemeral:true})
+		     follow = false
 	     }
 	  }
      } catch (e) {
