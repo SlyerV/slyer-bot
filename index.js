@@ -11,7 +11,7 @@ const { token } = require('./config.json')
 const insults = require('./insults.json');
 const questions = require('./trivia.json')
 const { PermissionsBitField } = require('discord.js');
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
 const Parser = require('expr-eval').Parser;
 const app = express()
 // Random global vars
@@ -727,35 +727,37 @@ client.on("interactionCreate", async int => {
 				.addComponents(rock, paper, scissors, cancel);
 	            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
 				try {
-					confirmation = await resp.awaitMessageComponent({ time: 20_000 })
-					if (confirmation.user.id == int.options.getUser("user").id) {
-						if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
-							  c2 = confirmation.customId
-							  if ((c1 == 'r') && (c2 == 'r')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
-							  } else if ((c1 == 'p') && (c2 == 'p')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
-							  } else if ((c1 == 's') && (c2 == 's')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
-							  } else if ((c1 == 'r') && (c2 == 'p')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
-							  } else if ((c1 == 'r') && (c2 == 's')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
-							  } else if ((c1 == 'p') && (c2 == 'r')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
-							  } else if ((c1 == 'p') && (c2 == 's')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
-							  } else if ((c1 == 's') && (c2 == 'r')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
-							  } else if ((c1 == 's') && (c2 == 'p')) {
-							      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
-							  }
-						} else if (confirmation.customId === "c") {
-							int.editReply({ content: "Action cancelled", components: []})
+					const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
+					collector.on('collect', i => {
+						if (i.user.id === int.options.getUser("user").id) {
+							if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
+								  c2 = confirmation.customId
+								  if ((c1 == 'r') && (c2 == 'r')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
+								  } else if ((c1 == 'p') && (c2 == 'p')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
+								  } else if ((c1 == 's') && (c2 == 's')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
+								  } else if ((c1 == 'r') && (c2 == 'p')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
+								  } else if ((c1 == 'r') && (c2 == 's')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
+								  } else if ((c1 == 'p') && (c2 == 'r')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
+								  } else if ((c1 == 'p') && (c2 == 's')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
+								  } else if ((c1 == 's') && (c2 == 'r')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
+								  } else if ((c1 == 's') && (c2 == 'p')) {
+								      int.editReply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
+								  }
+							} else if (confirmation.customId === "c") {
+								int.editReply({ content: "Action cancelled", components: []})
+							}
+						} else {
+							i.deferUpdate()
+							i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
 						}
-			    		} else {
-						int.followUp({content:"This game is not for you",ephemeral:true})
-					}
 				} catch (e) {
 					int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
 				}
