@@ -357,6 +357,7 @@ function writexp() {
     console.log("Wrote xp");
   });
 }
+let follow = false
 // Stored data
 let counting = data.counting
 let ncount = data.count
@@ -411,13 +412,14 @@ client.on("interactionCreate", async int => {
 	  // Commands
 	  if (int.isCommand()) {
 	    const oldrank = level(xp[int.user.id])
+	    const newrank = 0
 	    if (xp[int.user.id]) {
 		  console.log(int.user.id)
 		  xp[int.user.id] = xp[int.user.id] + 5
 		  writexp()
-		  const newrank = level(xp[int.user.id])
+		  newrank = level(xp[int.user.id])
 	          if (newrank > oldrank) {
-		  int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank),ephemeral:true})
+			  follow = true
 	          }
 	    } else {
 		  xp[int.user.id] = 5
@@ -1188,6 +1190,9 @@ client.on("interactionCreate", async int => {
 		    }
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
+	     }
+	     if (follow) {
+		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank),ephemeral:true})
 	     }
 	  }
      } catch (e) {
