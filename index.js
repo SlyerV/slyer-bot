@@ -727,7 +727,7 @@ client.on("interactionCreate", async int => {
 				.addComponents(rock, paper, scissors, cancel);
 	            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
 				try {
-					const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
+					const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
 					collector.on('collect', i => {
 						if (i.user.id === int.options.getUser("user").id) {
 							if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
