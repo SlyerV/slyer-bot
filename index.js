@@ -728,8 +728,8 @@ client.on("interactionCreate", async int => {
 	            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
 				try {
 					const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
-					collector.on('collect', i => {
-						if (i.user.id === int.options.getUser("user").id) {
+					collector.on('collect', confirmation => {
+						if (confirmation.user.id === int.options.getUser("user").id) {
 							if ((confirmation.customId == "r") || (confirmation.customId == "p") || (confirmation.customId == "s")) {
 								  c2 = confirmation.customId
 								  if ((c1 == 'r') && (c2 == 'r')) {
@@ -756,14 +756,16 @@ client.on("interactionCreate", async int => {
 							}
 						} else {
 							int.followUp({ content: `This response isn't for you!`, ephemeral: true });
-							i.deferUpdate()
+							confirmation.deferUpdate()
 						}
 					})
 					collector.on('end', collected => {
-						console.log(`gay`)
+						if (collected.size == 0) {
+							int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
+						}
 					});
 				} catch (e) {
-					int.editReply({ content: 'Confirmation not received within 20 seconds, cancelling', components: [] })
+					console.log(e)
 				}
 	        } else {
 	            const l = ["r","p","s"]
