@@ -1174,9 +1174,9 @@ client.on("interactionCreate", async int => {
 			    try {
 				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
-					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n# +10 XP")
+					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n# +5 XP")
 						const oldrank = level(xp[int.user.id])
-						xp[int.user.id] = xp[int.user.id] + 10
+						xp[int.user.id] = xp[int.user.id] + 5
 						writexp()
 						const newrank = level(xp[int.user.id])
 					        if (newrank > oldrank) {
