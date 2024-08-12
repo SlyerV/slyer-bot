@@ -726,7 +726,7 @@ client.on("interactionCreate", async int => {
 	    	    const row = new ActionRowBuilder()
 				.addComponents(rock, paper, scissors, cancel);
 	            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
-				const confirmed = false
+				let confirmed = false
 				try {
 					const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
 					collector.on('collect', confirmation => {
