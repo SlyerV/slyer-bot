@@ -1304,7 +1304,7 @@ client.on("interactionCreate", async int => {
 		    		.addComponents(A,S,D,F,G,H,J,K,L)
 		    const row3 = new ActionRowBuilder()
 		    		.addComponents(Z,X,C,V,B,N,M)
-		    int.reply({components:[row1,row2,row3]})
+		    int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3]})
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
 	     }
