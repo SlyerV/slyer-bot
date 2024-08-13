@@ -1335,7 +1335,7 @@ client.on("interactionCreate", async int => {
 				.setLabel('9(0)')
 				.setStyle(ButtonStyle.Primary)
 		    const Zero = new ButtonBuilder()
-				.setCustomId("5")
+				.setCustomId("0")
 				.setLabel('(9)0')
 				.setStyle(ButtonStyle.Primary)
 		    const Period = new ButtonBuilder()
@@ -1413,7 +1413,6 @@ client.on("interactionCreate", async int => {
 		    const resp = await int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3,row4,row5]})
 		    let r = ""
 		    let flipped = false
-		    let cont = ""
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 120_000 });
 		    collector.on('collect', c => {
 			    const id = c.customId
@@ -1421,16 +1420,11 @@ client.on("interactionCreate", async int => {
 			    } else if (id === "_") {
 				    r+=" "
 			    } else if (id === "~") {
-				    if (r == "") {
-					    cont = "Type a sentence! (this prompt will get deleted)"
-				    } else {
-					    cont = r
-				    }
 				    if (! flipped) {
-					    int.editReply({content:cont,components:[frow1,frow2,frow3,frow4,frow5]})
+					    int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
 					    flipped = true
 				    } else {
-					    int.editReply({content:cont,components:[row1,row2,row3,row4,row5]})
+					    int.editReply({components:[row1,row2,row3,row4,row5]})
 					    flipped = false
 				    }
 			    } else if (id === "<") {
