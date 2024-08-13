@@ -1355,7 +1355,7 @@ client.on("interactionCreate", async int => {
 				.setLabel('(M)!')
 				.setStyle(ButtonStyle.Primary)
 		    const Shift = new ButtonBuilder()
-		    		.setCustomId("^")
+		    		.setCustomId("/")
 		    		.setLabel("Shift(')")
 		    		.setStyle(ButtonStyle.Success)
 		    const Space = new ButtonBuilder()
@@ -1416,15 +1416,20 @@ client.on("interactionCreate", async int => {
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 120_000 });
 		    collector.on('collect', c => {
 			    const id = c.customId
-			    if (id === "^") {
+			    if (id === "/") {
 			    } else if (id === "_") {
 				    r+=" "
 			    } else if (id === "~") {
+				    if (r == "") {
+					    const cont = "Type a sentence! (this prompt will get deleted)"
+				    } else {
+					    const cont = r
+				    }
 				    if (! flipped) {
-					    int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
+					    int.editReply({content:cont,components:[frow1,frow2,frow3,frow4,frow5]})
 					    flipped = true
 				    } else {
-					    int.editReply({components:[row1,row2,row3,row4,row5]})
+					    int.editReply({content:cont,components:[row1,row2,row3,row4,row5]})
 					    flipped = false
 				    }
 			    } else if (id === "<") {
