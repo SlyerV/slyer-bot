@@ -1311,7 +1311,7 @@ client.on("interactionCreate", async int => {
 				.setLabel('3(4)')
 				.setStyle(ButtonStyle.Primary)
 		    const Four = new ButtonBuilder()
-				.setCustomId("4")
+				.setCustomId("four")
 				.setLabel('(3)4')
 				.setStyle(ButtonStyle.Primary)
 		    const Five = new ButtonBuilder()
@@ -1429,6 +1429,8 @@ client.on("interactionCreate", async int => {
 				    }
 			    } else if (id === "<") {
 				    r = r.slice(0,-1)
+			    } else if (id === "four") {
+				    r = r+="4"
 			    } else {
 				    r+=id
 			    }
