@@ -1413,6 +1413,7 @@ client.on("interactionCreate", async int => {
 		    const resp = await int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3,row4,row5]})
 		    let r = ""
 		    let flipped = false
+		    let cont = ""
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 120_000 });
 		    collector.on('collect', c => {
 			    const id = c.customId
@@ -1421,9 +1422,9 @@ client.on("interactionCreate", async int => {
 				    r+=" "
 			    } else if (id === "~") {
 				    if (r == "") {
-					    const cont = "Type a sentence! (this prompt will get deleted)"
+					    cont = "Type a sentence! (this prompt will get deleted)"
 				    } else {
-					    const cont = r
+					    cont = r
 				    }
 				    if (! flipped) {
 					    int.editReply({content:cont,components:[frow1,frow2,frow3,frow4,frow5]})
