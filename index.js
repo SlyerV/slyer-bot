@@ -308,7 +308,7 @@ function writewarns() {
     JSON.stringify(warns),
     err => {
     // Checking for errors 
-    if (err) throw err;
+    if (err) console.log(err);
     // Success 
     console.log("Wrote warns");
   }); 
@@ -319,7 +319,7 @@ function writenicks() {
     JSON.stringify(nicks),
     err => {
     // Checking for errors 
-    if (err) throw err;
+    if (err) console.log(err);
     // Success 
     console.log("Wrote nicks");
   }); 
@@ -330,7 +330,7 @@ function writedata() {
     JSON.stringify(data),
     err => {
     // Checking for errors 
-    if (err) throw err;
+    if (err) console.log(err);
     // Success 
     console.log("Wrote data");
   }); 
@@ -341,7 +341,7 @@ function writestatus() {
     JSON.stringify(status),
     err => {
     // Checking for errors 
-    if (err) throw err;
+    if (err) console.log(err);
     // Success 
     console.log("Wrote status");
   });
@@ -353,7 +353,7 @@ function writexp() {
 	    JSON.stringify(xp),
 	    err => {
 	    // Checking for errors 
-	    if (err) throw err;
+	    if (err) console.log(err);
 	    // Success 
 	    console.log("Wrote xp");
 	  });
