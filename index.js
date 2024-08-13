@@ -1421,7 +1421,7 @@ client.on("interactionCreate", async int => {
 				    r+=" "
 			    } else if (id === "~") {
 				    if (! flipped) {
-					    int.editReply({components:[frow2,frow3,frow4,frow5]})
+					    int.editReply({components:[frow2,frow3,frow4]})
 					    flipped = true
 				    } else {
 					    int.editReply({components:[row1,row2,row3,row4,row5]})
