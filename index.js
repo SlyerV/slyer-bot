@@ -1334,30 +1334,30 @@ client.on("interactionCreate", async int => {
 		    		.addComponents(Shift,Space,Flip,Backspace,Punct)
 		    const resp = await int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3,row4]})
 		    let r = ""
+		    let flipped = false
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 120_000 });
 		    collector.on('collect', c => {
 			    const id = c.customId
 			    if (id === "^") {
-				    c.deferUpdate()
 			    } else if (id === "_") {
 				    r+=" "
 			    } else if (id === "~") {
-				    if (r == "") {
-					    const con = "Type a sentence! (this prompt will get deleted)"
+				    if (flipped) {
+					    int.editReply({components:[frow1,frow2,frow3,row4]})
+					    flipped = true
 				    } else {
-					    const con = r
+					    int.editReply({components:[row1,row2,row3,row4]})
+					    flipped = false
 				    }
-				    int.editReply({content:r,components:[frow1,frow2,frow3,row4]})
-				    c.deferUpdate()
 			    } else if (id === "<") {
-				    l = l.substring(0,l.length-1)
-				    c.deferUpdate()
+				    r = r.substring(0,l.length-1)
 			    } else if (id === ".") {
-				    l+=" "
+				    r+=" "
 			    } else {
-				    l+=id
+				    r+=id
 			    }
 			    int.editReply({content:r})
+			    c.deferUpdate()
 		    })
 		    collector.on('end', collected => {
 			int.editReply({content:"Time up",components:[]})
