@@ -1342,7 +1342,7 @@ client.on("interactionCreate", async int => {
 			    } else if (id === "_") {
 				    r+=" "
 			    } else if (id === "~") {
-				    if (flipped) {
+				    if (! flipped) {
 					    int.editReply({components:[frow1,frow2,frow3,row4]})
 					    flipped = true
 				    } else {
@@ -1350,9 +1350,9 @@ client.on("interactionCreate", async int => {
 					    flipped = false
 				    }
 			    } else if (id === "<") {
-				    r = r.substring(0,l.length-1)
+				    r = r.substring(0,(l.length-1))
 			    } else if (id === ".") {
-				    r+=" "
+				    r+="."
 			    } else {
 				    r+=id
 			    }
