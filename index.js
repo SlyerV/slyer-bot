@@ -1244,7 +1244,7 @@ client.on("interactionCreate", async int => {
 				.setStyle(ButtonStyle.Primary)
 		    const M = new ButtonBuilder()
 				.setCustomId("m")
-				.setLabel('M(!)')
+				.setLabel("M(;)")
 				.setStyle(ButtonStyle.Primary)
 		    const N = new ButtonBuilder()
 				.setCustomId("n")
@@ -1311,7 +1311,7 @@ client.on("interactionCreate", async int => {
 				.setLabel('3(4)')
 				.setStyle(ButtonStyle.Primary)
 		    const Four = new ButtonBuilder()
-				.setCustomId("four")
+				.setCustomId("4")
 				.setLabel('(3)4')
 				.setStyle(ButtonStyle.Primary)
 		    const Five = new ButtonBuilder()
@@ -1350,12 +1350,12 @@ client.on("interactionCreate", async int => {
 				.setCustomId("?")
 				.setLabel('(V)?')
 				.setStyle(ButtonStyle.Primary)
-		    const Exclamation = new ButtonBuilder()
-				.setCustomId("!")
-				.setLabel('(M)!')
+		    const SemiCol = new ButtonBuilder()
+				.setCustomId("'")
+				.setLabel("(M);")
 				.setStyle(ButtonStyle.Primary)
 		    const Shift = new ButtonBuilder()
-		    		.setCustomId("/")
+		    		.setCustomId("|")
 		    		.setLabel("Shift")
 		    		.setStyle(ButtonStyle.Success)
 		    const Space = new ButtonBuilder()
@@ -1375,11 +1375,11 @@ client.on("interactionCreate", async int => {
 		    		.setLabel('Enter(Finish)')
 		    		.setStyle(ButtonStyle.Success)
 		    const Finish = new ButtonBuilder()
-		    		.setCustomId("/")
+		    		.setCustomId(">")
 		    		.setLabel('Finish(Enter)')
 		    		.setStyle(ButtonStyle.Success)
 		    const Apostrophe = new ButtonBuilder()
-		    		.setCustomId("'")
+		    		.setCustomId(";")
 		    		.setLabel("'(g)")
 		    		.setStyle(ButtonStyle.Secondary)
 		    const ParOpen = new ButtonBuilder()
@@ -1405,7 +1405,7 @@ client.on("interactionCreate", async int => {
 		    const frow3 = new ActionRowBuilder()
 		    		.addComponents(S,F,Period,J,L)
 		    const frow4 = new ActionRowBuilder()
-		    		.addComponents(Comma,C,Question,N,Exclamation)
+		    		.addComponents(Comma,C,Question,N,SemiCol)
 		    const row5 = new ActionRowBuilder()
 		    		.addComponents(Shift,Space,Flip,Backspace,Enter)
 		    const frow5 = new ActionRowBuilder()
@@ -1416,7 +1416,7 @@ client.on("interactionCreate", async int => {
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 120_000 });
 		    collector.on('collect', c => {
 			    const id = c.customId
-			    if (id === "/") {
+			    if (id === "|") {
 			    } else if (id === "_") {
 				    r+=" "
 			    } else if (id === "~") {
@@ -1429,8 +1429,6 @@ client.on("interactionCreate", async int => {
 				    }
 			    } else if (id === "<") {
 				    r = r.slice(0,-1)
-			    } else if (id === "four") {
-				    r = r+="4"
 			    } else {
 				    r+=id
 			    }
