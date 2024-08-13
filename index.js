@@ -1429,8 +1429,6 @@ client.on("interactionCreate", async int => {
 				    }
 			    } else if (id === "<") {
 				    r = r.slice(0,-1)
-			    } else if (id === ".") {
-				    r+="."
 			    } else {
 				    r+=id
 			    }
