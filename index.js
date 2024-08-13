@@ -1350,7 +1350,7 @@ client.on("interactionCreate", async int => {
 					    flipped = false
 				    }
 			    } else if (id === "<") {
-				    r = r.substring(0,(l.length-1))
+				    r = r.slice(0,-1)
 			    } else if (id === ".") {
 				    r+="."
 			    } else {
