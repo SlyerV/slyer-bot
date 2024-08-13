@@ -1371,7 +1371,7 @@ client.on("interactionCreate", async int => {
 		    		.setLabel('Backspace(Enter)')
 		    		.setStyle(ButtonStyle.Danger)
 		    const Enter = new ButtonBuilder()
-		    		.setCustomId("\n")
+		    		.setCustomId("\nE")
 		    		.setLabel('Enter(Finish)')
 		    		.setStyle(ButtonStyle.Success)
 		    const Finish = new ButtonBuilder()
