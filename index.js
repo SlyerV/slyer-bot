@@ -1548,7 +1548,7 @@ client.on("interactionCreate", async int => {
 		    let shifted = false
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button });
 		    collector.on('collect', coll => {
-			    const id = c.customId
+			    const id = coll.customId
 			    if (id === "|") {
 				    if (! shifted) {
 					    if (! flipped) {
