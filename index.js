@@ -1483,7 +1483,7 @@ client.on("interactionCreate", async int => {
 		    		.setLabel('Backspace')
 		    		.setStyle(ButtonStyle.Danger)
 		    const Enter = new ButtonBuilder()
-		    		.setCustomId("\n")
+		    		.setCustomId("\n‍**")
 		    		.setLabel('Enter')
 		    		.setStyle(ButtonStyle.Success)
 		    const Finish = new ButtonBuilder()
@@ -1622,7 +1622,9 @@ client.on("interactionCreate", async int => {
 			    } else {
 				    res+=id
 			    }
-			    int.editReply({content:res})
+			    if (r != "") {
+			    	int.editReply({content:res})
+			    }
 			    coll.deferUpdate()
 		    })
 	     } else {
