@@ -1629,6 +1629,7 @@ client.on("interactionCreate", async int => {
 				    coll.deferUpdate()
 			    } else {
 				    int.followUp({content:"This isn't for you, do /funtype yourself!",ephemeral:true})
+				    coll.deferUpdate()
 			    }
 		    })
 	     } else {
