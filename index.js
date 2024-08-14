@@ -458,7 +458,7 @@ client.on("interactionCreate", async int => {
 	      emsg = emsg.replace("<","<@")
 	      d = new Date()
 	      console.log(d+"\nEcho used by "+int.user.tag)
-	      int.reply({ content: "Message sent!", ephemeral: true });
+	      await int.reply({ content: "Message sent!", ephemeral: true });
 	      int.channel.send(emsg);
 	    } else if (int.commandName === "warn") {
 	      let user = int.options.getUser('user')
