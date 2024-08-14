@@ -1580,52 +1580,56 @@ client.on("interactionCreate", async int => {
 		    let shifted = false
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button });
 		    collector.on('collect', coll => {
-			    const id = coll.customId
-			    if (id === "|") {
-				    if (! shifted) {
-					    if (! flipped) {
-					    	int.editReply({components:[srow1,srow2,srow3,srow4,row5]})
-					    } else {
-						int.editReply({components:[fsrow1,fsrow2,fsrow3,fsrow4,frow5]})
-					    }
-					    shifted = true
-				    } else {
-					    if (! flipped) {
-					    	int.editReply({components:[row1,row2,row3,row4,row5]})
-					    } else {
-						int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
-					    }
-					    shifted = false
-				    }
-			    } else if (id === "_") {
-				    res+=" "
-			    } else if (id === "~") {
-				    if (! flipped) {
+			    if (coll.user.id == int.user.id) {
+				    const id = coll.customId
+				    if (id === "|") {
 					    if (! shifted) {
-					    	int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
+						    if (! flipped) {
+						    	int.editReply({components:[srow1,srow2,srow3,srow4,row5]})
+						    } else {
+							int.editReply({components:[fsrow1,fsrow2,fsrow3,fsrow4,frow5]})
+						    }
+						    shifted = true
 					    } else {
-						int.editReply({components:[fsrow1,fsrow2,fsrow3,fsrow4,frow5]})
+						    if (! flipped) {
+						    	int.editReply({components:[row1,row2,row3,row4,row5]})
+						    } else {
+							int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
+						    }
+						    shifted = false
 					    }
-					    flipped = true
+				    } else if (id === "_") {
+					    res+=" "
+				    } else if (id === "~") {
+					    if (! flipped) {
+						    if (! shifted) {
+						    	int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
+						    } else {
+							int.editReply({components:[fsrow1,fsrow2,fsrow3,fsrow4,frow5]})
+						    }
+						    flipped = true
+					    } else {
+						    if (! shifted) {
+						    	int.editReply({components:[row1,row2,row3,row4,row5]})
+						    } else {
+							int.editReply({components:[srow1,srow2,srow3,srow4,row5]})
+						    }
+						    flipped = false
+					    }
+				    } else if (id === "<") {
+					    res = res.slice(0,-1)
+				    } else if (id === ">") {
+					    int.editReply({components:[]})
 				    } else {
-					    if (! shifted) {
-					    	int.editReply({components:[row1,row2,row3,row4,row5]})
-					    } else {
-						int.editReply({components:[srow1,srow2,srow3,srow4,row5]})
-					    }
-					    flipped = false
+					    res+=id
 				    }
-			    } else if (id === "<") {
-				    res = res.slice(0,-1)
-			    } else if (id === ">") {
-				    int.editReply({components:[]})
+				    if (r != "") {
+				    	int.editReply({content:res})
+				    }
+				    coll.deferUpdate()
 			    } else {
-				    res+=id
+				    resp.followUp({content:"This isn't for you, do /funtype yourself!",ephemeral:true})
 			    }
-			    if (r != "") {
-			    	int.editReply({content:res})
-			    }
-			    coll.deferUpdate()
 		    })
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
