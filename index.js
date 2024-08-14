@@ -1637,6 +1637,7 @@ client.on("interactionCreate", async int => {
 	     }
 	     if (follow) {
 		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank),ephemeral:true})
+		     follow = false
 	     }
 	  }
      } catch (e) {
