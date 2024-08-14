@@ -1636,7 +1636,7 @@ client.on("interactionCreate", async int => {
 		    ephreply("WIP (command hasn't been added yet)")
 	     }
 	     if (follow) {
-		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank),ephemeral:true})
+		     int.channel.send({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank)})
 		     follow = false
 	     }
 	  }
