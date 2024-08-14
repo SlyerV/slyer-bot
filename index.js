@@ -1543,11 +1543,11 @@ client.on("interactionCreate", async int => {
 		    const frow4 = new ActionRowBuilder()
 		    		.addComponents(Minus,c,Quotes,n,Col)
 		    const resp = await int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3,row4,row5]})
-		    let r = ""
+		    let res = ""
 		    let flipped = false
 		    let shifted = false
 		    const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button });
-		    collector.on('collect', c => {
+		    collector.on('collect', coll => {
 			    const id = c.customId
 			    if (id === "|") {
 				    if (! shifted) {
@@ -1566,7 +1566,7 @@ client.on("interactionCreate", async int => {
 					    flipped = false
 				    }
 			    } else if (id === "_") {
-				    r+=" "
+				    res+=" "
 			    } else if (id === "~") {
 				    if (! flipped) {
 					    if (! shifted) {
@@ -1584,14 +1584,14 @@ client.on("interactionCreate", async int => {
 					    flipped = false
 				    }
 			    } else if (id === "<") {
-				    r = r.slice(0,-1)
+				    res = res.slice(0,-1)
 			    } else if (id === ">") {
 				    int.editReply({components:[]})
 			    } else {
-				    r+=id
+				    res+=id
 			    }
-			    int.editReply({content:r})
-			    c.deferUpdate()
+			    int.editReply({content:res})
+			    coll.deferUpdate()
 		    })
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
