@@ -1556,14 +1556,14 @@ client.on("interactionCreate", async int => {
 					    } else {
 						int.editReply({components:[fsrow1,fsrow2,fsrow3,fsrow4,frow5]})
 					    }
-					    flipped = true
+					    shifted = true
 				    } else {
 					    if (! flipped) {
 					    	int.editReply({components:[row1,row2,row3,row4,row5]})
 					    } else {
 						int.editReply({components:[frow1,frow2,frow3,frow4,frow5]})
 					    }
-					    flipped = false
+					    shifted = false
 				    }
 			    } else if (id === "_") {
 				    res+=" "
