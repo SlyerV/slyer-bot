@@ -15,6 +15,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilde
 const Parser = require('expr-eval').Parser;
 const app = express()
 // Random global vars
+let follow = false
 const compliments = ["cool","awesome","intelligent","amazing","talented"]
 const smembers= []
 const highbase = {
@@ -422,12 +423,12 @@ client.on("interactionCreate", async int => {
 		  writexp()
 		  rnewrank = level(xp[int.user.id])
 	          if (rnewrank > roldrank) {
-			  int.channel.send({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank)})
+			  follow = true
 	          }
 	    } else {
 		  xp[int.user.id] = 5
 		  writexp()
-		  int.followUp({content:"# <@"+int.user.id+"> LEVEL UP! 0 => 1",ephemeral:true})
+		  follow = true
 	    }
 	    if (int.commandName === "rdate") {
 	      let currentT = new Date();
@@ -1633,6 +1634,9 @@ client.on("interactionCreate", async int => {
 		    })
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
+	     }
+	     if (follow) {
+		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank),ephemeral:true})
 	     }
 	  }
      } catch (e) {
