@@ -361,7 +361,6 @@ function writexp() {
 	    console.log("Didn't clear XP file :)")
     }
 }
-let follow = false
 // Stored data
 let counting = data.counting
 let ncount = data.count
@@ -423,7 +422,7 @@ client.on("interactionCreate", async int => {
 		  writexp()
 		  rnewrank = level(xp[int.user.id])
 	          if (rnewrank > roldrank) {
-			  follow = true
+			  int.channel.send({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank)})
 	          }
 	    } else {
 		  xp[int.user.id] = 5
@@ -1634,10 +1633,6 @@ client.on("interactionCreate", async int => {
 		    })
 	     } else {
 		    ephreply("WIP (command hasn't been added yet)")
-	     }
-	     if (follow) {
-		     int.channel.send({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank)})
-		     follow = false
 	     }
 	  }
      } catch (e) {
