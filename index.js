@@ -1952,6 +1952,7 @@ client.on("messageCreate", async msg => {
 		      }
 	    }
 	    if (loot == 1) {
+		     const ni = randomnum(20)
 		     const accept = new ButtonBuilder()
 				.setCustomId("loot+")
 				.setLabel('ACCEPT!!!')
@@ -1962,11 +1963,19 @@ client.on("messageCreate", async msg => {
 				.setStyle(ButtonStyle.Danger);
 		    const row = new ActionRowBuilder()
 				.addComponents(accept,decline);
-		    const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
+		    if (ni == 1) {
+				const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets **A ONE-TIME-USE N WORD PASS**!!!\n# <a:loot:1271692935389380608>", components: [row]})
+		    } else {
+				const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
+		    }
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 5_000 })
 			if (confirmation.customId === "loot+") {
-				resp.reply(`<@${confirmation.user.id}> GOT THE 25 XP!!!\n# +25 XP`)
+				if (ni != 1) {
+					resp.reply(`<@${confirmation.user.id}> GOT THE 25 XP!!!\n# +25 XP`)
+				} else {
+					resp.reply(`<@${confirmation.user.id}> GOT THE N-WORD PASS!!!\n You will not be warned for saying the n-word. One time use only. Terms and conditions apply.`)
+				}
 				const oldrank = level(xp[confirmation.user.id])
 				xp[confirmation.user.id] = xp[confirmation.user.id] + 25
 				writexp()
@@ -1976,7 +1985,11 @@ client.on("messageCreate", async msg => {
 			        }
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			} else if (confirmation.customId === "loot-") {
-				msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 25 XP huh; to anyone who wanted the XP sorry ig :(")
+				if (ni != 1) {
+					msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 25 XP huh; to anyone who wanted the XP sorry ig :(")
+				} else {
+					msg.reply("Soooo... <@"+msg.author.id+"> you just deleted the N-Word pass, nice! You def made some ppl very happy but for others im not so sure...")
+				}
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			}
 		    } catch {
