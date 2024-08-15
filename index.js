@@ -1987,9 +1987,9 @@ client.on("messageCreate", async msg => {
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			} else if (confirmation.customId === "loot-") {
 				if (ni != 1) {
-					msg.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 25 XP huh; to anyone who wanted the XP sorry ig :(")
+					resp.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 25 XP huh; to anyone who wanted the XP sorry ig :(")
 				} else {
-					msg.reply("Soooo... <@"+msg.author.id+"> you just deleted the N-Word pass, nice! You def made some ppl very happy but for others im not so sure...")
+					resp.reply("Soooo... <@"+msg.author.id+"> you just deleted the N-Word pass, nice! You def made some ppl very happy but for others im not so sure...")
 				}
 				resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 			}
