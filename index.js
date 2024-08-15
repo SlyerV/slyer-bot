@@ -1963,10 +1963,11 @@ client.on("messageCreate", async msg => {
 				.setStyle(ButtonStyle.Danger);
 		    const row = new ActionRowBuilder()
 				.addComponents(accept,decline);
+		    let resp = ""
 		    if (ni == 1) {
-				const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets **A ONE-TIME-USE N WORD PASS**!!!\n# <a:loot:1271692935389380608>", components: [row]})
+				resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets **A ONE-TIME-USE N WORD PASS**!!!\n# <a:loot:1271692935389380608>", components: [row]})
 		    } else {
-				const resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
+				resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
 		    }
 		    try {
 		    	confirmation = await resp.awaitMessageComponent({ time: 5_000 })
