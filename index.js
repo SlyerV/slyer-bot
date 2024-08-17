@@ -888,6 +888,31 @@ client.on("interactionCreate", async int => {
 			    if (! caught) {
 				    int.reply(`${n} converted to Base 10 is ${r}`)
 			    }
+		    } else if (int.options.getSubcommand() === "quadratic") {
+			    if (int.options.getNumber("a") == 0) {
+				    ephreply("**a** value cannot be 0")
+			    } else {
+				    const a = int.options.getNumber("a")
+				    const b = int.options.getNumber("b")
+				    const c = int.options.getNumber("c")
+				    const discrim = b**2-(4*a*c)
+				    if (discrim < 0) {
+					    int.reply("**No solutions** for "+a+"x^2 + "+b+"x + "+c)
+				    } else if (discrim == 0) {
+					    const root = (-1*b)/(2*a)
+					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
+				    } else if (! sqrt(discrim).isInteger()){
+					    const numerator1 = "__"+(-1*b)+"+ √"+discrim+"__"
+					    const root1 = numerator1+"\n"+(" "*(numerator1.length/2))+(2*a)+(" "*(numerator1.length/2))+",\n"
+					    const numerator2 = "__"+(-1*b)+"- √"+discrim+"__"
+					    const root2 = numerator1+"\n"+(" "*(numerator2.length/2))+(2*a)+(" "*(numerator2.length/2))+","
+					    int.reply(root1+root2)
+				    } else {
+					    const root1 = ((-1*b)+discrim)/(2*a)
+					    const root2 = ((-1*b)-discrim)/(2*a)
+					    int.reply(root1,root2)
+				    }
+			    }
 		    }
 	     } else if (int.commandName === "react") {
 		    let caught = false
