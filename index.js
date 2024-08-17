@@ -892,7 +892,7 @@ client.on("interactionCreate", async int => {
 			    if (int.options.getNumber("a") == 0) {
 				    ephreply("**a** value cannot be 0")
 			    } else {
-				    const a = int.options.getNumber("a")
+				    let a = int.options.getNumber("a")
 				    const b = int.options.getNumber("b")
 				    const c = int.options.getNumber("c")
 				    const discrim = b**2-(4*a*c)
