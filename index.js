@@ -901,15 +901,15 @@ client.on("interactionCreate", async int => {
 				    } else if (discrim == 0) {
 					    const root = (-1*b)/(2*a)
 					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
-				    } else if (! sqrt(discrim).isInteger()){
+				    } else if (! Math.sqrt(discrim).isInteger()){
 					    const numerator1 = "__"+(-1*b)+"+ √"+discrim+"__"
 					    const root1 = numerator1+"\n"+(" "*(numerator1.length/2))+(2*a)+(" "*(numerator1.length/2))+",\n"
 					    const numerator2 = "__"+(-1*b)+"- √"+discrim+"__"
 					    const root2 = numerator1+"\n"+(" "*(numerator2.length/2))+(2*a)+(" "*(numerator2.length/2))+","
 					    int.reply(root1+root2)
 				    } else {
-					    const root1 = ((-1*b)+discrim)/(2*a)
-					    const root2 = ((-1*b)-discrim)/(2*a)
+					    const root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
+					    const root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
 					    int.reply(root1,root2)
 				    }
 			    }
