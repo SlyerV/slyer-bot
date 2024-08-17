@@ -897,9 +897,15 @@ client.on("interactionCreate", async int => {
 				    const c = int.options.getNumber("c")
 				    const discrim = b**2-(4*a*c)
 				    if (discrim < 0) {
+					    if (a == 1) {
+						    a = ""
+					    }
 					    int.reply("**No solutions** for "+a+"x^2 + "+b+"x + "+c)
 				    } else if (discrim == 0) {
 					    const root = (-1*b)/(2*a)
+					    if (a == 1) {
+						    a = ""
+					    }
 					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
 				    } else if (! Number.isInteger(Math.sqrt(discrim))){
 					    const numerator1 = "__"+(-1*b)+"+ √"+discrim+"__"
@@ -910,7 +916,10 @@ client.on("interactionCreate", async int => {
 				    } else {
 					    const root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
 					    const root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
-					    int.reply(root1,root2)
+					    if (a == 1) {
+						    a= ""
+					    }
+					    int.reply(root1+root2+" are the answers to "+a+"x^2 + "+b+"x + "+c)
 				    }
 			    }
 		    }
