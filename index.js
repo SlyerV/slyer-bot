@@ -902,21 +902,36 @@ client.on("interactionCreate", async int => {
 					    }
 					    int.reply("**No solutions** for "+a+"x^2 + "+b+"x + "+c)
 				    } else if (discrim == 0) {
-					    const root = (-1*b)/(2*a)
+					    const root
+					    if (Number.isInteger((-1*b)/(2*a))) {
+					    	root = (-1*b)/(2*a)
+					    } else {
+						root = (-1*b)+"/"+(2*a)
+					    }
 					    if (a == 1) {
 						    a = ""
 					    }
 					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
 				    } else if (! Number.isInteger(Math.sqrt(discrim))){
 					    const space = " "
-					    const numerator1 = "__"+(-1*b)+"+ √"+discrim+"__"
+					    const numerator1 = "__"+(-1*b)+" + √"+discrim+"__"
 					    const denominator1 = (space.repeat(numerator1.length/2))+(2*a)+(space.repeat(numerator1.length/2))+",    "
-					    const numerator2 = "    __"+(-1*b)+"- √"+discrim+"__"
+					    const numerator2 = "    __"+(-1*b)+" - √"+discrim+"__"
 					    const denominator2 = (space.repeat(numerator2.length/2))+(2*a)+(space.repeat(numerator2.length/2))
-					    int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers")
+					    int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers ")
 				    } else {
-					    const root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
-					    const root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
+					    const root1
+					    if (Number.isInteger(((-1*b)+Math.sqrt(discrim))/(2*a))) {
+					    	root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
+					    } else {
+						root1 = ((-1*b)+Math.sqrt(discrim))+"/"+(2*a)
+					    }
+					    const root2
+					    if (Number.isInteger(((-1*b)-Math.sqrt(discrim))/(2*a))) {
+					    	root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
+					    } else {
+						root2 = ((-1*b)-Math.sqrt(discrim))+"/"+(2*a)
+					    }
 					    if (a == 1) {
 						    a= ""
 					    }
