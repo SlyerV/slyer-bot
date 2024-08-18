@@ -909,13 +909,11 @@ client.on("interactionCreate", async int => {
 					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
 				    } else if (! Number.isInteger(Math.sqrt(discrim))){
 					    const space = " "
-					    const lineone1 = "__"+(-1*b)+"+ √"+discrim+"__"
-					    const linetwo1 = (space.repeat(numerator1.length/2))+(2*a)+(space.repeat(numerator1.length/2))+",    "
-					    const lineone2 = "    __"+(-1*b)+"- √"+discrim+"__"
-					    const linetwo2 = (space.repeat(numerator2.length/2))+(2*a)+(space.repeat(numerator2.length/2))
-					    console.log(root1)
-					    console.log(root2)
-					    int.reply(lineone1+lineone2+"\n"+linetwo1+linetwo2+" are the answers")
+					    const numerator1 = "__"+(-1*b)+"+ √"+discrim+"__"
+					    const denominator1 = (space.repeat(numerator1.length/2))+(2*a)+(space.repeat(numerator1.length/2))+",    "
+					    const numerator2 = "    __"+(-1*b)+"- √"+discrim+"__"
+					    const denominator2 = (space.repeat(numerator2.length/2))+(2*a)+(space.repeat(numerator2.length/2))
+					    int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers")
 				    } else {
 					    const root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
 					    const root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
@@ -1678,8 +1676,7 @@ client.on("interactionCreate", async int => {
 	     }
 	  }
      } catch (e) {
-	    // int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.lineNumber+"**")
-	    throw e
+	    int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.lineNumber+"**")
      }
 });
 // Message Event Listener
