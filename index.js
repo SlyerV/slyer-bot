@@ -264,11 +264,25 @@ function gcf(k, n) {
 }
 function simplify(num,denom) {
 	const f = gcf(num,denom)
-	if (f != 1) {
+	if ((f != 1) && (f != -1)) {
 		return (num/f)+"/"+(denom/f)
 	} else {
 		return num+"/"+denom
 	}
+}
+function simplifyroot(num) {
+	let outside_root = 1
+	let inside_root = num
+	let d = 2
+	while (d * d <= inside_root) {
+		  if (inside_root % (d * d) == 0) { 
+		    inside_root = inside_root/(d * d)
+		    outside_root = outside_root*d
+		  } else {
+		    d = d + 1
+		  }
+	}
+	return (outside_root+"√"+inside_root)
 }
 function reverse(str) {
 	return str.split('').reverse().join('')
@@ -925,9 +939,9 @@ client.on("interactionCreate", async int => {
 					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
 				    } else if (! Number.isInteger(Math.sqrt(discrim))){
 					    const space = " "
-					    const numerator1 = "__"+(-1*b)+" + √"+discrim+"__"
+					    const numerator1 = "__"+(-1*b)+" + "+simplifyroot(discrim)+"__"
 					    const denominator1 = (space.repeat(numerator1.length/2))+(2*a)+(space.repeat(numerator1.length/2))+",    "
-					    const numerator2 = "    __"+(-1*b)+" - √"+discrim+"__"
+					    const numerator2 = "    __"+(-1*b)+" - "+simplifyroot(discrim)+"__"
 					    const denominator2 = (space.repeat(numerator2.length/2))+(2*a)+(space.repeat(numerator2.length/2))
 					    int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers ")
 				    } else {
