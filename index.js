@@ -902,7 +902,7 @@ client.on("interactionCreate", async int => {
 					    }
 					    int.reply("**No solutions** for "+a+"x^2 + "+b+"x + "+c)
 				    } else if (discrim == 0) {
-					    const root
+					    let root
 					    if (Number.isInteger((-1*b)/(2*a))) {
 					    	root = (-1*b)/(2*a)
 					    } else {
@@ -920,13 +920,13 @@ client.on("interactionCreate", async int => {
 					    const denominator2 = (space.repeat(numerator2.length/2))+(2*a)+(space.repeat(numerator2.length/2))
 					    int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers ")
 				    } else {
-					    const root1
+					    let root1
 					    if (Number.isInteger(((-1*b)+Math.sqrt(discrim))/(2*a))) {
 					    	root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
 					    } else {
 						root1 = ((-1*b)+Math.sqrt(discrim))+"/"+(2*a)
 					    }
-					    const root2
+					    let root2
 					    if (Number.isInteger(((-1*b)-Math.sqrt(discrim))/(2*a))) {
 					    	root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
 					    } else {
