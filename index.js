@@ -554,7 +554,7 @@ client.on("interactionCreate", async int => {
 	            writedata()
 	        }
 	    } else if (int.commandName === "collatz") {
-	        let collatz = int.options.getInteger("numb")
+	        let collatz = int.options.getInteger("number")
 	        let colcount = 0
 	        let colnums = []
 	        while (true) {
@@ -580,7 +580,7 @@ client.on("interactionCreate", async int => {
 	                collist+=String(x)+", "
 	            }
 	        })
-	        int.reply(int.options.getNumber("numb")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
+	        int.reply(int.options.getInteger("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
 	     } else if (int.commandName === "unnick") {
 		const eph = int.options.getBoolean("ephemeral")
 	        if (nicked == false) {
