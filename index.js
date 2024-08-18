@@ -259,6 +259,17 @@ function random(list) {
 function randomnum(max) {
     return (Math.floor(Math.random() * max)+1)
 }
+function gcf(k, n) {
+    return k ? gcf(n % k, k) : n;
+}
+function simplify(num,denom) {
+	const f = gcf(num,denom)
+	if (f != 1) {
+		return (num/f)+"/"+(denom/f)
+	} else {
+		return num+"/"+denom
+	}
+}
 function reverse(str) {
 	return str.split('').reverse().join('')
 }
@@ -906,7 +917,7 @@ client.on("interactionCreate", async int => {
 					    if (Number.isInteger((-1*b)/(2*a))) {
 					    	root = (-1*b)/(2*a)
 					    } else {
-						root = (-1*b)+"/"+(2*a)
+						root = simplify((-1*b),(2*a))
 					    }
 					    if (a == 1) {
 						    a = ""
@@ -924,13 +935,13 @@ client.on("interactionCreate", async int => {
 					    if (Number.isInteger(((-1*b)+Math.sqrt(discrim))/(2*a))) {
 					    	root1 = ((-1*b)+Math.sqrt(discrim))/(2*a)
 					    } else {
-						root1 = ((-1*b)+Math.sqrt(discrim))+"/"+(2*a)
+						root1 = simplify(((-1*b)+Math.sqrt(discrim)),(2*a))
 					    }
 					    let root2
 					    if (Number.isInteger(((-1*b)-Math.sqrt(discrim))/(2*a))) {
 					    	root2 = ((-1*b)-Math.sqrt(discrim))/(2*a)
 					    } else {
-						root2 = ((-1*b)-Math.sqrt(discrim))+"/"+(2*a)
+						root2 = simplify(((-1*b)-Math.sqrt(discrim)),(2*a))
 					    }
 					    if (a == 1) {
 						    a= ""
