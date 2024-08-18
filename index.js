@@ -554,7 +554,7 @@ client.on("interactionCreate", async int => {
 	            writedata()
 	        }
 	    } else if (int.commandName === "collatz") {
-	        let collatz = int.options.getInteger("number")
+	        let collatz = Number(int.options.getInteger("number"))
 	        let colcount = 0
 	        let colnums = []
 	        while (true) {
