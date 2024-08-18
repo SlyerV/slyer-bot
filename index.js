@@ -273,11 +273,13 @@ function simplify(num,denom) {
 function simplifyroot(num) {
 	let outside_root = 1
 	let inside_root = num
+	console.log(inside_root+" STARTING")
 	let d = 2
 	while (d * d <= inside_root) {
 		  if (inside_root % (d * d) == 0) { 
 		    inside_root = inside_root/(d * d)
 		    outside_root = outside_root*d
+		    console.log(inside_root,outside_root)
 		  } else {
 		    d = d + 1
 		  }
