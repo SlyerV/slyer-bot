@@ -580,7 +580,7 @@ client.on("interactionCreate", async int => {
 	                collist+=String(x)+", "
 	            }
 	        })
-	        int.reply(int.options.getNumber("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
+	        int.reply(int.options.getNumber("numb")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
 	     } else if (int.commandName === "unnick") {
 		const eph = int.options.getBoolean("ephemeral")
 	        if (nicked == false) {
