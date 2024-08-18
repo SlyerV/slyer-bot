@@ -1677,7 +1677,7 @@ client.on("interactionCreate", async int => {
 	     }
 	  }
      } catch (e) {
-	    int.reply("An unexpected error occured.\n<@816099107545940008> "+e)
+	    int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.lineNumber+"**")
      }
 });
 // Message Event Listener
