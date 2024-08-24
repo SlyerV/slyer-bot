@@ -428,13 +428,13 @@ client.on("interactionCreate", async int => {
     try {
 	  // Int Funcs
 	  function ephreply(msg) {
-		  await int.reply({content:msg,ephemeral:true})
+		  int.reply({content:msg,ephemeral:true})
 	  }
 	  function silreply(msg) {
-		  await int.reply({content:msg, allowedMentions: { parse: [] }})
+		  int.reply({content:msg, allowedMentions: { parse: [] }})
 	  }
 	  function nocompreply(msg) {
-		  await int.reply({content:msg, components:[]})
+		  int.reply({content:msg, components:[]})
 	  }
 	  function nocompeditReply(msg) {
 		  int.editReply({content:msg, components:[]})
@@ -504,7 +504,7 @@ client.on("interactionCreate", async int => {
 	      if (! (userS in warns)) {
 	        warns[userS] = 0
 	      }
-	      silreply(userS+" has **"+warns[userS]+"** warns.")
+	      await silreply(userS+" has **"+warns[userS]+"** warns.")
 	    } else if (int.commandName === "warnset") {
 	      let user = int.options.getUser('user')
 	      let userS = String(user)
@@ -513,7 +513,7 @@ client.on("interactionCreate", async int => {
 	        num = 0
 	      }
 	      warns[userS] = int.options.getNumber('number')
-	      silreply(userS+"'s warn count is now **"+num+"**")
+	      await silreply(userS+"'s warn count is now **"+num+"**")
 	      writewarns()
 	    } else if (int.commandName === "8ball") {
 	        await int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
@@ -668,7 +668,7 @@ client.on("interactionCreate", async int => {
 	        }
 	     } else if (int.commandName === "owner") {
 	        const owner = await int.guild.fetchOwner()
-	        silreply("The owner of the server is <@"+owner+">")
+	        await silreply("The owner of the server is <@"+owner+">")
 	     } else if (int.commandName === "ping") {
 	        await int.reply("Pong!\n🏓")
 	     } else if (int.commandName === "info") {
@@ -917,7 +917,7 @@ client.on("interactionCreate", async int => {
 			    }
 		    } else if (int.options.getSubcommand() === "quadratic") {
 			    if (int.options.getNumber("a") == 0) {
-				    ephreply("**a** value cannot be 0")
+				    await ephreply("**a** value cannot be 0")
 			    } else {
 				    let a = int.options.getNumber("a")
 				    const b = int.options.getNumber("b")
@@ -1027,13 +1027,13 @@ client.on("interactionCreate", async int => {
 	     } else if (int.commandName === "tictactoe") {
 		        tp1 = "<@"+int.user.id+">"
 			if (tic == true) {
-				ephreply("Another tic-tac-toe game is already going on!")
+				await ephreply("Another tic-tac-toe game is already going on!")
 			} else if (int.options.getUser("user")) {
 				tp2 = "<@"+int.options.getUser("user").id+">"
 				if (tp1 == tp2) {
-					ephreply("You can't play against yourself")
+					await ephreply("You can't play against yourself")
 				} else if (int.channel.id == channelid) {
-					ephreply("You can't start a tic-tac-toe game in the counting channel!")
+					await ephreply("You can't start a tic-tac-toe game in the counting channel!")
 				} else {
 					tic = true
 					ticid = int.channel.id
@@ -1102,7 +1102,7 @@ client.on("interactionCreate", async int => {
 				    writestatus()
 				    await int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
 			    } else {
-				    ephreply("You already have an AFK status; run /afk edit to change your status message")
+				    await ephreply("You already have an AFK status; run /afk edit to change your status message")
 			    }
 		    } else if (subint === "list") {
 			    let l = "List:\n"
@@ -1133,7 +1133,7 @@ client.on("interactionCreate", async int => {
 				    const id = int.user.id
 			    	    await int.reply(`<@${id}> Removed your AFK status`)
 			    } else {
-				    ephreply("You don't have an AFK status")
+				    await ephreply("You don't have an AFK status")
 			    }
 		    } else if (subint === "edit") {
 			    if (status[int.user.id]) {
@@ -1141,7 +1141,7 @@ client.on("interactionCreate", async int => {
 				    writestatus()
 				    await int.reply(`<@${int.user.id}> Status changed: ${int.options.getString("message")}`)
 			    } else {
-				    ephreply("You don't have an AFK status")
+				    await ephreply("You don't have an AFK status")
 			    }
 		    }
 	     } else if (int.commandName === "genalpha") {
@@ -1190,7 +1190,7 @@ client.on("interactionCreate", async int => {
 				    }
 			    }
 			    l+=("You are Rank **#"+rank+"**")
-			    silreply(l)
+			    await silreply(l)
 		    } else if (subint === "info") {
 			    await int.reply(`Level up by using any slyer-bot commands. Every command will give you 5 XP, and winning a slyer-bot game will give you an additional 10 XP. After you reach a certain amount of XP, you will level up!\nHere is the list of XP requirements for each level:
 	Level 1: **5** XP
@@ -1218,7 +1218,7 @@ client.on("interactionCreate", async int => {
 			const command = require(`./${file}`);
 			str += `Name: ${command.data.name}, Description: ${command.data.description} \n`;
 		    }
-		    ephreply(str)
+		    await ephreply(str)
 	     } else if (int.commandName === "trivia") {
 		    const A = new ButtonBuilder()
 				.setCustomId("A")
@@ -1243,7 +1243,7 @@ client.on("interactionCreate", async int => {
 		    const row = new ActionRowBuilder()
 				.addComponents(A,B,C,D,Cancel);
 		    if (int.options.getUser("user")) {
-			    ephreply("WIP")
+			    await ephreply("WIP")
 		    } else {
 			    const tquestion = random(questions)
 			    const resp = await await int.reply({ content:(tquestion["question"]+"\nA) "+tquestion["A"]+"\nB) "+tquestion["B"]+"\nC) "+tquestion["C"]+"\nD) "+tquestion["D"]), components: [row]})
@@ -1251,7 +1251,7 @@ client.on("interactionCreate", async int => {
 			    try {
 				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
 				    if (tquestion["answer"]==confirmation.customId) {
-					    	nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n# +5 XP")
+					    	await nocompeditReply(tquestion["question"]+"\n\n**"+confirmation.customId+"**: **"+tquestion[tquestion["answer"]]+"** is the correct answer, good job!\n# +5 XP")
 						const oldrank = level(xp[int.user.id])
 						xp[int.user.id] = xp[int.user.id] + 5
 						writexp()
@@ -1260,13 +1260,13 @@ client.on("interactionCreate", async int => {
 						    int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+oldrank+" → "+newrank),ephemeral:true})
 					        }
 				    } else if (confirmation.customId === "x") {
-					    nocompeditReply(tquestion["question"]+"\n\nTrivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
+					    await nocompeditReply(tquestion["question"]+"\n\nTrivia game cancelled (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 				    } else {
-					    nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
+					    await nocompeditReply(tquestion["question"]+"\n\nYou got it wrong, the correct answer is **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"** :(")
 				    }
 			    } catch (e) {
 				    console.log(e)
-				    nocompeditReply(tquestion["question"]+"\n\nYou didn't answer the question within 15 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
+				    await nocompeditReply(tquestion["question"]+"\n\nYou didn't answer the question within 15 seconds! You lose :( (The answer was **"+tquestion["answer"]+"**: **"+tquestion[tquestion["answer"]]+"**)")
 			    }
 		    }
 	     } else if (int.commandName === "funtype") {
@@ -1710,7 +1710,7 @@ client.on("interactionCreate", async int => {
 			    }
 		    })
 	     } else {
-		    ephreply("WIP (command hasn't been added yet)")
+		    await ephreply("WIP (command hasn't been added yet)")
 	     }
 	     if (follow) {
 		     int.followUp({content:("# <@"+int.user.id+"> LEVEL UP! "+roldrank+" → "+rnewrank),ephemeral:true})
