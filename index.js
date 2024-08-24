@@ -428,13 +428,13 @@ client.on("interactionCreate", async int => {
     try {
 	  // Int Funcs
 	  function ephreply(msg) {
-		  int.reply({content:msg,ephemeral:true})
+		  await int.reply({content:msg,ephemeral:true})
 	  }
 	  function silreply(msg) {
-		  int.reply({content:msg, allowedMentions: { parse: [] }})
+		  await int.reply({content:msg, allowedMentions: { parse: [] }})
 	  }
 	  function nocompreply(msg) {
-		  int.reply({content:msg, components:[]})
+		  await int.reply({content:msg, components:[]})
 	  }
 	  function nocompeditReply(msg) {
 		  int.editReply({content:msg, components:[]})
@@ -476,16 +476,16 @@ client.on("interactionCreate", async int => {
 	      }
 	      const T = new Date(startT.getTime()+7*(currentT.getTime()-oldT.getTime()-h*60*60*1000)+a*24*60*60*1000);
 	      const d = T.toLocaleDateString();
-	      int.reply({ content: ("The Rathnorian date is **"+d+"**"), ephemeral: false });
+	      await int.reply({ content: ("The Rathnorian date is **"+d+"**"), ephemeral: false });
 	    } else if (int.commandName === "praise") {
-	      int.reply("slyer1 is so "+random(compliments)+"!")
+	      await int.reply("slyer1 is so "+random(compliments)+"!")
 	    } else if (int.commandName === "echo") {
 	      let emsg = int.options.getString("message");
 	      emsg = emsg.replace("@","")
 	      emsg = emsg.replace("<","<@")
 	      d = new Date()
 	      console.log(d+"\nEcho used by "+int.user.tag)
-	      await int.reply({ content: "Message sent!", ephemeral: true });
+	      await await int.reply({ content: "Message sent!", ephemeral: true });
 	      int.channel.send(emsg);
 	    } else if (int.commandName === "warn") {
 	      let user = int.options.getUser('user')
@@ -495,8 +495,8 @@ client.on("interactionCreate", async int => {
 	      } else {
 	        warns[userS] = 1
 	      }
-	      // int.reply({ content: "Warn sent!", ephemeral: true });
-	      int.reply("<@"+user+"> \nWarning **" + warns[userS] + "**/3 \n" + int.options.getString('reason'))
+	      // await int.reply({ content: "Warn sent!", ephemeral: true });
+	      await int.reply("<@"+user+"> \nWarning **" + warns[userS] + "**/3 \n" + int.options.getString('reason'))
 	      writewarns()
 	    } else if (int.commandName === "warnlist") {
 	      let user = int.options.getUser('user')
@@ -516,26 +516,26 @@ client.on("interactionCreate", async int => {
 	      silreply(userS+"'s warn count is now **"+num+"**")
 	      writewarns()
 	    } else if (int.commandName === "8ball") {
-	        int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
+	        await int.reply("(Prompt: "+int.options.getString('prompt')+")\n"+random(replies))
 	    } else if (int.commandName === "randping") {
 	        int.guild.members.fetch().then(members => {
 	        })
 	        int.guild.members.cache.forEach(member => smembers.push(member))
-	        int.reply("<@"+random(smembers)+"> you got randomly pinged lol have a nice day")
+	        await int.reply("<@"+random(smembers)+"> you got randomly pinged lol have a nice day")
 	    } else if (int.commandName === "insult") {
 	        if (int.options.getUser('user') == "816099107545940008") {
-	            int.reply("You really thought you could insult my **creator**??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
+	            await int.reply("You really thought you could insult my **creator**??? \n Nah just kidding lol \n <@816099107545940008> "+random(insults))
 	        } else if (int.options.getUser('user').id === "1244853392942170143") {
-	            int.reply("bro really thought he could insult **ME** the **SUPREME RULER**\nAs revenge, <@"+int.user.id+"> "+random(insults))
+	            await int.reply("bro really thought he could insult **ME** the **SUPREME RULER**\nAs revenge, <@"+int.user.id+"> "+random(insults))
 	        } else {
 	          console.log(int.options.getUser('user'))
-	          int.reply("<@"+int.options.getUser('user')+"> "+random(insults))
+	          await int.reply("<@"+int.options.getUser('user')+"> "+random(insults))
 	        }
 	    } else if (int.commandName === "flipcoin") {
 	        if (randomnum(2) == 1) {
-	            int.reply("🗣️ It's **heads** 🗣️")
+	            await int.reply("🗣️ It's **heads** 🗣️")
 	        } else {
-	            int.reply("🪙 It's **tails** 🪙")
+	            await int.reply("🪙 It's **tails** 🪙")
 	        }
 	    } else if (int.commandName === "rolldice") {
 	        let rolltxt = ""
@@ -547,9 +547,9 @@ client.on("interactionCreate", async int => {
 	        if ((int.options.getNumber("count") == undefined) || (int.options.getNumber("count") < 0)) {
 	            let count = 1
 	            if ((int.options.getNumber("size") == undefined) || (int.options.getNumber("size") < 3)) {
-	        int.reply("(Size: d6)\n🎲 You rolled a **"+randomnum(6)+"** 🎲")
+	        await int.reply("(Size: d6)\n🎲 You rolled a **"+randomnum(6)+"** 🎲")
 	            } else {
-	                int.reply("(Size: d"+int.options.getNumber("size")+")\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲")
+	                await int.reply("(Size: d"+int.options.getNumber("size")+")\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲")
 	                }
 	        } else {
 	            let count = int.options.getNumber("count")
@@ -560,7 +560,7 @@ client.on("interactionCreate", async int => {
 	                    rolltxt = rolltxt + "\n🎲 You rolled a **"+randomnum(int.options.getNumber("size"))+"** 🎲"
 	              }
 	          }
-	            int.reply(rolltxt)
+	            await int.reply(rolltxt)
 	        }
 	    } else if (int.commandName === "counting") {
 	        if (int.options.getString("off") === "true") {
@@ -568,14 +568,14 @@ client.on("interactionCreate", async int => {
 		    channelid = ""
 	            data["counting"] = false
 		    data["channel"] = channelid
-	            int.reply("Counting game turned **off**.")
+	            await int.reply("Counting game turned **off**.")
 	            writedata()
 	        } else {
 	            counting = true
 	            channelid = int.channel.id
 	            oldid = 0
 	            ncount = 0
-	            int.reply("Counting game channel set to <#"+channelid+">! **Count has also reset to 0.**")
+	            await int.reply("Counting game channel set to <#"+channelid+">! **Count has also reset to 0.**")
 	            data["counting"] = true
 	            data["channel"] = channelid
 	            writedata()
@@ -607,7 +607,7 @@ client.on("interactionCreate", async int => {
 	                collist+=String(x)+", "
 	            }
 	        })
-	        int.reply(int.options.getInteger("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
+	        await int.reply(int.options.getInteger("number")+" works and became 1 after **"+colcount+"** iterations.\n"+"Peak value: **"+colmax+"**\nList: "+collist)
 	     } else if (int.commandName === "unnick") {
 		const eph = int.options.getBoolean("ephemeral")
 	        if (nicked == false) {
@@ -627,12 +627,12 @@ client.on("interactionCreate", async int => {
 	              if (! memb.permissions.has(PermissionsBitField.Flags.Administrator))
 	                  memb.setNickname(memb.user.tag)
 	          })
-	          int.reply({content:"Unnicked all non-admins >:)",ephemeral: eph})
+	          await int.reply({content:"Unnicked all non-admins >:)",ephemeral: eph})
 	          nicked = true
 	          data["nicked"] = true
 	          writedata()
 	        } else {
-	          int.reply({ content: "You already used /unnick, use **/renick** to use it again", ephemeral: true });
+	          await int.reply({ content: "You already used /unnick, use **/renick** to use it again", ephemeral: true });
 	        }
 	     } else if (int.commandName === "renick") {
 	        let server = int.guild
@@ -644,25 +644,25 @@ client.on("interactionCreate", async int => {
 	                if (! member.permissions.has(PermissionsBitField.Flags.Administrator))
 	                    member.setNickname(nicks[member.user.id])
 	            })
-	            int.reply("Re-nicked all non-admins :)")
+	            await int.reply("Re-nicked all non-admins :)")
 	            nicked = false
 	            data["nicked"] = false
 	            nicks = {}
 	            writedata()
 	            writenicks()
 	        } else {
-	            int.reply({ content: "You didn't use **/unnick**", ephemeral: true });
+	            await int.reply({ content: "You didn't use **/unnick**", ephemeral: true });
 	        }
 	     } else if (int.commandName === "reactions") {
 		const eph = int.options.getBoolean("ephemeral")
 	        if (nerdmode == false) {
 	          nerdmode = true
-	          int.reply({content:"Reactions toggled **on**!", ephemeral: eph})
+	          await int.reply({content:"Reactions toggled **on**!", ephemeral: eph})
 	          data["nerdmode"] = true
 	          writedata()
 	        } else {
 	          nerdmode = false
-	          int.reply({content:"Reactions toggled **off**!",ephemeral:false})
+	          await int.reply({content:"Reactions toggled **off**!",ephemeral:false})
 	          data["nerdmode"] = false
 	          writedata()
 	        }
@@ -670,27 +670,27 @@ client.on("interactionCreate", async int => {
 	        const owner = await int.guild.fetchOwner()
 	        silreply("The owner of the server is <@"+owner+">")
 	     } else if (int.commandName === "ping") {
-	        int.reply("Pong!\n🏓")
+	        await int.reply("Pong!\n🏓")
 	     } else if (int.commandName === "info") {
-	        int.reply("Creation date: **May 28th 2024**"+"\nCreator: **slyer1**\nGender: **Male**\nHeight: **undefined**\nWeight: **472.45 MB**\nSexuality: **Straight**\nStatus: **Single 😏**")
+	        await int.reply("Creation date: **May 28th 2024**"+"\nCreator: **slyer1**\nGender: **Male**\nHeight: **undefined**\nWeight: **472.45 MB**\nSexuality: **Straight**\nStatus: **Single 😏**")
 	     } else if (int.commandName === "kill") {
 	        if (int.user.id == "816099107545940008") {
-	            int.reply("Bot successfully terminated 💀🫡")
+	            await int.reply("Bot successfully terminated 💀🫡")
 	            .then(() => {
 	                process.exit()  
 	            })
 	        } else {
-	            int.reply({ content: "You're not my creator...", ephemeral: true })
+	            await int.reply({ content: "You're not my creator...", ephemeral: true })
 	        }
 	     } else if (int.commandName === "quoting") {
 	        if (quoting == false) {
 	          quoting = true
-	          int.reply("Quoting toggled **on**!")
+	          await int.reply("Quoting toggled **on**!")
 	          data["quoting"] = true
 	          writedata()
 	        } else {
 	          quoting = false
-	          int.reply("Quoting toggled **off**!")
+	          await int.reply("Quoting toggled **off**!")
 	          data["quoting"] = false
 	          writedata()
 	        }
@@ -714,11 +714,11 @@ client.on("interactionCreate", async int => {
 	            g = ""
 	            gtxt = stages[s]+"\n"+r+"\n"
 	            console.log(r)
-	            int.reply(gtxt+"Hangman game started! Type any letter to guess.")
+	            await int.reply(gtxt+"Hangman game started! Type any letter to guess.")
 		} else if (int.channel.id === channelid) {
-		    int.reply({ content:"You can't start a hangman game in the counting channel!", ephemeral: true })
+		    await int.reply({ content:"You can't start a hangman game in the counting channel!", ephemeral: true })
 	        } else {
-	            int.reply({ content: "A game has already started!", ephemeral: true })
+	            await int.reply({ content: "A game has already started!", ephemeral: true })
 	        }
 	     } else if (int.commandName === "reply") {
 	        const id = int.options.getString("receiver")
@@ -728,13 +728,13 @@ client.on("interactionCreate", async int => {
 	            remsg.reply(int.options.getString("message"))
 	        } catch {
 	            caught = true
-	            int.reply({ content:"Receiving-message ID is either invalid or in a different channel", ephemeral: true })
+	            await int.reply({ content:"Receiving-message ID is either invalid or in a different channel", ephemeral: true })
 	        }
 	        if (! caught) {
-	            int.reply({ content:"Message replied to!", ephemeral: true })
+	            await int.reply({ content:"Message replied to!", ephemeral: true })
 	        }
 	     } else if (int.commandName === "preview") {
-	        int.reply("**FUTURE COMMANDS:**\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
+	        await int.reply("**FUTURE COMMANDS:**\n/trivia [user] [number] [category]: Challenge a user to a game of trivia with a specific category and number of questions!\n\nIf you want to suggest a possible new command or feature, too bad so sad u can't :wompwomp: :skillissue:")
 	     } else if (int.commandName === "rps") {
 	        c1 = int.options.getString("choice")
 		const p1 = "<@"+int.user.id+">"
@@ -758,7 +758,7 @@ client.on("interactionCreate", async int => {
 				.setStyle(ButtonStyle.Danger);
 	    	    const row = new ActionRowBuilder()
 				.addComponents(rock, paper, scissors, cancel);
-	            		const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
+	            		const resp = await await int.reply({ content:"<@"+int.options.getUser("user")+"> choose your move!", components: [row]})
 				let confirmed = false
 				try {
 					const collector = resp.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
@@ -807,57 +807,57 @@ client.on("interactionCreate", async int => {
 		    c2 = random(l)
 		    const p2 = "<@1244853392942170143>"
 		    if ((c1 == 'r') && (c2 == 'r')) {
-		      int.reply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n🤜  🤛\nTie!", components: []})
 		    } else if ((c1 == 'p') && (c2 == 'p')) {
-		      int.reply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n🫱  🫲\nTie!", components: []})
 		    } else if ((c1 == 's') && (c2 == 's')) {
-		      int.reply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n✌️  ✌️\nTie!", components: []})
 		    } else if ((c1 == 'r') && (c2 == 'p')) {
-		      int.reply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n🤜  🫲\n"+p2+" wins!", components: []})
 		    } else if ((c1 == 'r') && (c2 == 's')) {
-		      int.reply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n🤜  ✌️\n"+p1+" wins!", components: []})
 		    } else if ((c1 == 'p') && (c2 == 'r')) {
-		      int.reply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n🫱  🤛\n"+p1+" wins!", components: []})
 		    } else if ((c1 == 'p') && (c2 == 's')) {
-		      int.reply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n🫱  ✌️\n"+p2+" wins!", components: []})
 		    } else if ((c1 == 's') && (c2 == 'r')) {
-		      int.reply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n✌️  🤛\n"+p2+" wins!", components: []})
 		    } else if ((c1 == 's') && (c2 == 'p')) {
-		      int.reply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
+		      await int.reply({ content: p1+" vs "+p2+"\n✌️  🫲\n"+p1+" wins!", components: []})
 		    }
 	        }
 	     } else if (int.commandName === "math") {
 		    if (int.options.getSubcommand() === "average") {
 		        if (int.options.getNumber("5")) {
 		            if ((! (int.options.getNumber(4))) || (! (int.options.getNumber(3)))) {
-		                int.reply({ content: "Invalid input(s)", ephemeral: true })
+		                await int.reply({ content: "Invalid input(s)", ephemeral: true })
 		            } else {
 		                const n1 = int.options.getNumber("1")
 		                const n2 = int.options.getNumber("2")
 		                const n3 = int.options.getNumber("3")
 		                const n4 = int.options.getNumber("4")
 		                const n5 = int.options.getNumber("5")
-		                int.reply(String((n1+n2+n3+n4+n5)/5))
+		                await int.reply(String((n1+n2+n3+n4+n5)/5))
 		            }
 		        } else if (int.options.getNumber("4")) {
 		            if (! (int.options.getNumber(3))) {
-		                int.reply({ content: "Invalid input(s)", ephemeral: true })
+		                await int.reply({ content: "Invalid input(s)", ephemeral: true })
 		            } else {
 		                const n1 = int.options.getNumber("1")
 		                const n2 = int.options.getNumber("2")
 		                const n3 = int.options.getNumber("3")
 		                const n4 = int.options.getNumber("4")
-		                int.reply(String((n1+n2+n3+n4)/4))
+		                await int.reply(String((n1+n2+n3+n4)/4))
 		            }
 		        } else if (int.options.getNumber("3")) {
 		            const n1 = int.options.getNumber("1")
 		            const n2 = int.options.getNumber("2")
 		            const n3 = int.options.getNumber("3")
-		            int.reply(String((n1+n2+n3)/3))
+		            await int.reply(String((n1+n2+n3)/3))
 		        } else {
 		            const n1 = int.options.getNumber("1")
 		            const n2 = int.options.getNumber("2")
-		            int.reply(String((n1+n2)/2))
+		            await int.reply(String((n1+n2)/2))
 		        }
 		    } else if (int.options.getSubcommand() === "base") {
 			    let n = int.options.getNumber("number")
@@ -876,7 +876,7 @@ client.on("interactionCreate", async int => {
 					    break
 				    }
 			    }
-			    int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
+			    await int.reply(`${int.options.getNumber("number")} converted to Base ${b} is **${reverse(a)}**`)
 		    } else if (int.options.getSubcommand() === "calc") {
 			    let caught = false
 			    let expr = ""
@@ -885,11 +885,11 @@ client.on("interactionCreate", async int => {
 				    expr = int.options.getString("expression")
 				    ans = Parser.evaluate(expr)
 			    } catch {
-				    int.reply({content:"Invalid expression",ephemeral: true})
+				    await int.reply({content:"Invalid expression",ephemeral: true})
 				    caught = true
 			    }
 			    if (! caught) {
-				    int.reply(`The answer to ${expr} is **${ans}**`)
+				    await int.reply(`The answer to ${expr} is **${ans}**`)
 			    }
 		    } else if (int.options.getSubcommand() === "base36") {
 			    let n = int.options.getString("number")
@@ -909,11 +909,11 @@ client.on("interactionCreate", async int => {
 					p--
 				}    
 			    } catch {
-				    int.reply("Invalid number, or number was too big")
+				    await int.reply("Invalid number, or number was too big")
 				    caught = true
 			    }
 			    if (! caught) {
-				    int.reply(`${n} converted to Base 10 is ${r}`)
+				    await int.reply(`${n} converted to Base 10 is ${r}`)
 			    }
 		    } else if (int.options.getSubcommand() === "quadratic") {
 			    if (int.options.getNumber("a") == 0) {
@@ -927,7 +927,7 @@ client.on("interactionCreate", async int => {
 					    if (a == 1) {
 						    a = ""
 					    }
-					    int.reply("**No solutions** for "+a+"x^2 + "+b+"x + "+c)
+					    await int.reply("**No solutions** for "+a+"x^2 + "+b+"x + "+c)
 				    } else if (discrim == 0) {
 					    let root
 					    if (Number.isInteger((-1*b)/(2*a))) {
@@ -938,14 +938,14 @@ client.on("interactionCreate", async int => {
 					    if (a == 1) {
 						    a = ""
 					    }
-					    int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
+					    await int.reply("**"+root+"** is the answer to "+a+"x^2 + "+b+"x + "+c)
 				    } else if (! Number.isInteger(Math.sqrt(discrim))){
 					    const space = " "
 					    const numerator1 = "__"+(-1*b)+" + "+simplifyroot(discrim)+"__"
 					    const denominator1 = (space.repeat(numerator1.length/2))+(2*a)+(space.repeat(numerator1.length/2))+",    "
 					    const numerator2 = "    __"+(-1*b)+" - "+simplifyroot(discrim)+"__"
 					    const denominator2 = (space.repeat(numerator2.length/2))+(2*a)+(space.repeat(numerator2.length/2))
-					    int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers ")
+					    await int.reply(numerator1+numerator2+"\n"+denominator1+denominator2+" are the answers ")
 				    } else {
 					    let root1
 					    if (Number.isInteger(((-1*b)+Math.sqrt(discrim))/(2*a))) {
@@ -962,7 +962,7 @@ client.on("interactionCreate", async int => {
 					    if (a == 1) {
 						    a= ""
 					    }
-					    int.reply(root1+" and "+root2+" are the answers to "+a+"x^2 + "+b+"x + "+c)
+					    await int.reply(root1+" and "+root2+" are the answers to "+a+"x^2 + "+b+"x + "+c)
 				    }
 			    }
 		    }
@@ -976,18 +976,18 @@ client.on("interactionCreate", async int => {
 				    await rmsg.react(emoji)
 			    }
 		    } catch {
-			    int.reply({content:"Invalid message or emoji",ephemeral: true})
+			    await int.reply({content:"Invalid message or emoji",ephemeral: true})
 			    caught = true
 		    }
 		    if (! caught) {
-			    int.reply({content:"Message reacted to!",ephemeral: true})
+			    await int.reply({content:"Message reacted to!",ephemeral: true})
 		    }
 	     } else if (int.commandName === "test") {
-		    int.reply({content:"Bot is fully functional",ephemeral: true})
+		    await int.reply({content:"Bot is fully functional",ephemeral: true})
 	     } else if (int.commandName === "date") {
 		    let d = new Date()
 		    d = d.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
-		    int.reply("The date is "+d)
+		    await int.reply("The date is "+d)
 	     } else if (int.commandName === "getid") {
 		    const subint = int.options.getSubcommand()
 		    if (subint === "message") {
@@ -1005,24 +1005,24 @@ client.on("interactionCreate", async int => {
 					    throw "err"
 				    }
 			    } catch {
-				    int.reply({content:"Invalid link",ephemeral:true})
+				    await int.reply({content:"Invalid link",ephemeral:true})
 				    caught = true
 			    }
 			    if (! caught) {
-				    int.reply({content:stringid,ephemeral:true})
+				    await int.reply({content:stringid,ephemeral:true})
 			    }
 	    	    } else if (subint === "user") {
-			    int.reply({content:String(int.options.getUser("user").id), ephemeral: true})
+			    await int.reply({content:String(int.options.getUser("user").id), ephemeral: true})
 		    } else if (subint === "channel") {
 			    if (int.options.getChannel("channel")) {
-				    int.reply({content:String(int.options.getChannel("channel").id), ephemeral: true})
+				    await int.reply({content:String(int.options.getChannel("channel").id), ephemeral: true})
 			    } else {
-				    int.reply({content:String(int.channel.id), ephemeral: true})
+				    await int.reply({content:String(int.channel.id), ephemeral: true})
 			    }
 		    } else if (subint === "role") {
-			    int.reply({content:String(int.options.getRole("role").id), ephemeral: true})
+			    await int.reply({content:String(int.options.getRole("role").id), ephemeral: true})
 		    } else if (subint === "guild") {
-			    int.reply({content:String(int.guild.id), ephemeral: true})
+			    await int.reply({content:String(int.guild.id), ephemeral: true})
 		    }
 	     } else if (int.commandName === "tictactoe") {
 		        tp1 = "<@"+int.user.id+">"
@@ -1047,7 +1047,7 @@ client.on("interactionCreate", async int => {
 					.setStyle(ButtonStyle.Danger);
 					const row = new ActionRowBuilder()
 					.addComponents(accept, cancel);
-					const resp = await int.reply({ content:"<@"+int.options.getUser("user")+"> do you accept a game of Tic Tac Toe with <@"+int.user.id+">?", components: [row]})
+					const resp = await await int.reply({ content:"<@"+int.options.getUser("user")+"> do you accept a game of Tic Tac Toe with <@"+int.user.id+">?", components: [row]})
 					const collectorFilter = i => i.user.id === int.options.getUser("user").id;
 					console.log(i)
 					player = tp1
@@ -1092,7 +1092,7 @@ client.on("interactionCreate", async int => {
 				pos[9] = "  "
 				avinps = ["1","2","3","4","5","6","7","8","9"]
 				update()
-				int.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
+				await int.reply(`${board}\n<@${playerid}>'s turn! Type a number between 1-9 (1-3 first row, 4-6 second, 7-9 third)`)
 			}
 	     } else if (int.commandName === "afk") {
 		    const subint = int.options.getSubcommand()
@@ -1100,7 +1100,7 @@ client.on("interactionCreate", async int => {
 			    if (! status[int.user.id]) {
 				    status[int.user.id] = int.options.getString("message")
 				    writestatus()
-				    int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
+				    await int.reply(`<@${int.user.id}> Set your AFK status: ${int.options.getString("message")}`)
 			    } else {
 				    ephreply("You already have an AFK status; run /afk edit to change your status message")
 			    }
@@ -1114,24 +1114,24 @@ client.on("interactionCreate", async int => {
 			    if (l == "List:\n") {
 				    l+="No one is AFK"
 			    }
-			    int.reply(l)
+			    await int.reply(l)
 		    } else if (subint === "clear") {
 			    if (int.options.getUser("user")) {
 				    const id = int.options.getUser("user").id
 				    delete status[id]
 				    writestatus()
-				    int.reply(`Cleared <@${id}>'s AFK status`)
+				    await int.reply(`Cleared <@${id}>'s AFK status`)
 			    } else {
 				    status = {}
 				    writestatus()
-				    int.reply("All AFK statuses have been cleared")
+				    await int.reply("All AFK statuses have been cleared")
 			    }
 		    } else if (subint === "remove") {
 			    if (status[int.user.id]) {
 				    delete status[int.user.id]
 			    	    writestatus()
 				    const id = int.user.id
-			    	    int.reply(`<@${id}> Removed your AFK status`)
+			    	    await int.reply(`<@${id}> Removed your AFK status`)
 			    } else {
 				    ephreply("You don't have an AFK status")
 			    }
@@ -1139,7 +1139,7 @@ client.on("interactionCreate", async int => {
 			    if (status[int.user.id]) {
 				    status[int.user.id] = int.options.getString("message")
 				    writestatus()
-				    int.reply(`<@${int.user.id}> Status changed: ${int.options.getString("message")}`)
+				    await int.reply(`<@${int.user.id}> Status changed: ${int.options.getString("message")}`)
 			    } else {
 				    ephreply("You don't have an AFK status")
 			    }
@@ -1148,13 +1148,13 @@ client.on("interactionCreate", async int => {
 			const eph = int.options.getBoolean("ephemeral")
 		        if (alpha == false) {
 		          alpha = true
-		          int.reply({content:"Gen Alpha mode toggled **on**! 🤫🧏", ephemeral: eph})
+		          await int.reply({content:"Gen Alpha mode toggled **on**! 🤫🧏", ephemeral: eph})
 		          data["alpha"] = true
 		          writedata()
 		        } else {
 			  alpha = false
 			  console.log(alpha)
-		          int.reply({content:"Gen Alpha mode toggled **off**! 🤫❌",ephemeral:false})
+		          await int.reply({content:"Gen Alpha mode toggled **off**! 🤫❌",ephemeral:false})
 		          data["alpha"] = false
 		          writedata()
 		        }
@@ -1164,15 +1164,15 @@ client.on("interactionCreate", async int => {
 			    if (! int.options.getUser("user")) {
 				    rank = level(xp[int.user.id])
 				    if (rank == 10) {
-					    int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+" XP.")
+					    await int.reply("You are Level **10** which is the MAX level. Good job! You have "+xp[int.user.id]+" XP.")
 				    } else {
-				    	int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
+				    	await int.reply("You are Level **"+rank+"** and have **"+xp[int.user.id]+"**/"+maxxp[rank]+" XP until you reach the next level.")
 				    }
 			    } else {
 				    if (xp[int.options.getUser("user").id]) {
-					    int.reply(`${int.options.getUser("user")} is Level **${level(xp[int.options.getUser("user").id])}** with **${xp[int.options.getUser("user").id]}** XP.`)
+					    await int.reply(`${int.options.getUser("user")} is Level **${level(xp[int.options.getUser("user").id])}** with **${xp[int.options.getUser("user").id]}** XP.`)
 				    } else {
-					    int.reply(`${int.options.getUser("user")} is Level **0** with **0** XP 😑`)
+					    await int.reply(`${int.options.getUser("user")} is Level **0** with **0** XP 😑`)
 				    }
 			    }
 		    } else if (subint === "leaderboard") {
@@ -1192,7 +1192,7 @@ client.on("interactionCreate", async int => {
 			    l+=("You are Rank **#"+rank+"**")
 			    silreply(l)
 		    } else if (subint === "info") {
-			    int.reply(`Level up by using any slyer-bot commands. Every command will give you 5 XP, and winning a slyer-bot game will give you an additional 10 XP. After you reach a certain amount of XP, you will level up!\nHere is the list of XP requirements for each level:
+			    await int.reply(`Level up by using any slyer-bot commands. Every command will give you 5 XP, and winning a slyer-bot game will give you an additional 10 XP. After you reach a certain amount of XP, you will level up!\nHere is the list of XP requirements for each level:
 	Level 1: **5** XP
 	Level 2: **25** XP
 	Level 3: **100** XP
@@ -1206,9 +1206,9 @@ client.on("interactionCreate", async int => {
 	Once you reach Level 10, you have reached the max level! You will continue to gain XP but will not level up anymore.`)
 		    } else if (subint === "next") {
 			    if (! (level(xp[int.user.id]) == 10)) {
-			    	int.reply("You need **"+(maxxp[level(xp[int.user.id])]-xp[int.user.id])+"** more XP until you reach Level **"+(level(xp[int.user.id])+1)+"**.")
+			    	await int.reply("You need **"+(maxxp[level(xp[int.user.id])]-xp[int.user.id])+"** more XP until you reach Level **"+(level(xp[int.user.id])+1)+"**.")
 			    } else {
-				    int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
+				    await int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
 			    }
 		    }
 	     } else if (int.commandName === "help") {
@@ -1246,7 +1246,7 @@ client.on("interactionCreate", async int => {
 			    ephreply("WIP")
 		    } else {
 			    const tquestion = random(questions)
-			    const resp = await int.reply({ content:(tquestion["question"]+"\nA) "+tquestion["A"]+"\nB) "+tquestion["B"]+"\nC) "+tquestion["C"]+"\nD) "+tquestion["D"]), components: [row]})
+			    const resp = await await int.reply({ content:(tquestion["question"]+"\nA) "+tquestion["A"]+"\nB) "+tquestion["B"]+"\nC) "+tquestion["C"]+"\nD) "+tquestion["D"]), components: [row]})
 			    const collectorFilter = i => i.user.id === int.user.id;
 			    try {
 				    confirmation = await resp.awaitMessageComponent({ filter: collectorFilter, time: 15_000 })
@@ -1651,7 +1651,7 @@ client.on("interactionCreate", async int => {
 		    		.addComponents(s,f,Period,j,l)
 		    const frow4 = new ActionRowBuilder()
 		    		.addComponents(Comma,c,Question,n,SemiCol)
-		    const resp = await int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3,row4,row5]})
+		    const resp = await await int.reply({content:"Type a sentence! (this prompt will get deleted)",components:[row1,row2,row3,row4,row5]})
 		    let res = ""
 		    let flipped = false
 		    let shifted = false
@@ -1718,7 +1718,7 @@ client.on("interactionCreate", async int => {
 	     }
 	  }
      } catch (e) {
-	    int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.lineNumber+"**")
+	    await int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.lineNumber+"**")
      }
 });
 // Message Event Listener
