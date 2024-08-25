@@ -1710,13 +1710,25 @@ client.on("interactionCreate", async int => {
 			    }
 		    })
 	     } else if (int.commandName === "give") {
-		    let num = 1
+		    const item = await int.options.getString("item")
+		    let obtain = "__1__ **"+item+"**"
 		    if (int.options.getInteger("amt")) {
-			num = int.options.getInteger("amt")    
+			num = int.options.getInteger("amt")
+			if (num != 1) {
+				obtain = "__"+num+"__ **"+item+"s**"
+			} else {
+				obtain = "__1__ **"+item+"**"
+			}
 		    }
-		    const itemm = await int.options.getString("item")
-		    const iconn = await int.options.getAttachment("icon")
-		    await int.reply(`You have obtained ${num}x **${itemm}**\n${iconn.url}`)
+		    const icon = ""
+		    if (int.options.getAttachment("icon")) {
+		    	icon = await int.options.getAttachment("icon").url
+		    }
+		    if (! int.options.getUser("user")) {
+		    	await int.reply(`You have obtained ${obtain}\n${icon}`)
+		    } else {
+			await int.reply(`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>\n${icon}`)
+		    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
