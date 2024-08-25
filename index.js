@@ -1720,7 +1720,7 @@ client.on("interactionCreate", async int => {
 				obtain = "__1__ **"+item+"**"
 			}
 		    }
-		    const icon = ""
+		    let icon = ""
 		    if (int.options.getAttachment("icon")) {
 		    	icon = await int.options.getAttachment("icon").url
 		    }
