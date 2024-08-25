@@ -289,6 +289,10 @@ function simplifyroot(num) {
 function reverse(str) {
 	return str.split('').reverse().join('')
 }
+function capFirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function fetchKey(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
@@ -1710,24 +1714,24 @@ client.on("interactionCreate", async int => {
 			    }
 		    })
 	     } else if (int.commandName === "give") {
-		    const item = await int.options.getString("item")
-		    let obtain = "__1__ **"+item+"**"
+		    const item = capFirst(int.options.getString("item"))
+		    let obtain = "a **"+item+"**"
 		    if (int.options.getInteger("amt")) {
 			num = int.options.getInteger("amt")
 			if (num != 1) {
-				obtain = "__"+num+"__ **"+item+"s**"
+				obtain = num+" **"+item+"**s"
 			} else {
-				obtain = "__1__ **"+item+"**"
+				obtain = "a **"+item+"**"
 			}
 		    }
 		    let icon = ""
 		    if (int.options.getAttachment("icon")) {
-		    	icon = await int.options.getAttachment("icon").url
+		    	icon = await int.options.getAttachment("icon").proxyURL
 		    }
 		    if (! int.options.getUser("user")) {
-		    	await int.reply(`You have obtained ${obtain}\n${icon}`)
+		    	await int.reply(`You have obtained ${obtain}\n\n${icon}`)
 		    } else {
-			await int.reply(`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>\n${icon}`)
+			await int.reply(`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>\n\n${icon}`)
 		    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
