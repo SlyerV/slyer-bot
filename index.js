@@ -1709,6 +1709,12 @@ client.on("interactionCreate", async int => {
 				    coll.deferUpdate()
 			    }
 		    })
+	     } else if (int.commandName === "give") {
+		    let num = 1
+		    if (int.options.getInteger("amt")) {
+			num = int.options.getInteger("amt")    
+		    }
+		    await int.reply(`You have obtained ${num}x **${int.options.getString(item)}**\n${int.options.getAttachment("icon")}`)
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
