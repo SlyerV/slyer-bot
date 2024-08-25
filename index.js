@@ -1714,9 +1714,9 @@ client.on("interactionCreate", async int => {
 		    if (int.options.getInteger("amt")) {
 			num = int.options.getInteger("amt")    
 		    }
-		    const item = await int.options.getString(item)
-		    const icon = await int.options.getAttachment("icon")
-		    await int.reply(`You have obtained ${num}x **${item}**\n${icon}`)
+		    const itemm = await int.options.getString(item)
+		    const iconn = await int.options.getAttachment("icon")
+		    await int.reply(`You have obtained ${num}x **${itemm}**\n${iconn}`)
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
