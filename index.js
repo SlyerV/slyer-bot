@@ -1729,9 +1729,9 @@ client.on("interactionCreate", async int => {
 		    	icon = await int.options.getAttachment("icon").proxyURL
 		    }
 		    if (! int.options.getUser("user")) {
-		    	await int.reply(`You have obtained ${obtain} \||${icon}\||`)
+		    	await int.reply(`You have obtained ${obtain} ${icon}`)
 		    } else {
-			await int.reply(`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}> \||${icon}\||`)
+			await int.reply(`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}> ${icon}`)
 		    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
@@ -1742,7 +1742,7 @@ client.on("interactionCreate", async int => {
 	     }
 	  }
      } catch (e) {
-	    await int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.lineNumber+"**")
+	    await int.reply("An unexpected error occured.\n<@816099107545940008> "+e+"\nLine **"+e.line+"**")
      }
 });
 // Message Event Listener
