@@ -1724,14 +1724,19 @@ client.on("interactionCreate", async int => {
 				obtain = "a **"+item+"**"
 			}
 		    }
-		    let icon = ""
 		    if (int.options.getAttachment("icon")) {
-		    	icon = await int.options.getAttachment("icon")
-		    }
-		    if (! int.options.getUser("user")) {
-		    	await int.reply({content:`You have obtained ${obtain}`,files:[icon]})
+		    	    const icon = await int.options.getAttachment("icon")
+			    if (! int.options.getUser("user")) {
+			    	await int.reply({content:`You have obtained ${obtain}`,files:[icon]})
+			    } else {
+				await int.reply({content:`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>`,files:[icon]})
+			    }
 		    } else {
-			await int.reply({content:`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>`,files:[icon]})
+			    if (! int.options.getUser("user")) {
+			    	await int.reply({content:`You have obtained ${obtain}`})
+			    } else {
+				await int.reply({content:`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>`})
+			    }
 		    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
