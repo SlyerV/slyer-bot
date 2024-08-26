@@ -1726,12 +1726,12 @@ client.on("interactionCreate", async int => {
 		    }
 		    let icon = ""
 		    if (int.options.getAttachment("icon")) {
-		    	icon = await int.options.getAttachment("icon").proxyURL
+		    	icon = await int.options.getAttachment("icon")
 		    }
 		    if (! int.options.getUser("user")) {
-		    	await int.reply({content:`You have obtained ${obtain}`,files:icon})
+		    	await int.reply({content:`You have obtained ${obtain}`,files:[icon]})
 		    } else {
-			await int.reply({content:`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>`,files:icon})
+			await int.reply({content:`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>`,files:[icon]})
 		    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
