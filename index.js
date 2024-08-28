@@ -1738,6 +1738,15 @@ client.on("interactionCreate", async int => {
 				await int.reply({content:`${int.options.getUser("user")} you have received ${obtain} from <@${int.user.id}>`})
 			    }
 		    }
+	     } else if (int.commandName === "hoist") {
+		    const role = int.options.getRole("role")
+		    if (role.hoist) {
+			    await ephreply("Role is already hoisted!")
+		    } else {
+		    	role.setHoist(true)
+		    	await silreply(`Hoisted ${role}`)
+	    	    }
+	     }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
