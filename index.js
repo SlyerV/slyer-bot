@@ -1746,7 +1746,6 @@ client.on("interactionCreate", async int => {
 		    	role.setHoist(true)
 		    	await silreply(`Hoisted ${role}`)
 	    	    }
-	     }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
