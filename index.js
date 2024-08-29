@@ -1742,11 +1742,12 @@ client.on("interactionCreate", async int => {
 		    const role = int.options.getRole("role")
 		    if (role.hoist) {
 			    await ephreply("Role is already hoisted!")
-		    } else if (role.position > int.guild.members.cache.get(bot.user.id).roles.highest)
+		    } else if (role.position > int.guild.members.cache.get(bot.user.id).roles.highest) {
 			    await ephreply("The role "+role+" is above my highest role")
 		    } else {
 			role.setHoist(true)
 			await silreply(`Hoisted ${role}`)
+	    	    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
