@@ -1742,7 +1742,7 @@ client.on("interactionCreate", async int => {
 		    const role = int.options.getRole("role")
 		    if (role.hoist) {
 			    await ephreply("Role is already hoisted!")
-		    } else if (role.position > int.guild.members.cache.get(bot.user.id).roles.highest) {
+		    } else if (role.position > int.guild.members.cache.get("1244853392942170143").roles.highest) {
 			    await ephreply("The role "+role+" is above my highest role")
 		    } else {
 			role.setHoist(true)
