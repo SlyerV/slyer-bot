@@ -1740,12 +1740,16 @@ client.on("interactionCreate", async int => {
 		    }
 	     } else if (int.commandName === "hoist") {
 		    const role = int.options.getRole("role")
-		    if (role.hoist) {
-			    await ephreply("Role is already hoisted!")
-		    } else {
-		    	role.setHoist(true)
-		    	await silreply(`Hoisted ${role}`)
-	    	    }
+		    try {
+			    if (role.hoist) {
+				    await ephreply("Role is already hoisted!")
+			    } else {
+			    	role.setHoist(true)
+			    	await silreply(`Hoisted ${role}`)
+		    	    }
+		    } catch {
+			    ephreply("The role "+role+" is above my highest role")
+		    }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
