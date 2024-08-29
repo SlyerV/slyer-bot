@@ -1740,6 +1740,8 @@ client.on("interactionCreate", async int => {
 		    }
 	     } else if (int.commandName === "hoist") {
 		    const role = int.options.getRole("role")
+		    console.log(int.guild.members.cache.get("1244853392942170143").roles.highest)
+		    console.log(role.position)
 		    if (role.hoist) {
 			    await ephreply("Role is already hoisted!")
 		    } else if (role.position > int.guild.members.cache.get("1244853392942170143").roles.highest) {
