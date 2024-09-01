@@ -2158,7 +2158,7 @@ client.on("messageDelete", async dmsg => {
     // Quoting deleted messages by 2 specific people
     if (quoting == true) {
         if ((dmsg.author.id == "947534567781331024") || (dmsg.author.id == "1025868793068658718")) {
-            client.channels.cache.get("1278931791310356522").send({content:'"'+dmsg.content+'" - <@'+dmsg.author.id+'> in <#'+dmsg.channel.id+">",allowedMentions: { parse: [] }})
+            client.channels.cache.get("1279951278369275915").send({content:'"'+dmsg.content+'" - <@'+dmsg.author.id+'> in <#'+dmsg.channel.id+">",allowedMentions: { parse: [] }})
         }
     }
 })
