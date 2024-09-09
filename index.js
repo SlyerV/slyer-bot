@@ -485,11 +485,9 @@ client.on("interactionCreate", async int => {
 	      await int.reply("slyer1 is so "+random(compliments)+"!")
 	    } else if (int.commandName === "echo") {
 	      let emsg = int.options.getString("message");
-	      emsg = emsg.replace("@","")
-	      emsg = emsg.replace("<","<@")
 	      d = new Date()
 	      console.log(d+"\nEcho used by "+int.user.tag)
-	      await await int.reply({ content: "Message sent!", ephemeral: true });
+	      await int.reply({ content: "Message sent!", ephemeral: true });
 	      int.channel.send(emsg);
 	    } else if (int.commandName === "warn") {
 	      let user = int.options.getUser('user')
