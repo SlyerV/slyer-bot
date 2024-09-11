@@ -1212,6 +1212,8 @@ client.on("interactionCreate", async int => {
 			    } else {
 				    await int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
 			    }
+		    } else if (subint === "getfile") {
+			    int.reply(xp)
 		    }
 	     } else if (int.commandName === "help") {
 		    let str
