@@ -1213,7 +1213,11 @@ client.on("interactionCreate", async int => {
 				    await int.reply("You're Level 10, so you don't need any more XP to level up! You have **"+xp[int.user.id]+"** XP.")
 			    }
 		    } else if (subint === "getfile") {
-			    int.reply(xp)
+			    fs.readFile('xp.json', (err, data) => {
+				  if (err) { throw err; }
+				  const xp = JSON.stringify(JSON.parse(data), null, 2);
+				  await int.reply('```json\n' + xp + '\n```');
+			    });
 		    }
 	     } else if (int.commandName === "help") {
 		    let str
