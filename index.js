@@ -379,7 +379,7 @@ function writestatus() {
   });
 }
 function writexp() {
-    if (xp != {}) {
+    if (xp != "") {
 	  fs.writeFile(
 	    "xp.json",
 	    JSON.stringify(xp),
@@ -1214,9 +1214,9 @@ client.on("interactionCreate", async int => {
 			    }
 		    } else if (subint === "getfile") {
 			    let xp
-			    fs.readFile('xp.json', (err, data) => {
+			    fs.readFile("xp.json", (err, data) => {
 				  if (err) { throw err; }
-				  xp = JSON.stringify(JSON.parse(data), null, 2);
+				  xp = JSON.stringify(data)
 			    });
 			    await int.reply('```json\n' + xp + '\n```');
 		    }
