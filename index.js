@@ -1753,6 +1753,42 @@ client.on("interactionCreate", async int => {
 			role.setHoist(true)
 			await silreply(`Hoisted ${role}`)
 	    	    }
+	     } else if (int.commandName === "embedplus") {
+		    if ((int.options.getString("reg-fieldtitle") && (! int.options.getString("reg-fieldvalue"))) 
+			|| (int.options.getString("reg-fieldvalue") && (! int.options.getString("reg-fieldtitle")))) {
+			    await ephreply("Must contain reg-fieldtitle AND reg-fieldvalue")
+		    } else {
+			const userembed = new EmbedBuilder()
+				.setColor(int.options.getString("color"))
+				.setTitle(int.options.getString("title"))
+				if (int.options.getString("url")) {
+			        	.setURL(int.options.getString("title"))
+				}
+				if (int.options.getString("author")) {
+					.setAuthor({ name: int.options.getString("author") })
+				}
+				if (int.options.getString("description")) {
+					.setDescription(int.options.getString("description"))
+				}
+				if (int.options.getAttachment("thumbnail")) {
+					.setThumbnail(int.options.getString("author"))
+				}
+				if (int.options.getString("reg-fieldtitle") && int.options.getString("reg-fieldvalue")) {
+					.addFields(
+						{ name: int.options.getString("reg-fieldtitle"), value: int.options.getString("reg-fieldvalue") },
+					)
+				}
+				if (int.options.getAttachment("image")) {
+					.setImage(int.options.getAttachment("thumbnail"))
+				}
+				.setTimestamp()
+				if (int.options.getString("footer")) {
+					.setFooter({ text: 'Some footer text here' });
+				}
+		        int.reply({ embeds: [userembed] });
+		    }
+
+	     }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
