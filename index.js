@@ -1762,7 +1762,7 @@ client.on("interactionCreate", async int => {
 				.setColor(int.options.getString("color"))
 				.setTitle(int.options.getString("title"))
 				if (int.options.getString("url")) {
-			        	userembed.setURL(int.options.getString("title"))
+			        	userembed.setURL(int.options.getString("url"))
 				}
 				if (int.options.getString("author")) {
 					userembed.setAuthor({ name: int.options.getString("author") })
@@ -1771,7 +1771,7 @@ client.on("interactionCreate", async int => {
 					userembed.setDescription(int.options.getString("description"))
 				}
 				if (int.options.getAttachment("thumbnail")) {
-					userembed.setThumbnail(int.options.getAttachment("thumbnail"))
+					userembed.setThumbnail(int.options.getAttachment("thumbnail").url)
 				}
 				if (int.options.getString("reg-fieldtitle") && int.options.getString("reg-fieldvalue")) {
 					userembed.addFields(
@@ -1779,7 +1779,7 @@ client.on("interactionCreate", async int => {
 					)
 				}
 				if (int.options.getAttachment("image")) {
-					userembed.setImage(int.options.getAttachment("image"))
+					userembed.setImage(int.options.getAttachment("image").url)
 				}
 				userembed.setTimestamp()
 				if (int.options.getString("footer")) {
