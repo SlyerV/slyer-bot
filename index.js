@@ -1771,7 +1771,7 @@ client.on("interactionCreate", async int => {
 					userembed.setDescription(int.options.getString("description"))
 				}
 				if (int.options.getAttachment("thumbnail")) {
-					userembed.setThumbnail(int.options.getString("author"))
+					userembed.setThumbnail(int.options.getAttachment("thumbnail"))
 				}
 				if (int.options.getString("reg-fieldtitle") && int.options.getString("reg-fieldvalue")) {
 					userembed.addFields(
@@ -1779,11 +1779,11 @@ client.on("interactionCreate", async int => {
 					)
 				}
 				if (int.options.getAttachment("image")) {
-					userembed.setImage(int.options.getAttachment("thumbnail"))
+					userembed.setImage(int.options.getAttachment("image"))
 				}
 				userembed.setTimestamp()
 				if (int.options.getString("footer")) {
-					userembed.setFooter({ text: 'Some footer text here' });
+					userembed.setFooter({ text: int.options.getString("footer") });
 				}
 		        int.reply({ embeds: [userembed] });
 		    }
