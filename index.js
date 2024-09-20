@@ -2103,6 +2103,7 @@ client.on("messageCreate", async msg => {
 		   //    }
 	    // }
 	    if (loot == 1) {
+		     loot = 0
 		     const ni = randomnum(20)
 		     const accept = new ButtonBuilder()
 				.setCustomId("loot+")
@@ -2115,7 +2116,7 @@ client.on("messageCreate", async msg => {
 		    const row = new ActionRowBuilder()
 				.addComponents(accept,decline);
 		    let resp = ""
-		    if (ni == 1) {
+		    if (ni == 30) {
 				resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets **A ONE-TIME-USE N-WORD PASS**!!!\n# <a:loot:1271692935389380608>", components: [row]})
 		    } else {
 				resp = await msg.channel.send({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>", components: [row]})
