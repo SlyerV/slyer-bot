@@ -1761,9 +1761,6 @@ client.on("interactionCreate", async int => {
 			const userembed = new EmbedBuilder()
 				.setColor(int.options.getString("color"))
 				.setTitle(int.options.getString("title"))
-				if (int.options.getString("url")) {
-			        	userembed.setURL(int.options.getString("url"))
-				}
 				if (int.options.getString("author")) {
 					userembed.setAuthor({ name: int.options.getString("author") })
 				}
