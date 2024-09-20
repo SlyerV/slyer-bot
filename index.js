@@ -1762,28 +1762,28 @@ client.on("interactionCreate", async int => {
 				.setColor(int.options.getString("color"))
 				.setTitle(int.options.getString("title"))
 				if (int.options.getString("url")) {
-			        	.setURL(int.options.getString("title"))
+			        	userembed.setURL(int.options.getString("title"))
 				}
 				if (int.options.getString("author")) {
-					.setAuthor({ name: int.options.getString("author") })
+					userembed.setAuthor({ name: int.options.getString("author") })
 				}
 				if (int.options.getString("description")) {
-					.setDescription(int.options.getString("description"))
+					userembed.setDescription(int.options.getString("description"))
 				}
 				if (int.options.getAttachment("thumbnail")) {
-					.setThumbnail(int.options.getString("author"))
+					userembed.setThumbnail(int.options.getString("author"))
 				}
 				if (int.options.getString("reg-fieldtitle") && int.options.getString("reg-fieldvalue")) {
-					.addFields(
+					userembed.addFields(
 						{ name: int.options.getString("reg-fieldtitle"), value: int.options.getString("reg-fieldvalue") },
 					)
 				}
 				if (int.options.getAttachment("image")) {
-					.setImage(int.options.getAttachment("thumbnail"))
+					userembed.setImage(int.options.getAttachment("thumbnail"))
 				}
-				.setTimestamp()
+				userembed.setTimestamp()
 				if (int.options.getString("footer")) {
-					.setFooter({ text: 'Some footer text here' });
+					userembed.setFooter({ text: 'Some footer text here' });
 				}
 		        int.reply({ embeds: [userembed] });
 		    }
