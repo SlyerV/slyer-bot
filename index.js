@@ -252,6 +252,8 @@ function update() {
 // Trivia
 let trivchannel
 let trivid
+// Loot Box
+let loot
 // Funcs
 function random(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -389,6 +391,7 @@ function writexp() {
 	    // Success 
 	    console.log("Wrote xp");
 	  });
+	  loot = randomnum(150)
     } else {
 	    console.log("Didn't clear XP file :)")
     }
@@ -1774,7 +1777,6 @@ client.on("messageCreate", async msg => {
     if (alpha) {
 	    alphmsg = randomnum(40)
     }
-    const loot = randomnum(150)
     // Counting Game
     if ((counting == true) && (msg.channel.id == channelid) && (! msg.author.bot)) {
         ncount = ncount+1
@@ -2092,7 +2094,7 @@ client.on("messageCreate", async msg => {
 			if (confirmation.customId === "loot+") {
 				if (ni != 1) {
 					resp.reply(`<@${confirmation.user.id}> GOT THE 25 XP!!!\n# +25 XP`)
-					resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 20 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
+					resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 				} else {
 					resp.reply(`<@${confirmation.user.id}> GOT THE N-WORD PASS!!!\n You will not be warned for saying the n-word. One time use only. Terms and conditions apply.`)
 					resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets **A ONE-TIME-USE N-WORD PASS**!!!\n# <a:loot:1271692935389380608>",components:[]})
@@ -2110,7 +2112,7 @@ client.on("messageCreate", async msg => {
 			        }
 			} else if (confirmation.customId === "loot-") {
 				if (ni != 1) {
-					resp.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 20 XP huh; to anyone who wanted the XP sorry ig :(")
+					resp.reply("Soooo... <@"+msg.author.id+"> you just denied an opportunity to gain 25 XP huh; to anyone who wanted the XP sorry ig :(")
 					resp.edit({content:"A random loot box appeared!!! First one to click the accept button gets 25 XP!!!\n# <a:loot:1271692935389380608>",components:[]})
 				} else {
 					resp.reply("Soooo... <@"+msg.author.id+"> you just deleted the N-Word pass, nice! You def made some ppl very happy but for others im not so sure...")
