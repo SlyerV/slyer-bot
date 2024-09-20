@@ -2147,7 +2147,7 @@ client.on("messageCreate", async msg => {
     if (msg.channel.id != "1253010049199243398") {
       if ((msg.author.id == "947534567781331024") || (msg.author.id == "1025868793068658718")) {
         if ((msg.content.includes("love")) || (msg.content.includes("💗")) || (msg.content.includes("<3")) || (msg.content.includes("princess")) || (msg.content.includes("NESTEROVICH")) || msg.content.includes("Love") || msg.content.includes("🩷")) {
-          msg.reply("<#1253010049199243398> <:cringe:1227877222430281759>")
+          msg.reply("**DMs** <:cringe:1280681565609001073> <:cringe:1280681565609001073> <:cringe:1280681565609001073>")
         }
       }
     }
