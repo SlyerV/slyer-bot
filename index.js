@@ -2088,20 +2088,20 @@ client.on("messageCreate", async msg => {
 		        console.log(err)
 		      }
 	    }
-	    if (alpha == true) {
-		    try {
-		          const r = randomnum(3)
-		          if (r == 1) {
-		            msg.reply("erm what da sigma 🤓☝️")
-		          } else if (r == 2) {
-		            msg.channel.send("🤫🧏")
-		          } else {
-		            msg.reply("only in ohio if fanum tax causes skibdi rizz with a looksmaxxed level 10 gyatt")
-		          }
-		      } catch(err) {
-		        console.log(err)
-		      }
-	    }
+	    // if (alpha == true) {
+		   //  try {
+		   //        const r = randomnum(3)
+		   //        if (r == 1) {
+		   //          msg.reply("erm what da sigma 🤓☝️")
+		   //        } else if (r == 2) {
+		   //          msg.channel.send("🤫🧏")
+		   //        } else {
+		   //          msg.reply("only in ohio if fanum tax causes skibdi rizz with a looksmaxxed level 10 gyatt")
+		   //        }
+		   //    } catch(err) {
+		   //      console.log(err)
+		   //    }
+	    // }
 	    if (loot == 1) {
 		     const ni = randomnum(20)
 		     const accept = new ButtonBuilder()
