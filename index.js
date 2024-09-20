@@ -1787,8 +1787,6 @@ client.on("interactionCreate", async int => {
 				}
 		        int.reply({ embeds: [userembed] });
 		    }
-
-	     }
 	     } else {
 		    await ephreply("WIP (command hasn't been added yet)")
 	     }
